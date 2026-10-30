@@ -31,6 +31,21 @@ button:disabled{opacity:.5;cursor:default}
 .pick{position:relative;overflow:hidden;display:grid;place-items:center;gap:4px;text-align:center;font:800 17px var(--display);border-radius:18px;border:2px dashed var(--flame);background:var(--field);color:var(--ink);padding:22px 16px;cursor:pointer}
 .pick small{font:500 13px var(--body);color:var(--muted)}
 .pick input{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;font-size:0}
+body[data-ratio] #pickBox{margin-inline:auto;align-content:center;transition:width .2s}
+body[data-ratio="doc"] #pickBox{width:min(58%,260px);aspect-ratio:9/16}
+body[data-ratio="ngang"] #pickBox{width:100%;aspect-ratio:16/9}
+body[data-ratio="ca2"] #pickBox{width:min(80%,340px);aspect-ratio:1}
+.tprev{display:grid;justify-items:center;gap:2px;margin:6px auto 4px;width:fit-content}
+.tprev canvas{display:block;border-radius:10px;box-shadow:0 2px 10px #0003;height:auto}
+.tprev small{font:600 11px var(--body);color:var(--muted)}
+body[data-ratio="doc"] .tprev canvas,body[data-ratio="ca2"] .tprev canvas{width:min(40vw,160px)}
+body[data-ratio="ngang"] .tprev canvas{width:min(78vw,340px)}
+body[data-ratio="doc"] #sPrevBox canvas,body[data-ratio="ca2"] #sPrevBox canvas{width:min(62vw,240px)}
+body[data-ratio="ngang"] #sPrevBox canvas{width:min(86vw,380px)}
+.tprev[hidden]{display:none}
+.big.alt{background:var(--field);color:var(--ink);border:2px solid var(--flame);box-shadow:none}
+#outVid{display:block;width:100%;max-height:70vh;border-radius:14px;background:#000;margin:8px 0}
+body[data-ratio="doc"] #outVid{width:min(100%,360px);margin:8px auto}
 .pick:focus-within{outline:3px solid var(--sun);outline-offset:1px}
 .styles{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-bottom:12px}
 .quote{margin-top:12px;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--sun) 18%,var(--field));border:1.5px solid var(--line)}
@@ -59,6 +74,13 @@ body.hasvoice .sci .cap{display:none}
 .pv span{position:relative;z-index:1;font:900 13px/1.15 var(--display);color:#fff;-webkit-text-stroke:3px #000;paint-order:stroke fill;padding:0 4px}
 .pv i{font-style:normal;color:#FFE100}
 .pv em{position:absolute;top:12%;left:50%;transform:translateX(-50%);z-index:1;font:900 11px var(--display);font-style:normal;background:#FFE100;color:#111;padding:2px 6px;border-radius:4px;white-space:nowrap}
+.presets{grid-template-columns:repeat(4,1fr)!important;gap:6px!important}
+.pre{padding:5px!important}.pre b{font-size:12.5px!important;line-height:1.2}.pre small{font-size:10px!important}
+.pvi{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:10px;background:var(--line)}
+.pvt{display:grid;place-items:center;font:900 30px var(--display);color:var(--flame);background:var(--field);border:2px dashed var(--line)}
+.sdemo{display:grid;justify-items:center;gap:4px;margin:10px 0 4px}
+.sdemo video{width:min(52vw,220px);aspect-ratio:9/16;border-radius:14px;background:#000;box-shadow:0 4px 14px #0003}
+body.kieu .tuchinh{display:none!important}
 .pv-gt{background:linear-gradient(160deg,#ff6b4a,#7a1020)}.pv-gt::after{background:linear-gradient(#0000,#c8141ee0)}
 .pv-nl{background:linear-gradient(160deg,#4a8bff,#1a1f60)}
 .pv-cl{background:linear-gradient(160deg,#e8b98a,#6b4024)}.pv-cl::after{background:linear-gradient(#0000,#3c1e0ad9)}
@@ -116,7 +138,10 @@ select{width:100%;font:700 16px var(--body);color:var(--ink);background:var(--fi
 .bgc input{position:absolute;opacity:0;pointer-events:none}
 .bgc i{width:34px;height:34px;border-radius:50%;display:block;border:1px solid var(--line)}
 .bgc:has(input:checked){border-color:var(--flame)}
+.mine{position:relative}
+.mine .x{position:absolute;top:-6px;right:-6px;width:22px;height:22px;padding:0;border-radius:50%;border:0;background:var(--hot,#A50064);color:#fff;font:800 12px/22px var(--display);text-align:center;min-height:0;box-shadow:0 1px 4px #0004}
 .bgc:has(input:focus-visible){outline:3px solid var(--sun)}
+[hidden]{display:none!important}
 .switch{display:flex;gap:10px;align-items:flex-start;font:700 15px var(--display)}
 .switch input{width:22px;height:22px;accent-color:var(--flame);flex:none;margin-top:1px}
 .switch small{display:block;font:500 13px var(--body);color:var(--muted)}
@@ -179,7 +204,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
   <section class="card">
     <div class="modes" role="radiogroup" aria-label="Dạng video">
       <label class="mode"><input type="radio" name="mode" value="noi" checked><b>🎙 Video quay nói</b><small>Tự quay nói chuyện: cắt lặng, cắt ậm ờ, phụ đề, làm giọng</small></label>
-      <label class="mode"><input type="radio" name="mode" value="ghep"><b>🖼 Ghép hình và video</b><small>Tối đa 12 hình, video ngắn + nhạc, lồng tiếng nếu muốn</small></label>
+      <label class="mode"><input type="radio" name="mode" value="ghep"><b>🖼 Ghép hình và video</b><small>Tối đa 12 hình, video (mỗi video 40 giây) + nhạc, lồng tiếng nếu muốn</small></label>
     </div>
     <div class="ctl" id="ratioRow"><span class="lbl">Video làm ra</span><div class="seg3" role="radiogroup" aria-label="Khung video">
       <label><input type="radio" name="ratio" value="doc" checked><span>Dọc 9:16<small>TikTok, Reels</small></span></label>
@@ -199,13 +224,13 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 
   <section class="card" id="step1ghep" hidden>
     <div class="step"><b>1</b>Chọn hình, video (tối đa 12)</div>
-    <label class="pick"><span>＋ Thêm hình, video</span><small id="scInfo">Mỗi hình 3 giây, video lấy tối đa 6 giây. Video làm ra tối đa 60 giây.</small>
+    <label class="pick"><span>＋ Thêm hình, video</span><small id="scInfo">Mỗi hình 3 giây, mỗi video lấy tối đa 40 giây. Video làm ra tối đa 5 phút.</small>
       <input type="file" id="scFile" multiple accept="image/*,video/*"></label>
     <div id="scList" class="brs"></div>
     <div class="ctl"><span class="lbl">Độ dài video</span><div class="seg3" role="radiogroup" aria-label="Độ dài video ghép">
       <label><input type="radio" name="mlen" value="60" checked><span>Dưới 1 phút<small>nhanh, ~45 MB</small></span></label>
-      <label><input type="radio" name="mlen" value="120"><span>1–2 phút<small>~90 MB</small></span></label>
-      <label><input type="radio" name="mlen" value="180"><span>Tối đa 3 phút<small>chậm hơn, ~130 MB</small></span></label>
+      <label><input type="radio" name="mlen" value="180"><span>1–3 phút<small>~130 MB</small></span></label>
+      <label><input type="radio" name="mlen" value="300"><span>Tối đa 5 phút<small>chậm hơn, ~170 MB</small></span></label>
     </div></div>
     <label class="switch"><input type="checkbox" id="optSceneAudio"><span>Giữ tiếng gốc của video cảnh<small>Cho kiểu ASMR: lọc bớt ồn đều (quạt, máy lạnh, xì), làm rõ tiếng. Tiếng xe, người nói xung quanh thì không lọc được.</small></span></label>
     <span class="lbl">Giọng nói (không bắt buộc)</span>
@@ -218,26 +243,29 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
   <section class="card">
     <div class="step"><b>2</b>Chọn phong cách</div>
     <div class="presets" role="radiogroup" aria-label="Phong cách">
-      <label class="pre"><input type="radio" name="preset" value="giat_tit"><div class="pv pv-gt"><em>BÍ MẬT</em><span>mình <i>làm</i></span></div><b>Giật tít</b><small>Tít vàng 3 giây đầu, "bùm", nhạc sôi</small></label>
-      <label class="pre"><input type="radio" name="preset" value="nang_luong" checked><div class="pv pv-nl"><span>cực <i>đỉnh</i></span></div><b>Năng lượng</b><small>Chữ nảy, zoom theo nhịp, nhạc nhanh</small></label>
-      <label class="pre"><input type="radio" name="preset" value="chua_lanh"><div class="pv pv-cl"><span class="soft">bình yên thôi</span></div><b>Chữa lành</b><small>Chữ nghiêng mềm, màu ấm, nhạc êm</small></label>
-      <label class="pre"><input type="radio" name="preset" value="vlog"><div class="pv pv-vl"><span class="vl">hôm nay <i>mình</i> đi</span></div><b>Vlog bình yên</b><small>Chữ nhỏ gọn, màu phim, nhạc vừa</small></label>
-      <label class="pre"><input type="radio" name="preset" value="co_ban"><div class="pv"><span>mình <i>làm</i></span></div><b>Gọn gàng</b><small>Chỉ cắt + phụ đề, không nhạc</small></label>
+      <label class="pre"><input type="radio" name="preset" value="co_ban" checked><img class="pvi" src="mau/co_ban.jpg" alt=""><b>Mặc định</b><small>Phụ đề rõ, tiêu đề 3 tầng, không nhạc</small></label>
+      <label class="pre"><input type="radio" name="preset" value="giat_tit"><img class="pvi" src="mau/giat_tit.jpg" alt=""><b>Giật tít năng lượng</b><small>Tít to 3 giây đầu, chữ nảy, nhạc sôi</small></label>
+      <label class="pre"><input type="radio" name="preset" value="chua_lanh"><img class="pvi" src="mau/chua_lanh.jpg" alt=""><b>Chữa lành</b><small>Chữ mềm, màu ấm, nhạc piano êm</small></label>
+      <label class="pre pre-tu"><input type="radio" name="preset" value="tu_chinh"><div class="pvi pvt">＋</div><b>Tự chỉnh</b><small>Tự chọn nhạc, chữ, màu, tiêu đề</small></label>
     </div>
-    <label class="switch" id="musicRow"><input type="checkbox" id="optMusic" checked><span>Nhạc nền + tiếng hiệu ứng<small>Không bản quyền, tự nhỏ lại khi có giọng nói</small></span></label>
-    <div class="ctl" id="musicPick"><span class="lbl">Nhạc nền</span>
+    <div id="styleDemo" class="sdemo">
+      <video id="styleVid" controls playsinline preload="none" poster="mau/co_ban.jpg" src="mau/co_ban.mp4"></video>
+      <p class="note" id="styleNote">Video mẫu phong cách Mặc định. Bấm ▶ để xem, bấm ⛶ để xem to.</p>
+    </div>
+    <label class="switch tuchinh" id="musicRow"><input type="checkbox" id="optMusic" checked><span>Nhạc nền + tiếng hiệu ứng<small>Không bản quyền, tự nhỏ lại khi có giọng nói</small></span></label>
+    <div class="ctl tuchinh" id="musicPick"><span class="lbl">Nhạc nền</span>
       <div class="row"><select id="musicSel" aria-label="Chọn nhạc nền" style="flex:1"></select><button type="button" id="musicPlay" aria-label="Nghe thử">▶ Nghe</button></div>
       <input type="file" id="musicFile" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac" hidden>
       <p class="note" id="musicInfo"></p>
     </div>
-    <div class="bgrow"><span class="lbl">Giọng</span>
+    <div class="bgrow tuchinh"><span class="lbl">Giọng</span>
       <div class="seg" role="radiogroup" aria-label="Giọng">
         <label><input type="radio" name="voice" value="trong" checked><span>Giọng thật, trong<small>Khử ồn, bớt vang, không méo</small></span></label>
         <label><input type="radio" name="voice" value="to"><span>To, rõ hơn<small>Giọng nhỏ, ồ, khàn</small></span></label>
       </div></div>
-    <label class="switch"><input type="checkbox" id="optSubs" checked><span>Hiện phụ đề<small>Tắt nếu chỉ muốn tiêu đề, hình và nhạc. File phụ đề .srt vẫn lưu được.</small></span></label>
+    <label class="switch tuchinh"><input type="checkbox" id="optSubs" checked><span>Hiện phụ đề<small>Tắt nếu chỉ muốn tiêu đề, hình và nhạc. File phụ đề .srt vẫn lưu được.</small></span></label>
     <div class="ctl" id="titleRow"><span class="lbl">Tiêu đề suốt video</span>
-      <div class="seg3 tk" role="radiogroup" aria-label="Tiêu đề suốt video">
+      <div class="seg3 tk tuchinh" role="radiogroup" aria-label="Tiêu đề suốt video">
         <label><input type="radio" name="tkind" value="ba_tang" checked><span>3 tầng<small>kiểu Công việc</small></span></label>
         <label><input type="radio" name="tkind" value="kinh"><span>Thẻ kính mờ<small>sang, gọn</small></span></label>
         <label><input type="radio" name="tkind" value="tap_chi"><span>Tạp chí<small>sâu lắng</small></span></label>
@@ -247,8 +275,8 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <label><input type="radio" name="tkind" value="khong"><span>Không có<small></small></span></label>
       </div>
       <div id="tierBox" class="tiers">
-        <span class="lbl">Màu tiêu đề</span>
-        <div class="bgs" id="tcs" role="radiogroup" aria-label="Màu tiêu đề">
+        <span class="lbl tuchinh">Màu tiêu đề</span>
+        <div class="bgs tuchinh" id="tcs" role="radiogroup" aria-label="Màu tiêu đề">
           <label class="bgc"><input type="radio" name="tcol" value="vang" checked><i style="background:#FACA16"></i>Vàng</label>
           <label class="bgc"><input type="radio" name="tcol" value="trang"><i style="background:#fff"></i>Trắng</label>
           <label class="bgc"><input type="radio" name="tcol" value="do"><i style="background:#E5262E"></i>Đỏ</label>
@@ -260,8 +288,9 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
           <label class="pickimg">Lấy màu từ ảnh (logo, bảng màu thương hiệu)<input type="file" id="tcImg" accept="image/*"></label>
           <canvas id="tcCanvas" class="pickcv" hidden></canvas>
           <p class="note" id="tcHint" hidden>Chạm vào ảnh để lấy màu, rồi bấm Lưu màu.</p>
-          <p class="note">Màu đã lưu hiện thành ô tròn ở trên. Nhấn giữ ô đó để xóa.</p>
+          <p class="note">Màu đã lưu hiện thành ô tròn ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa. Màu có sẵn thì không xóa.</p>
         </div>
+        <div class="tprev" id="tPrevBox"><canvas id="tPrev" width="270" height="480" aria-label="Xem trước tiêu đề"></canvas><small>Xem trước tiêu đề</small></div>
         <span class="lbl">Chữ tiêu đề, sửa từng tầng</span>
         <input type="text" id="tier1" maxlength="80" aria-label="Tầng 1">
         <input type="text" id="tier2" maxlength="80" aria-label="Tầng 2">
@@ -281,23 +310,42 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     </div>
     <div id="hookRow" class="bgrow" hidden><span class="lbl">Tít 3 giây đầu</span>
       <input type="text" id="hookText" maxlength="60" placeholder="Để trống thì máy lấy câu nói đầu tiên"></div>
-    <details id="more">
-      <summary>Tùy chỉnh thêm (chữ, màu, phông, vị trí, màu phủ, cắt, khử ồn)</summary>
-    <div class="ctl"><span class="lbl">Cỡ chữ</span><div class="seg3" role="radiogroup" aria-label="Cỡ chữ">
-      <label><input type="radio" name="size" value="lon" checked><span>Lớn</span></label>
-      <label><input type="radio" name="size" value="vua"><span>Vừa</span></label>
-      <label><input type="radio" name="size" value="nho"><span>Nhỏ</span></label>
-    </div></div>
-    <div class="ctl"><span class="lbl">Màu chữ <small>(chữ thường · chữ đang nói)</small></span><div class="cols" role="radiogroup" aria-label="Màu chữ">
-      <label class="col"><input type="radio" name="color" value="trang_vang" checked><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
+    <details id="more" class="tuchinh">
+      <summary>Tùy chỉnh thêm (chữ, màu, phông, vị trí, lớp phủ chân)</summary>
+    <div class="tprev" id="sPrevBox"><canvas id="sPrev" width="270" height="480" aria-label="Xem trước phụ đề cùng tiêu đề"></canvas><small>Xem trước: tiêu đề + phụ đề + lớp phủ chân</small></div>
+    <div class="ctl"><span class="lbl">Cỡ chữ phụ đề</span><div class="seg3" role="radiogroup" aria-label="Cỡ chữ phụ đề">
+      <label><input type="radio" name="size" value="lon" checked><span>Lớn<small>dễ đọc nhất</small></span></label>
+      <label><input type="radio" name="size" value="vua"><span>Vừa<small>cân đối</small></span></label>
+      <label><input type="radio" name="size" value="nho"><span>Nhỏ<small>gọn, ít che hình</small></span></label>
+    </div><p class="note">Có tiêu đề suốt video thì phụ đề tự gọn lại cho khỏi chật, nhìn ô xem trước ở trên là biết.</p></div>
+    <div class="ctl"><span class="lbl">Màu chữ phụ đề <small>(chữ thường · chữ đang nói)</small></span><div class="cols" id="scs" role="radiogroup" aria-label="Màu chữ phụ đề">
       <label class="col"><input type="radio" name="color" value="trang_den"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="den_trang"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
       <label class="col"><input type="radio" name="color" value="trang_do"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="vang_do"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="trang_vang" checked><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="den_trang"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
       <label class="col"><input type="radio" name="color" value="den_do"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="trang"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="den"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
-    </div></div>
+      <label class="col"><input type="radio" name="color" value="den_vang"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="vang_trang"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="vang_do"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="vang_den"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="do_trang"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="do_den"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="do_vang"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <button type="button" class="bgadd col" id="scAdd" aria-label="Thêm cặp màu riêng">＋<small>Màu riêng</small></button>
+    </div>
+      <div id="scPanel" class="bgpanel" hidden>
+        <div class="row"><span class="lbl" style="min-width:110px">Chữ thường</span><input type="color" id="scPick" value="#FFFFFF" aria-label="Màu chữ thường"><input type="text" id="scHex" value="#FFFFFF" maxlength="7" aria-label="Mã màu chữ thường" style="width:110px"></div>
+        <div class="row"><span class="lbl" style="min-width:110px">Chữ đang nói</span><input type="color" id="scPick2" value="#FFE100" aria-label="Màu chữ đang nói"><input type="text" id="scHex2" value="#FFE100" maxlength="7" aria-label="Mã màu chữ đang nói" style="width:110px"></div>
+        <label class="pickimg">Lấy màu từ ảnh (logo, bảng màu thương hiệu)<input type="file" id="scImg" accept="image/*"></label>
+        <div class="seg3" id="scFor" role="radiogroup" aria-label="Chạm ảnh lấy màu cho" hidden>
+          <label><input type="radio" name="scfor" value="1" checked><span>Lấy cho chữ thường</span></label>
+          <label><input type="radio" name="scfor" value="2"><span>Lấy cho chữ đang nói</span></label>
+        </div>
+        <canvas id="scCanvas" class="pickcv" hidden></canvas>
+        <p class="note" id="scHint" hidden>Chọn ô "Lấy cho…", chạm vào ảnh để lấy màu, rồi bấm Lưu màu.</p>
+        <div class="row"><button type="button" id="scSave">Lưu màu</button></div>
+        <p class="note">Màu đã lưu hiện thành ô ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa.</p>
+      </div></div>
     <div class="ctl"><span class="lbl">Phông chữ</span>
       <small class="grp">Cơ bản, dễ đọc</small><div class="fonts" role="radiogroup" aria-label="Cơ bản, dễ đọc">
         <label class="fnt"><input type="radio" name="font" value="be_vietnam" checked><span style="font-family:&quot;Be Vietnam Pro&quot;;font-weight:900">mình làm được<small>Be Vietnam Pro</small></span></label>
@@ -350,17 +398,17 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <label class="pickimg">Lấy màu từ ảnh (logo, bảng màu thương hiệu)<input type="file" id="bgImg" accept="image/*"></label>
         <canvas id="bgCanvas" hidden></canvas>
         <p class="note" id="bgHint" hidden>Chạm vào ảnh để lấy màu, rồi bấm Lưu màu.</p>
-        <p class="note">Màu đã lưu hiện thành ô tròn ở trên. Nhấn giữ ô đó để xóa.</p>
+        <p class="note">Màu đã lưu hiện thành ô tròn ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa. Màu có sẵn thì không xóa.</p>
       </div>
     </div>
     <div class="opts">
-      <label class="switch"><input type="checkbox" id="optSilence" checked><span>Cắt khoảng lặng<small>Ngừng nói lâu hơn 0,3 giây thì cắt, vẫn chừa hơi thở</small></span></label>
-      <label class="switch"><input type="checkbox" id="optFiller" checked><span>Cắt ậm, ờ, ừm<small>Cả tiếng ngân dài “thìiii…”</small></span></label>
-      <label class="switch"><input type="checkbox" id="optDenoise" checked><span>Khử ồn, làm rõ giọng<small>Bớt tiếng xì, ù quạt, tiếng xe; giọng sáng, đều</small></span></label>
+      <label class="switch" hidden><input type="checkbox" id="optSilence" checked><span>Cắt khoảng lặng<small>Ngừng nói lâu hơn 0,3 giây thì cắt, vẫn chừa hơi thở</small></span></label>
+      <label class="switch" hidden><input type="checkbox" id="optFiller" checked><span>Cắt ậm, ờ, ừm<small>Cả tiếng ngân dài “thìiii…”</small></span></label>
+      <label class="switch" hidden><input type="checkbox" id="optDenoise" checked><span>Khử ồn, làm rõ giọng<small>Bớt tiếng xì, ù quạt, tiếng xe; giọng sáng, đều</small></span></label>
       <label class="switch"><input type="checkbox" id="optZoom" checked><span>Đổi góc máy ở chỗ cắt<small>Zoom nhẹ 7% xen kẽ cho khỏi giật hình</small></span></label>
     </div>
     </details>
-    <details>
+    <details class="tuchinh">
       <summary>Từ điển sửa chữ (tên riêng, thương hiệu)</summary>
       <p class="note">Mỗi dòng 1 cặp: <code>chữ máy nghe sai =&gt; chữ đúng</code>. Máy tự nhớ cho các video sau.</p>
       <textarea id="dict" rows="4" placeholder="bi rôn => B-roll&#10;umi cai => Umikai"></textarea>
@@ -398,7 +446,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <div id="linesSum" class="row lsum" hidden><span id="linesSumText"></span><button type="button" id="linesDone">✓ Xong hết</button><button type="button" id="linesAll">Xem tất cả</button></div>
       <div id="lines"></div>
     </details>
-    <details id="brBox">
+    <details id="brBox" class="tuchinh">
       <summary>B-roll: chèn thẻ màu, hình, video (tùy chọn)</summary>
       <label class="switch"><input type="checkbox" id="optBroll"><span>Thêm B-roll<small>Tắt thì video giữ nguyên hình quay</small></span></label>
       <div id="brOn" class="tiers" hidden>
@@ -415,17 +463,31 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
           <label class="pickimg">Lấy màu từ ảnh (logo, bảng màu thương hiệu)<input type="file" id="bcImg" accept="image/*"></label>
           <canvas id="bcCanvas" class="pickcv" hidden></canvas>
           <p class="note" id="bcHint" hidden>Chạm vào ảnh để lấy màu, rồi bấm Lưu màu.</p>
-          <p class="note">Màu đã lưu hiện thành ô tròn ở trên. Nhấn giữ ô đó để xóa.</p>
+          <p class="note">Màu đã lưu hiện thành ô tròn ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa. Màu có sẵn thì không xóa.</p>
         </div>
         <div id="brSum" class="row lsum" hidden><span id="brSumText"></span><button type="button" id="brAll">Xem tất cả</button></div>
         <div id="brList" class="brs"></div>
         <p class="note">Bật B-roll là máy tự chèn thẻ màu ở các chỗ gợi ý, màu thẻ chọn 1 lần ở trên cho tất cả. Muốn dùng hình hay video ở chỗ nào thì đổi "Thẻ màu" thành Hình/Video ở chỗ đó. Bấm 🎬 ở dòng phụ đề để chèn thêm.</p>
       </div>
     </details>
-    <button class="big" id="exp">⬇ Xuất video</button>
-    <button class="big ok" id="save" hidden>💾 Lưu video vào máy</button>
-    <button class="big ok" id="save2" hidden>💾 Lưu bản ngang</button>
-    <p class="note" id="saveNote"></p>
+    <div id="expArea">
+      <button class="big alt" id="quick">▶ Xem nhanh toàn bộ trước khi xuất</button>
+      <p class="note">Xem lại từ đầu tới cuối đúng như video sẽ xuất. Thấy ổn thì bấm Xuất video.</p>
+      <button class="big" id="exp">⬇ Xuất video</button>
+    </div>
+    <div id="expSlot"></div>
+    <div id="doneBox" hidden>
+      <div class="step"><b>✓</b>Video đã xong</div>
+      <div class="seg3 vw" id="doneView" hidden role="radiogroup" aria-label="Xem bản">
+        <label><input type="radio" name="dview" value="1" checked><span>Bản dọc</span></label>
+        <label><input type="radio" name="dview" value="2"><span>Bản ngang</span></label>
+      </div>
+      <video id="outVid" controls playsinline></video>
+      <button class="big ok" id="save">💾 Lưu video vào máy</button>
+      <button class="big ok" id="save2" hidden>💾 Lưu bản ngang</button>
+      <p class="note" id="saveNote"></p>
+      <button class="big alt" id="reEdit">✏ Sửa lại video</button>
+    </div>
     <button id="srt">📝 Lưu file phụ đề (.srt) cho YouTube</button>
     <p class="note" id="srtNote">Đăng YouTube: tải video lên, vào mục Phụ đề, chọn Tải tệp lên rồi chọn file này. YouTube, Google đọc được lời nói, giúp video dễ được tìm thấy.</p>
   </section>
@@ -442,6 +504,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       </ol>
       <p class="note">Mọi thứ chạy trong máy, video không gửi đi đâu. iPhone cần iOS 26 trở lên để xuất video có tiếng.</p>
       <div class="row"><button id="prefetch">Tải sẵn bộ nghe (dùng Wi-Fi)</button><span class="note" id="cacheInfo"></span></div>
+      <p class="note" id="devInfo"></p>
     </details>
   </section>
 </div>
@@ -457,7 +520,18 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
     }
   }).catch(() => {});
 }
-window.AE_FILES = {"ort": "./lib/ort.wasm.min.mjs", "ortDir": "./lib/", "rnn": "./lib/rnnoise.mjs", "voc": "mo_hinh/voc.json", "cfg": "mo_hinh/cfg.json", "enc": ["phan_1/mo_hinh/enc_0.bin", "phan_1/mo_hinh/enc_1.bin", "phan_1/mo_hinh/enc_2.bin", "phan_1/mo_hinh/enc_3.bin", "phan_2/mo_hinh/enc_4.bin", "phan_2/mo_hinh/enc_5.bin", "phan_2/mo_hinh/enc_6.bin", "phan_2/mo_hinh/enc_7.bin", "phan_3/mo_hinh/enc_8.bin", "phan_3/mo_hinh/enc_9.bin", "phan_3/mo_hinh/enc_10.bin", "phan_3/mo_hinh/enc_11.bin"], "dec": ["phan_4/mo_hinh/dec_0.bin", "phan_4/mo_hinh/dec_1.bin", "phan_4/mo_hinh/dec_2.bin", "phan_4/mo_hinh/dec_3.bin", "phan_5/mo_hinh/dec_4.bin", "phan_5/mo_hinh/dec_5.bin", "phan_5/mo_hinh/dec_6.bin", "phan_5/mo_hinh/dec_7.bin", "phan_6/mo_hinh/dec_8.bin", "phan_6/mo_hinh/dec_9.bin", "phan_6/mo_hinh/dec_10.bin", "phan_6/mo_hinh/dec_11.bin", "phan_7/mo_hinh/dec_12.bin", "phan_7/mo_hinh/dec_13.bin", "phan_7/mo_hinh/dec_14.bin"], "sizes": {"phan_1/mo_hinh/enc_0.bin": 10000000, "phan_1/mo_hinh/enc_1.bin": 10000000, "phan_1/mo_hinh/enc_2.bin": 10000000, "phan_1/mo_hinh/enc_3.bin": 10000000, "phan_2/mo_hinh/enc_4.bin": 10000000, "phan_2/mo_hinh/enc_5.bin": 10000000, "phan_2/mo_hinh/enc_6.bin": 10000000, "phan_2/mo_hinh/enc_7.bin": 10000000, "phan_3/mo_hinh/enc_8.bin": 10000000, "phan_3/mo_hinh/enc_9.bin": 10000000, "phan_3/mo_hinh/enc_10.bin": 10000000, "phan_3/mo_hinh/enc_11.bin": 2253839, "phan_4/mo_hinh/dec_0.bin": 10000000, "phan_4/mo_hinh/dec_1.bin": 10000000, "phan_4/mo_hinh/dec_2.bin": 10000000, "phan_4/mo_hinh/dec_3.bin": 10000000, "phan_5/mo_hinh/dec_4.bin": 10000000, "phan_5/mo_hinh/dec_5.bin": 10000000, "phan_5/mo_hinh/dec_6.bin": 10000000, "phan_5/mo_hinh/dec_7.bin": 10000000, "phan_6/mo_hinh/dec_8.bin": 10000000, "phan_6/mo_hinh/dec_9.bin": 10000000, "phan_6/mo_hinh/dec_10.bin": 10000000, "phan_6/mo_hinh/dec_11.bin": 10000000, "phan_7/mo_hinh/dec_12.bin": 10000000, "phan_7/mo_hinh/dec_13.bin": 10000000, "phan_7/mo_hinh/dec_14.bin": 1186700}, "fonts": [[900, "fonts/BeVietnamPro-Black.ttf"], [700, "fonts/BeVietnamPro-Bold.ttf"], [600, "fonts/BeVietnamPro-SemiBold.ttf"], [500, "fonts/BeVietnamPro-Medium.ttf"], ["400 900", "fonts/PlayfairDisplay-Italic-VF.ttf", "Playfair Display", "italic"]]};
+// lỗi bất ngờ: hiện ngay trên đầu trang để chụp màn hình gửi người làm tool sửa
+(function () {
+  const show = m => { try {
+    let b = document.getElementById("aeErr");
+    if (!b) { b = document.createElement("div"); b.id = "aeErr"; b.style.cssText = "position:fixed;left:8px;right:8px;top:8px;z-index:99;background:#A50064;color:#fff;font:600 13px/1.4 system-ui,sans-serif;padding:10px 12px;border-radius:12px;white-space:pre-wrap;max-height:40vh;overflow:auto"; b.onclick = () => b.remove(); document.body.append(b); }
+    b.textContent = (b.textContent ? b.textContent + "\n" : "Có lỗi (chụp màn hình gửi người làm tool, chạm để ẩn):\n") + String(m).slice(0, 300);
+  } catch (e) { } };
+  addEventListener("error", e => show((e.message || e) + (e.filename ? " @" + e.filename.split("/").pop() + ":" + e.lineno : "")));
+  addEventListener("unhandledrejection", e => show(e.reason && (e.reason.message || e.reason)));
+  window.AE_SHOWERR = show;
+})();
+window.AE_FILES = {"ort": "./lib/ort.wasm.min.mjs", "ortDir": "./lib/", "rnn": "./lib/rnnoise.mjs", "voc": "mo_hinh/voc.json", "cfg": "mo_hinh/cfg.json", "enc": ["nghe_1_enc_00.bin", "nghe_1_enc_01.bin", "nghe_1_enc_02.bin", "nghe_1_enc_03.bin", "nghe_2_enc_04.bin", "nghe_2_enc_05.bin", "nghe_2_enc_06.bin", "nghe_2_enc_07.bin", "nghe_3_enc_08.bin", "nghe_3_enc_09.bin", "nghe_3_enc_10.bin", "nghe_3_enc_11.bin"], "dec": ["nghe_4_dec_00.bin", "nghe_4_dec_01.bin", "nghe_4_dec_02.bin", "nghe_4_dec_03.bin", "nghe_5_dec_04.bin", "nghe_5_dec_05.bin", "nghe_5_dec_06.bin", "nghe_5_dec_07.bin", "nghe_6_dec_08.bin", "nghe_6_dec_09.bin", "nghe_6_dec_10.bin", "nghe_6_dec_11.bin", "nghe_7_dec_12.bin", "nghe_7_dec_13.bin", "nghe_7_dec_14.bin"], "sizes": {"nghe_1_enc_00.bin": 10000000, "nghe_1_enc_01.bin": 10000000, "nghe_1_enc_02.bin": 10000000, "nghe_1_enc_03.bin": 10000000, "nghe_2_enc_04.bin": 10000000, "nghe_2_enc_05.bin": 10000000, "nghe_2_enc_06.bin": 10000000, "nghe_2_enc_07.bin": 10000000, "nghe_3_enc_08.bin": 10000000, "nghe_3_enc_09.bin": 10000000, "nghe_3_enc_10.bin": 10000000, "nghe_3_enc_11.bin": 2253839, "nghe_4_dec_00.bin": 10000000, "nghe_4_dec_01.bin": 10000000, "nghe_4_dec_02.bin": 10000000, "nghe_4_dec_03.bin": 10000000, "nghe_5_dec_04.bin": 10000000, "nghe_5_dec_05.bin": 10000000, "nghe_5_dec_06.bin": 10000000, "nghe_5_dec_07.bin": 10000000, "nghe_6_dec_08.bin": 10000000, "nghe_6_dec_09.bin": 10000000, "nghe_6_dec_10.bin": 10000000, "nghe_6_dec_11.bin": 10000000, "nghe_7_dec_12.bin": 10000000, "nghe_7_dec_13.bin": 10000000, "nghe_7_dec_14.bin": 1186700}, "fonts": [[900, "fonts/BeVietnamPro-Black.ttf"], [700, "fonts/BeVietnamPro-Bold.ttf"], [600, "fonts/BeVietnamPro-SemiBold.ttf"], [500, "fonts/BeVietnamPro-Medium.ttf"], ["400 900", "fonts/PlayfairDisplay-Italic-VF.ttf", "Playfair Display", "italic"]]};
 </script>
 <script src="lib/mp4-muxer.js"></script>
 <script>
@@ -1468,10 +1542,16 @@ const Draw = (() => {
   const SIZES = { lon: 100, vua: 78, nho: 60 };       // cỡ ở khung rộng 1080
   // cặp màu: [chữ, chữ đang nói]
   const COLORS = {
-    trang_vang: ["#FFFFFF", "#FFE100"], trang_den: ["#FFFFFF", "#111111"], den_trang: ["#111111", "#FFFFFF"],
-    trang_do: ["#FFFFFF", "#E8202A"], vang_do: ["#FFE100", "#E8202A"], den_do: ["#111111", "#E8202A"],
-    trang: ["#FFFFFF", "#FFFFFF"], den: ["#111111", "#111111"],
+    trang_den: ["#FFFFFF", "#111111"], trang_do: ["#FFFFFF", "#E8202A"], trang_vang: ["#FFFFFF", "#FFE100"],
+    den_trang: ["#111111", "#FFFFFF"], den_do: ["#111111", "#E8202A"], den_vang: ["#111111", "#FFE100"],
+    vang_trang: ["#FFE100", "#FFFFFF"], vang_do: ["#FFE100", "#E8202A"], vang_den: ["#FFE100", "#111111"],
+    do_trang: ["#E8202A", "#FFFFFF"], do_den: ["#E8202A", "#111111"], do_vang: ["#E8202A", "#FFE100"],
+    trang: ["#FFFFFF", "#FFFFFF"], den: ["#111111", "#111111"],   // bản cũ, giữ cho máy đã lưu
   };
+  // màu riêng của phụ đề: "#RRGGBB/#RRGGBB" (chữ / chữ đang nói)
+  const pair = v => COLORS[v] || (/^#[0-9a-f]{6}\/#[0-9a-f]{6}$/i.test(v || "") ? v.toUpperCase().split("/") : COLORS.trang_vang);
+  // đi kèm tiêu đề thì phụ đề gọn lại, nhưng Lớn / Vừa / Nhỏ vẫn khác nhau
+  const SMALL = { lon: 68, vua: 56, nho: 46 };
   // phông: css, độ đậm, nghiêng, hệ số cỡ (cho các phông nhỏ/lớn mắt đều nhau), nhóm
   const FONTS = {
     be_vietnam: { name: "Be Vietnam Pro", css: '"Be Vietnam Pro"', w: 900, sc: 1, g: "co_ban" },
@@ -1527,9 +1607,9 @@ const Draw = (() => {
   // g: {words:[{w,s,e}], s, e, kw:Set} ; t: giây (giờ video đã cắt) ; look: lựa chọn của Diễm
   function subtitle(ctx, W, H, g, t, look) {
     const L = { ...DEF, ...(look || {}) };
-    const f = FONTS[L.font] || FONTS.be_vietnam, k = Math.min(W, H) / 1080, wide = W > H * 1.2, [main, hi] = COLORS[L.color] || COLORS.trang_vang;
+    const f = FONTS[L.font] || FONTS.be_vietnam, k = Math.min(W, H) / 1080, wide = W > H * 1.2, [main, hi] = pair(L.color);
     // small: đi kèm tiêu đề 3 tầng thì phụ đề gọn lại (~68 như mẫu Công việc)
-    const size = Math.round(Math.min(SIZES[L.size] || 100, L.small ? 68 : 999) * f.sc * k), chill = f.g === "chill", ol = size / (chill ? 22 : 14);
+    const size = Math.round((L.small ? SMALL[L.size] || 68 : SIZES[L.size] || 100) * f.sc * k), chill = f.g === "chill", ol = size / (chill ? 22 : 14);
     ctx.save();
     ctx.font = fontStr(f, size); ctx.textBaseline = "middle"; ctx.textAlign = "center"; ctx.lineJoin = "round"; ctx.miterLimit = 2;
     const toks = g.words.map(w => w.w.toLocaleLowerCase("vi"));
@@ -1649,7 +1729,7 @@ const Draw = (() => {
     try { await document.fonts.load(fontStr(f, 40), "aăâđêôơư ờữễạỹ"); } catch (e) { console.warn("font", key, e); }
   }
 
-  return { BG, base, subtitle, frame, POS_NGANG, loadFonts, useFont, SIZES, COLORS, FONTS, ANIMS, POS, DEF, fontStr };
+  return { BG, base, subtitle, pair, frame, POS_NGANG, loadFonts, useFont, SIZES, COLORS, FONTS, ANIMS, POS, DEF, fontStr };
 })();
 if (typeof module !== "undefined") module.exports = Draw;
 
@@ -1961,7 +2041,7 @@ const Title = (() => {
   // phông cần tải trước khi vẽ
   const FONTS = ['900 40px "Be Vietnam Pro"', '500 40px "Be Vietnam Pro"', '800 40px "Be Vietnam Pro"', '700 40px "Dancing Script"', 'italic 700 40px "Playfair Display"', 'italic 500 40px "Playfair Display"', '400 40px Montserrat'];
   async function load() { if (typeof document === "undefined" || !document.fonts) return; for (const f of FONTS) { try { await document.fonts.load(f, "AĂÂĐÊÔƠƯ aăâđêôơư ờữễạỹ"); } catch (e) { } } }
-  return { split, split2, split3, draw, load, suggest, keyword, phrase, TPL, COLS, hex };
+  return { split, split2, split3, draw, load, suggest, keyword, phrase, TPL, COLS, hex, lum };
 })();
 if (typeof module !== "undefined") module.exports = Title;
 
@@ -1972,10 +2052,11 @@ if (typeof module !== "undefined") module.exports = Title;
 const Style = (() => {
   const PRESETS = {
     nang_luong: { name: "Năng lượng", look: { size: "lon", color: "trang_vang", font: "montserrat", anim: "nay", unit: "cum" }, bg: "den", cutZoom: true, pulse: false, kb: 0, grade: "pop", music: "nhanh", sfx: "whoosh", hook: false, fade: false },
-    giat_tit:   { name: "Giật tít", look: { size: "lon", color: "trang_vang", font: "be_vietnam", anim: "hop", unit: "cum" }, bg: "do", cutZoom: true, pulse: false, kb: 0, grade: "pop", music: "vui", sfx: "whoosh", hook: true, flash: false, fade: false },
-    chua_lanh:  { name: "Chữa lành", look: { size: "vua", color: "trang_vang", font: "playfair", anim: "mo_truot", unit: "dong" }, bg: "nau", cutZoom: false, pulse: false, kb: 0, grade: "warm", music: "em", sfx: null, hook: false, fade: true },
+    giat_tit:   { name: "Giật tít năng lượng", title: { kind: "nhan", color: "vang" }, track: "6B", look: { size: "lon", color: "trang_vang", font: "be_vietnam", anim: "hop", unit: "cum" }, bg: "do", cutZoom: true, pulse: false, kb: 0, grade: "pop", music: "vui", sfx: "whoosh", hook: true, flash: false, fade: false },
+    chua_lanh:  { name: "Chữa lành", title: { kind: "viet_tay", color: "vang" }, track: "4B", look: { size: "vua", color: "trang_vang", font: "playfair", anim: "mo_truot", unit: "dong" }, bg: "nau", cutZoom: false, pulse: false, kb: 0, grade: "warm", music: "em", sfx: null, hook: false, fade: true },
     vlog:       { name: "Vlog bình yên", look: { size: "nho", color: "trang_vang", font: "quicksand", anim: "karaoke", unit: "dong" }, bg: "den", cutZoom: false, pulse: false, kb: 0, grade: "film", music: "vua", sfx: null, hook: false, fade: true },
-    co_ban:     { name: "Gọn gàng", look: { size: "lon", color: "trang_vang", font: "be_vietnam", anim: "nay", unit: "cum" }, bg: "den", cutZoom: true, pulse: false, kb: 0, grade: null, music: null, sfx: null, hook: false, fade: false },
+    co_ban:     { name: "Mặc định", title: { kind: "ba_tang", color: "vang" }, track: null, look: { size: "lon", color: "trang_vang", font: "be_vietnam", anim: "nay", unit: "cum" }, bg: "den", cutZoom: true, pulse: false, kb: 0, grade: null, music: null, sfx: null, hook: false, fade: false },
+    tu_chinh:   { name: "Tự chỉnh", custom: true, look: { size: "lon", color: "trang_vang", font: "be_vietnam", anim: "nay", unit: "cum" }, bg: "den", cutZoom: true, pulse: false, kb: 0, grade: null, music: null, sfx: null, hook: false, fade: false },
   };
 
   // ---- hình ----
@@ -2261,10 +2342,11 @@ const Render = (() => {
     Style.grade(ctx, W, H, P.style);
     if (onCard) { Style.edges(ctx, W, H, P.style, t, P.M.total); return; }   // thẻ màu: chữ trên thẻ thay phụ đề, tiêu đề
     Draw.base(ctx, W, H, P.bg);
-    const sy = Title.draw(ctx, W, H, P.title, t);        // tiêu đề suốt video: phụ đề dời lên ngay trên tiêu đề
+    const hookOn = P.style && P.style.hook && P.hookText && t < 3.2;   // giật tít: 3 giây đầu là tít to, sau đó mới hiện tiêu đề suốt video
+    const sy = hookOn ? null : Title.draw(ctx, W, H, P.title, t - (P.style && P.style.hook && P.hookText ? 3.2 : 0));   // tiêu đề suốt video: phụ đề dời lên ngay trên tiêu đề
     const g = P.groupAt(t);
     if (g) Draw.subtitle(ctx, W, H, g, t, sy ? { ...P.look, y: sy / H, small: true } : P.look);
-    if (!sy && P.style && P.style.hook) Style.hook(ctx, W, H, P.hookText, t);
+    if (hookOn) Style.hook(ctx, W, H, P.hookText, t);
     Style.edges(ctx, W, H, P.style, t, P.M.total);
   }
 
@@ -2318,8 +2400,9 @@ const Render = (() => {
   }
 
   // ---- Xuất mp4 ----
-  async function pickVideoCfg(W, H, fps) {
-    const bitrate = Math.round(Math.min(10e6, W * H * fps * 0.1));   // 1080x1920 30 hình/giây ~6 Mbps: nét cho video nói chuyện, 1 phút ~45 MB
+  async function pickVideoCfg(W, H, fps, total) {
+    // 1080x1920 30 hình/giây ~6 Mbps: nét cho video nói chuyện, 1 phút ~45 MB. Video dài hơn 3 phút ~4,5 Mbps để file 5 phút ~170 MB, đỡ tràn bộ nhớ điện thoại
+    const bitrate = Math.round(Math.min(10e6, W * H * fps * (total > 180 ? 0.075 : 0.1)));
     for (const codec of ["avc1.640028", "avc1.4d0028", "avc1.42e028", "avc1.640033", "avc1.42001f"]) {
       const c = { codec, width: W, height: H, bitrate, framerate: fps, avc: { format: "avc" }, hardwareAcceleration: "prefer-hardware" };
       try { if ((await VideoEncoder.isConfigSupported(c)).supported) return c; } catch (e) { }
@@ -2342,7 +2425,7 @@ const Render = (() => {
   async function exportMp4(P, audioOut, sr, opts, onProg) {
     const v = P.video, fps = opts.fps || 30;
     const [W, H] = outSize(P.mont ? P.srcW : v.videoWidth, P.mont ? P.srcH : v.videoHeight, opts.maxW || 1080, P.ratio);
-    const vc = await pickVideoCfg(W, H, fps);
+    const vc = await pickVideoCfg(W, H, fps, P.M.total);
     if (!vc) throw new Error("Máy không xuất được video H.264 (WebCodecs).");
     const ac = await pickAudioCfg(sr);
     if (!ac) throw new Error("Máy chưa hỗ trợ ghi tiếng (AudioEncoder). iPhone cần iOS 26 trở lên.");
@@ -2594,6 +2677,9 @@ const Render = (() => {
     };
   }
 
+  // ---------- thông tin máy (để chụp gửi khi có lỗi) ----------
+  $("devInfo").textContent = `Thông tin máy: ${navigator.userAgent} · đa luồng: ${self.crossOriginIsolated ? "có" : "không"} · xuất video: ${typeof VideoEncoder !== "undefined" ? "có" : "không"} · lưu offline: ${navigator.serviceWorker && navigator.serviceWorker.controller ? "có" : "chưa"}`;
+
   // ---------- chọn video ----------
   const video = $("src");
   let file = null, S = null, prev = null;
@@ -2601,14 +2687,26 @@ const Render = (() => {
     for (const id of ["tier1", "tier2", "tier3"]) $(id).value = "";     // video mới: máy chia lại tiêu đề
     tierHand = false;
     const f = e.target.files && e.target.files[0]; if (!f) return;
-    file = f; S = null; $("result").hidden = true; $("save").hidden = true; $("saveNote").textContent = "";
+    file = f; S = null; $("result").hidden = true; $("doneBox").hidden = true; $("expArea").hidden = false; $("saveNote").textContent = "";
     if (prev) { prev.close(); prev = null; }
     if (video.src) URL.revokeObjectURL(video.src);
-    video.src = URL.createObjectURL(f);
     $("pickText").textContent = "🎬 " + f.name;
     $("pickInfo").textContent = "Đang đọc video…";
+    // không chờ trình duyệt đọc xong mới cho làm: phần nghe đọc thẳng từ file. Thông tin video hiện sau khi máy đọc được
+    $("pickInfo").textContent = `Đã chọn video · ${(f.size / 1e6).toFixed(0)} MB · bấm Edit tự động để làm`;
+    updateGo();
+    const ok = await new Promise(res => {
+      let done = false; const fin = v => { if (done) return; done = true; clearInterval(iv); clearTimeout(to); res(v); };
+      video.onloadedmetadata = video.ondurationchange = video.onloadeddata = () => { if (video.readyState >= 1 && isFinite(video.duration)) fin(true); };
+      video.onerror = () => fin("err");
+      const iv = setInterval(() => { if (video.readyState >= 1 && isFinite(video.duration)) fin(true); }, 300);
+      const to = setTimeout(() => fin(false), 15000);
+      video.muted = true; video.preload = "auto"; video.src = URL.createObjectURL(f); video.load();
+    });
+    if (file !== f) return;
     try {
-      await new Promise((res, rej) => { video.onloadedmetadata = res; video.onerror = () => rej(new Error("Máy không mở được video này")); });
+      if (ok === "err") throw new Error("Máy không mở được video này. Thử video khác, hoặc quay ở chế độ Tương thích nhất (iPhone: Cài đặt → Camera → Định dạng).");
+      if (!ok) return;
       const d = video.duration;
       $("pickInfo").textContent = `${fmt(d)} · ${video.videoWidth}×${video.videoHeight} · ${(f.size / 1e6).toFixed(0)} MB` + (d > 180 ? " · video dài, máy sẽ chạy lâu" : "") + " · bấm để đổi video";
       updateGo();
@@ -2622,13 +2720,41 @@ const Render = (() => {
 
   // ---------- tùy chọn ----------
   const setRadio = (name, v) => { const r = document.querySelector(`input[name="${name}"][value="${v}"]`); if (r) r.checked = true; };
-  for (const id of ["optSilence", "optFiller", "optDenoise", "optZoom", "optSubs", "optSceneAudio"]) {
+  for (const id of ["optZoom", "optSubs", "optSceneAudio"]) {   // cắt lặng, cắt ậm ờ, khử ồn: luôn bật, không hỏi
     const v = store.get("ae_" + id, null); if (v != null) $(id).checked = v === "1";
     $(id).addEventListener("change", () => { store.set("ae_" + id, $(id).checked ? "1" : "0"); if (S && id !== "optDenoise") rebuild(); });
   }
   const radio = name => (document.querySelector(`input[name="${name}"]:checked`) || {}).value;
   // ---- ô chọn màu có "Màu riêng" (mã màu hoặc chạm lấy màu từ ảnh), máy nhớ; dùng cho lớp phủ chân nền và màu tiêu đề ----
   const hexOk = v => /^#[0-9a-f]{6}$/i.test(v);
+  // nút ✕ nhỏ ở góc ô màu riêng (màu có sẵn thì không có nút này)
+  const xBtn = (c, del) => {
+    const x = document.createElement("button"); x.type = "button"; x.className = "x"; x.textContent = "✕"; x.setAttribute("aria-label", "Xóa màu " + c);
+    x.addEventListener("click", e => { e.preventDefault(); e.stopPropagation(); if (confirm("Xóa màu riêng này?")) del(); });
+    return x;
+  };
+  // ảnh logo: chọn ảnh, chạm vào ảnh để lấy màu (trung bình 5x5 điểm)
+  function imgPick(p, got) {
+    $(p + "Img").addEventListener("change", async () => {
+      const f = $(p + "Img").files[0]; if (!f) return;
+      const bmp = await createImageBitmap(f), cv = $(p + "Canvas"), sc = Math.min(1, 640 / bmp.width);
+      cv.width = Math.round(bmp.width * sc); cv.height = Math.round(bmp.height * sc);
+      cv.getContext("2d").drawImage(bmp, 0, 0, cv.width, cv.height); cv.hidden = false; $(p + "Hint").hidden = false;
+      if ($(p + "For")) $(p + "For").hidden = false;
+    });
+    $(p + "Canvas").addEventListener("pointerdown", e => {
+      const cv = $(p + "Canvas"), r = cv.getBoundingClientRect();
+      const x = Math.round((e.clientX - r.left) / r.width * cv.width), y = Math.round((e.clientY - r.top) / r.height * cv.height);
+      const d = cv.getContext("2d").getImageData(Math.max(0, x - 2), Math.max(0, y - 2), 5, 5).data;
+      let R = 0, G = 0, B = 0; for (let i = 0; i < d.length; i += 4) { R += d[i]; G += d[i + 1]; B += d[i + 2]; }
+      const n = d.length / 4; got("#" + [R, G, B].map(v => Math.round(v / n).toString(16).padStart(2, "0")).join("").toUpperCase());
+    });
+  }
+  const hexLink = (pick, hx) => {
+    $(pick).addEventListener("input", () => { $(hx).value = $(pick).value.toUpperCase(); });
+    $(hx).addEventListener("input", () => { let v = $(hx).value.trim(); if (!v.startsWith("#")) v = "#" + v; if (hexOk(v)) $(pick).value = v; });
+  };
+  const hexOf = id => { let v = $(id).value.trim().toUpperCase(); if (!v.startsWith("#")) v = "#" + v; return hexOk(v) ? v : null; };
   function colorBox(p, name, key, def, swatch, changed) {
     const now = () => radio(name) || def;
     let mine = []; try { mine = JSON.parse(store.get(key + "cols", "[]")) || []; } catch (e) { }
@@ -2638,9 +2764,7 @@ const Render = (() => {
       for (const c of mine) {
         const l = document.createElement("label"); l.className = "bgc mine"; l.title = c;
         l.innerHTML = `<input type="radio" name="${name}" value="${c}"><i style="background:${swatch(c)}"></i>${c.slice(1)}`;
-        let hold = 0;
-        l.addEventListener("pointerdown", () => { hold = setTimeout(() => { if (confirm("Xóa màu " + c + "?")) { mine = mine.filter(x => x !== c); store.set(key + "cols", JSON.stringify(mine)); drawMine(); if (now() === c || !radio(name)) { setRadio(name, def); fire(); } } }, 700); });
-        for (const ev of ["pointerup", "pointerleave", "pointercancel"]) l.addEventListener(ev, () => clearTimeout(hold));
+        l.append(xBtn(c, () => { mine = mine.filter(x => x !== c); store.set(key + "cols", JSON.stringify(mine)); drawMine(); if (now() === c || !radio(name)) { setRadio(name, def); fire(); } }));
         $(p + "Add").before(l);
       }
     }
@@ -2648,34 +2772,46 @@ const Render = (() => {
     { const v = store.get(key, null); if (v) setRadio(name, v); }
     $(p + "s").addEventListener("change", e => { if (e.target.name === name) fire(); });
     $(p + "Add").addEventListener("click", () => { $(p + "Panel").hidden = !$(p + "Panel").hidden; });
-    $(p + "Pick").addEventListener("input", () => { $(p + "Hex").value = $(p + "Pick").value.toUpperCase(); });
-    $(p + "Hex").addEventListener("input", () => { let v = $(p + "Hex").value.trim(); if (!v.startsWith("#")) v = "#" + v; if (hexOk(v)) $(p + "Pick").value = v; });
+    hexLink(p + "Pick", p + "Hex");
     $(p + "Save").addEventListener("click", () => {
       let v = $(p + "Hex").value.trim().toUpperCase(); if (!v.startsWith("#")) v = "#" + v;
       if (!hexOk(v)) { alert("Mã màu dạng #RRGGBB, ví dụ #2B2F8C"); return; }
       if (!mine.includes(v)) { mine.push(v); if (mine.length > 8) mine.shift(); store.set(key + "cols", JSON.stringify(mine)); drawMine(); }
       setRadio(name, v); fire(); $(p + "Panel").hidden = true;
     });
-    $(p + "Img").addEventListener("change", async () => {
-      const f = $(p + "Img").files[0]; if (!f) return;
-      const bmp = await createImageBitmap(f), cv = $(p + "Canvas"), sc = Math.min(1, 640 / bmp.width);
-      cv.width = Math.round(bmp.width * sc); cv.height = Math.round(bmp.height * sc);
-      cv.getContext("2d").drawImage(bmp, 0, 0, cv.width, cv.height); cv.hidden = false; $(p + "Hint").hidden = false;
-    });
-    $(p + "Canvas").addEventListener("pointerdown", e => {
-      const cv = $(p + "Canvas"), r = cv.getBoundingClientRect();
-      const x = Math.round((e.clientX - r.left) / r.width * cv.width), y = Math.round((e.clientY - r.top) / r.height * cv.height);
-      const d = cv.getContext("2d").getImageData(Math.max(0, x - 2), Math.max(0, y - 2), 5, 5).data;   // trung bình 5x5 điểm
-      let R = 0, G = 0, B = 0; for (let i = 0; i < d.length; i += 4) { R += d[i]; G += d[i + 1]; B += d[i + 2]; }
-      const n = d.length / 4, hx = "#" + [R, G, B].map(v => Math.round(v / n).toString(16).padStart(2, "0")).join("").toUpperCase();
-      $(p + "Hex").value = hx; $(p + "Pick").value = hx;
-    });
+    imgPick(p, hx => { $(p + "Hex").value = hx; $(p + "Pick").value = hx; });
     return now;
   }
   // lớp phủ chân nền: đen / nâu / đỏ / không + màu riêng (giữ khóa lưu cũ ae_bg, ae_bgcols)
-  const bgNow = colorBox("bg", "bg", "ae_bg", "den", c => `linear-gradient(#0000,${c})`, () => { store.set("ae_bg_hand", "1"); if (S) rebuild(); });   // Diễm tự chọn (kể cả Không) thì đổi phong cách không đè
+  const bgNow = colorBox("bg", "bg", "ae_bg", "den", c => `linear-gradient(#0000,${c})`, () => { store.set("ae_bg_hand", "1"); titlePrev(); if (S) rebuild(); });   // Diễm tự chọn (kể cả Không) thì đổi phong cách không đè
   // màu tiêu đề: vàng (mặc định) / trắng / đỏ / đen + màu riêng
-  const tcolNow = colorBox("tc", "tcol", "ae_tcol", "vang", c => c, () => { if (S) rebuild(); });
+  const tcolNow = colorBox("tc", "tcol", "ae_tcol", "vang", c => c, () => { titlePrev(); if (S) rebuild(); });
+  // ---- màu chữ phụ đề riêng: cặp "#chữ/#chữ đang nói", máy nhớ tới khi bấm ✕ ----
+  let scMine = []; try { scMine = JSON.parse(store.get("ae_look_colorcols", "[]")) || []; } catch (e) { }
+  const stroke = c => (Title.lum ? Title.lum(c) : 1) < 0.3 ? "#fff" : "#000";
+  function scDraw() {
+    document.querySelectorAll("#scs .mine").forEach(x => x.remove());
+    for (const v of scMine) {
+      const [a, b] = v.split("/"), l = document.createElement("label"); l.className = "col mine"; l.title = v;
+      l.innerHTML = `<input type="radio" name="color" value="${v}"><span><b style="color:${a};-webkit-text-stroke:3px ${stroke(a)}">chữ</b> <b style="color:${b};-webkit-text-stroke:3px ${stroke(b)}">nói</b></span>`;
+      l.append(xBtn(v, () => {
+        const was = radio("color") === v; scMine = scMine.filter(x => x !== v); store.set("ae_look_colorcols", JSON.stringify(scMine)); scDraw();
+        if (was || !radio("color")) { setRadio("color", Draw.DEF.color); lookChanged(); }
+      }));
+      $("scAdd").before(l);
+    }
+  }
+  scDraw();
+  $("scAdd").addEventListener("click", () => { $("scPanel").hidden = !$("scPanel").hidden; });
+  hexLink("scPick", "scHex"); hexLink("scPick2", "scHex2");
+  imgPick("sc", hx => { const two = radio("scfor") === "2"; $(two ? "scHex2" : "scHex").value = hx; $(two ? "scPick2" : "scPick").value = hx; });
+  $("scSave").addEventListener("click", () => {
+    const a = hexOf("scHex"), b = hexOf("scHex2");
+    if (!a || !b) { alert("Mã màu dạng #RRGGBB, ví dụ #2B2F8C"); return; }
+    const v = a + "/" + b;
+    if (!scMine.includes(v)) { scMine.push(v); if (scMine.length > 8) scMine.shift(); store.set("ae_look_colorcols", JSON.stringify(scMine)); scDraw(); }
+    setRadio("color", v); lookChanged(); $("scPanel").hidden = true;
+  });
   // ---- chữ phụ đề: cỡ, màu, phông, kiểu hiện, cách chia, vị trí (máy nhớ từng cái) ----
   const LOOK = ["size", "color", "font", "unit", "pos"];
   const lookNow = () => { const L = { anim: $("anim").value }; for (const n of LOOK) L[n] = radio(n) || Draw.DEF[n]; return L; };
@@ -2685,12 +2821,18 @@ const Render = (() => {
     if (save) for (const [n, v] of Object.entries(lookNow())) store.set("ae_look_" + n, v);
   }
   { const L = {}; for (const n of [...LOOK, "anim"]) { const v = store.get("ae_look_" + n, null); if (v) L[n] = v; } setLook(L); }
-  const lookChanged = () => { for (const [n, v] of Object.entries(lookNow())) store.set("ae_look_" + n, v); if (S) rebuild(); };
-  for (const n of LOOK) document.querySelectorAll(`input[name="${n}"]`).forEach(r => r.addEventListener("change", lookChanged));
+  function lookChanged() { for (const [n, v] of Object.entries(lookNow())) store.set("ae_look_" + n, v); titlePrev(); if (S) rebuild(); }
+  for (const n of LOOK) if (n !== "color") document.querySelectorAll(`input[name="${n}"]`).forEach(r => r.addEventListener("change", lookChanged));
+  $("scs").addEventListener("change", e => { if (e.target.name === "color") lookChanged(); });   // màu có sẵn + màu riêng thêm sau
   $("anim").addEventListener("change", lookChanged);
   { const v = store.get("ae_ratio", null); if (v && v !== "goc") setRadio("ratio", v); }
   // file .srt chỉ cần cho YouTube: hiện khi chọn Ngang hoặc Cả hai
-  const srtVis = () => { $("srt").hidden = $("srtNote").hidden = !["ngang", "ca2"].includes(radio("ratio")); };
+  const PICK_HINT = { doc: "Hợp nhất với video quay dọc", ngang: "Hợp nhất với video quay ngang", ca2: "Video dọc hay ngang đều được, máy xuất cả 2 khung" };
+  const srtVis = () => {
+    const r = radio("ratio") || "doc"; $("srt").hidden = $("srtNote").hidden = !["ngang", "ca2"].includes(r);
+    document.body.dataset.ratio = r;   // ô chọn video đổi theo khung: dọc, ngang, cả hai = vuông
+    if (!file) $("pickInfo").textContent = PICK_HINT[r] || PICK_HINT.doc;
+  };
   document.querySelectorAll('input[name="ratio"]').forEach(r => r.addEventListener("change", () => { store.set("ae_ratio", radio("ratio")); $("viewRow").hidden = radio("ratio") !== "ca2"; srtVis(); if (S) rebuild(); }));
   $("viewRow").hidden = radio("ratio") !== "ca2"; srtVis();
   document.querySelectorAll('input[name="view"]').forEach(r => r.addEventListener("change", () => { if (S) rebuild(); }));
@@ -2698,16 +2840,28 @@ const Render = (() => {
   const viewRatio = () => radio("ratio") === "ca2" ? radio("view") || "doc" : radio("ratio") || "doc";
   // phong cách: chọn 1 cái là tự đặt kiểu chữ, màu phủ, zoom, nhạc (vẫn chỉnh tay được ở "Tùy chỉnh thêm")
   const presetNow = () => (document.querySelector('input[name="preset"]:checked') || {}).value || "co_ban";
-  function applyPreset() {
+  function applyPreset(init) {
     const P = Style.PRESETS[presetNow()];
-    setLook({ ...Draw.DEF, pos: lookNow().pos, ...P.look }, true); if (!store.get("ae_bg_hand", null)) setRadio("bg", P.bg); $("optZoom").checked = P.cutZoom;
+    if (!(init && P.custom)) setLook({ ...Draw.DEF, pos: lookNow().pos, ...P.look }, true); if (!store.get("ae_bg_hand", null)) setRadio("bg", P.bg); $("optZoom").checked = P.cutZoom;
     if (!store.get("ae_bg_hand", null)) store.set("ae_bg", P.bg); store.set("ae_optZoom", P.cutZoom ? "1" : "0");
     $("hookRow").hidden = !P.hook;
+    // phong cách làm sẵn: tự đặt tiêu đề, màu, nhạc; chỉ còn xem trước, sửa chữ, xuất. "Tự chỉnh": hiện hết lựa chọn
+    document.body.classList.toggle("kieu", !P.custom);
+    if (!P.custom) {
+      setRadio("tkind", P.title.kind); store.set("ae_tkind", P.title.kind); setRadio("tcol", P.title.color); store.set("ae_tcol", P.title.color);
+      $("musicSel").value = P.track || "tu_tao"; store.set("ae_music", $("musicSel").value);
+      $("optMusic").checked = !!P.track; store.set("ae_optMusic", P.track ? "1" : "0");
+      $("optSubs").checked = true; store.set("ae_optSubs", "1");
+      tierUI(); musicInfo();
+    }
+    const id = P.custom ? null : presetNow(), v = $("styleVid");
+    $("styleDemo").hidden = !id;
+    if (id && !v.src.endsWith(`mau/${id}.mp4`)) { v.pause(); v.poster = `mau/${id}.jpg`; v.src = `mau/${id}.mp4`; $("styleNote").textContent = `Video mẫu phong cách ${P.name}. Bấm ▶ để xem, bấm ⛶ để xem to.`; }
   }
-  const pv = store.get("ae_preset", null); if (pv) setRadio("preset", pv);
-  if (!store.get("ae_look_font", null)) applyPreset();   // lần đầu: lấy kiểu chữ theo phong cách mặc định
+  { const pv = store.get("ae_preset", null); if (pv && Style.PRESETS[pv] && ["co_ban", "giat_tit", "chua_lanh", "tu_chinh"].includes(pv)) setRadio("preset", pv); }
+  setTimeout(() => { applyPreset(true); titlePrev(); }, 0);   // mỗi lần mở: áp phong cách đang chọn (Tự chỉnh thì giữ lựa chọn tay); chờ danh sách nhạc dựng xong
   $("hookRow").hidden = !Style.PRESETS[presetNow()].hook;
-  document.querySelectorAll('input[name="preset"]').forEach(r => r.addEventListener("change", () => { store.set("ae_preset", presetNow()); applyPreset(); if (S) rebuild(); }));
+  document.querySelectorAll('input[name="preset"]').forEach(r => r.addEventListener("change", () => { store.set("ae_preset", presetNow()); store.set("ae_bg_hand", ""); applyPreset(); titlePrev(); if (S) rebuild(); }));   // đổi phong cách: lớp phủ chân nền theo phong cách mới
   { const v = store.get("ae_optMusic", null); if (v != null) $("optMusic").checked = v === "1"; }
   $("optMusic").addEventListener("change", () => { store.set("ae_optMusic", $("optMusic").checked ? "1" : "0"); if (S) rebuild(); });
   $("hookText").addEventListener("change", () => { if (S) rebuild(); });
@@ -2734,6 +2888,35 @@ const Render = (() => {
     $("tierNote").textContent = (TIER_NOTE[k] || TIER_NOTE.other) + " Bạn sửa từng ô cho đúng ý; gõ dấu / để tự chia, vd \"Làm video / không cần máy tính / dễ lắm\". Sửa rồi thì máy giữ nguyên; muốn đổi câu khác thì bấm Gợi ý tiêu đề.";
   }
   tierUI();
+  // ô xem trước: vẽ đúng tiêu đề + phụ đề mẫu + lớp phủ chân đang chọn lên khung dọc/ngang, đổi gì vẽ lại liền
+  // (2 ô: 1 ở chỗ tiêu đề, 1 ở chỗ chữ phụ đề, cùng 1 hình)
+  const SAMPLE = "làm video bằng điện thoại".split(" ").map((w, i) => ({ w, s: i * 0.3, e: i * 0.3 + 0.28 }));
+  let tpT = 0;
+  function titlePrev() {
+    clearTimeout(tpT); tpT = setTimeout(async () => {
+      const k = tkNow(); $("tPrevBox").hidden = k === "khong";
+      const r = viewRatio(), [W, H] = r === "ngang" ? [960, 540] : [540, 960], look = lookNow();   // vẽ gấp đôi cho nét
+      await Title.load(); await Draw.useFont(look.font);
+      let tiers = [1, 2, 3].map(i => $("tier" + i).hidden ? "" : $("tier" + i).value.trim());
+      if (!tiers.some(Boolean)) tiers = Title.split(k, "Làm video / bằng điện thoại / dễ lắm");
+      for (const id of ["tPrev", "sPrev"]) {
+        const cv = $(id); if (id === "tPrev" && k === "khong") continue;
+        if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+        const ctx = cv.getContext("2d");
+        if (video.readyState >= 2 && video.videoWidth) { const sc = Math.max(W / video.videoWidth, H / video.videoHeight), dw = video.videoWidth * sc, dh = video.videoHeight * sc; ctx.drawImage(video, (W - dw) / 2, (H - dh) / 2, dw, dh); }
+        else { const g = ctx.createLinearGradient(0, 0, W * 0.4, H); g.addColorStop(0, "#8FA6BF"); g.addColorStop(1, "#2B3A4F"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.fillStyle = "#ffffff22"; ctx.beginPath(); ctx.arc(W / 2, H * 0.36, Math.min(W, H) * 0.16, 0, 7); ctx.fill(); ctx.fillRect(W / 2 - Math.min(W, H) * 0.26, H * 0.52, Math.min(W, H) * 0.52, H); }
+        ctx.save(); Draw.base(ctx, W, H, bgNow()); ctx.restore();
+        ctx.save(); const sy = Title.draw(ctx, W, H, { kind: k, color: tcolNow(), tiers }, 6); ctx.restore();
+        if ($("optSubs").checked) { ctx.save(); Draw.subtitle(ctx, W, H, { words: SAMPLE, s: 0, e: 1.5, kw: new Set([1]) }, 1.3, sy ? { ...look, y: sy / H, small: true } : look); ctx.restore(); }
+      }
+    }, 60);
+  }
+  document.querySelectorAll('input[name="tkind"]').forEach(r => r.addEventListener("change", titlePrev));
+  for (const id of ["tier1", "tier2", "tier3"]) $(id).addEventListener("input", titlePrev);
+  document.querySelectorAll('input[name="ratio"],input[name="view"]').forEach(r => r.addEventListener("change", titlePrev));
+  video.addEventListener("loadeddata", titlePrev); video.addEventListener("seeked", titlePrev);
+  $("optSubs").addEventListener("change", titlePrev);
+  titlePrev();
   document.querySelectorAll('input[name="tkind"]').forEach(r => r.addEventListener("change", () => { store.set("ae_tkind", tkNow()); tierUI(); if (S) rebuild(); }));
   let tierT = 0;
   for (const id of ["tier1", "tier2", "tier3"]) $(id).addEventListener("input", () => {
@@ -2789,6 +2972,7 @@ const Render = (() => {
 
   // ---------- chạy phân tích ----------
   $("go").addEventListener("click", async () => {
+    statusHome();
     const ghep = modeNow() === "ghep";
     if (ghep ? !MT.scenes.length : !file) return;
     if (ghep && !MT.voice) {   // ghép hình không có giọng: khỏi tải bộ nghe, dựng ngay theo nhạc
@@ -2970,16 +3154,23 @@ const Render = (() => {
     return R;
   }
 
-  // ---------- dạng "Ghép hình và video": tối đa 12 cảnh, video ra tối đa 60 giây ----------
-  // Diễm chọn độ dài: dưới 1 phút (nhanh, ~45 MB), 1–2 phút, tối đa 3 phút (chậm hơn, ~130 MB).
-  // hình mặc định 3 / 6 / 10 giây, video cảnh lấy tối đa 6 / 10 / 15 giây theo độ dài đã chọn
-  const MAX_SC = 12;
-  { const v = store.get("ae_mlen", null); if (v) setRadio("mlen", v); }
-  const maxT = () => +(radio("mlen") || 60), maxVid = () => ({ 60: 6, 120: 10, 180: 15 })[maxT()] || 6, imgDur = () => ({ 60: 3, 120: 6, 180: 10 })[maxT()] || 3;
+  // ---------- dạng "Ghép hình và video": tối đa 12 cảnh, video ra tối đa 5 phút ----------
+  // Diễm chọn độ dài: dưới 1 phút (nhanh, ~45 MB), 1–3 phút (~130 MB), tối đa 5 phút (chậm hơn, ~170 MB).
+  // mỗi video cảnh lấy tối đa 40 giây; hình mặc định 3 / 5 / 6 giây. Tổng quá độ dài đã chọn thì máy tự rút ngắn đều các video (cảnh tự chỉnh giây thì giữ).
+  const MAX_SC = 12, MAX_VID = 40, DUR_OPTS = [2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 35, 40];
+  { let v = store.get("ae_mlen", null); if (v === "120") v = "180"; if (v) setRadio("mlen", v); }
+  const maxT = () => +(radio("mlen") || 60), maxVid = () => MAX_VID, imgDur = () => ({ 60: 3, 180: 5, 300: 6 })[maxT()] || 3;
+  // giờ mặc định từng cảnh: video lấy hết (tối đa 40 s), quá độ dài đã chọn thì rút đều các video chưa chỉnh tay
+  function fitScenes() {
+    const auto = c => !c.manual;
+    for (const c of MT.scenes) if (auto(c)) c.dur = c.type === "anh" ? imgDur() : Math.max(1, Math.min(MAX_VID, Math.floor(c.len)));
+    const fixed = MT.scenes.reduce((a, c) => a + (auto(c) && c.type === "video" ? 0 : c.dur), 0);
+    const vids = MT.scenes.filter(c => auto(c) && c.type === "video"), vsum = vids.reduce((a, c) => a + c.dur, 0);
+    if (vsum && fixed + vsum > maxT()) { const k = Math.max(0, maxT() - fixed) / vsum; for (const c of vids) c.dur = Math.max(2, Math.floor(c.dur * k)); }
+  }
   document.querySelectorAll('input[name="mlen"]').forEach(r => r.addEventListener("change", () => {
     store.set("ae_mlen", radio("mlen"));
-    for (const c of MT.scenes) c.dur = c.type === "anh" ? imgDur() : Math.max(1, Math.min(maxVid(), Math.floor(c.len)));
-    drawScenes(); if (S) rebuild();
+    fitScenes(); drawScenes(); if (S) rebuild();
   }));
   const MT = { scenes: [], voice: null };
   let scId = 0;
@@ -2994,7 +3185,7 @@ const Render = (() => {
   modeUI();
   document.querySelectorAll('input[name="mode"]').forEach(r => r.addEventListener("change", () => {
     store.set("ae_mode", modeNow()); modeUI();
-    if (prev) { prev.close(); prev = null; } S = null; $("result").hidden = true; $("save").hidden = true;   // đổi dạng: làm lại từ đầu
+    if (prev) { prev.close(); prev = null; } S = null; $("result").hidden = true; $("doneBox").hidden = true; $("expArea").hidden = false;   // đổi dạng: làm lại từ đầu
   }));
   const mtTotal = () => Math.min(maxT(), MT.scenes.reduce((a, c) => a + c.dur, 0)) || 1;
   // khung gốc cho "Như video gốc": theo cảnh đầu
@@ -3045,25 +3236,39 @@ const Render = (() => {
     });
     return out;
   }
+  // mở video cảnh nhẹ máy: chỉ đọc thông tin + 1 khung làm ảnh nhỏ (không tải sẵn cả video), quá 20 giây thì bỏ qua để không kẹt
+  function openVid(f) {
+    return new Promise((res, rej) => {
+      const el = document.createElement("video"); el.muted = true; el.playsInline = true; el.setAttribute("playsinline", ""); el.preload = "metadata";
+      let done = false; const fin = (ok, why) => { if (done) return; done = true; clearTimeout(to); ok ? res(el) : (URL.revokeObjectURL(el.src), rej(new Error(why))); };
+      const to = setTimeout(() => el.videoWidth && isFinite(el.duration) ? fin(true) : fin(false, "Video " + f.name + " mở lâu quá, máy bỏ qua. Bạn thử cắt ngắn video này rồi thêm lại."), 20000);
+      el.onerror = () => fin(false, "Không mở được video " + f.name);
+      el.onloadedmetadata = () => { el.onseeked = () => fin(true); try { el.currentTime = Math.min(0.5, (el.duration || 1) / 2); } catch (e) { fin(true); } };
+      el.src = URL.createObjectURL(f); el.load();
+    });
+  }
   async function addScenes(files) {
+    const room = MAX_SC - MT.scenes.length;
+    if (files.length > room) { alert(`Tối đa ${MAX_SC} cảnh, máy chỉ lấy ${Math.max(0, room)} cái đầu.`); files = files.slice(0, Math.max(0, room)); }
+    let n = 0;
     for (const f of files) {
-      if (MT.scenes.length >= MAX_SC) { alert(`Tối đa ${MAX_SC} cảnh, máy bỏ bớt phần dư.`); break; }
+      n++; status(`Đang mở hình, video ${n}/${files.length}…`, n / files.length, ""); await tick();
       const isVid = (f.type || "").startsWith("video") || /\.(mp4|mov|m4v|webm)$/i.test(f.name);
       const c = { id: ++scId, type: isVid ? "video" : "anh", name: f.name, file: f, text: "", from: 0 };
       try {
         if (isVid) {
-          const el = document.createElement("video"); el.muted = true; el.playsInline = true; el.preload = "auto"; el.src = URL.createObjectURL(f);
-          await new Promise((res, rej) => { el.onloadeddata = res; el.onerror = () => rej(new Error("Không mở được video " + f.name)); });
-          c.el = el; c.len = el.duration || maxVid(); c.dur = Math.max(1, Math.min(maxVid(), Math.floor(c.len)));
+          const el = await openVid(f);
+          c.el = el; c.len = isFinite(el.duration) && el.duration > 0 ? el.duration : MAX_VID;
         } else {
           const im = await createImageBitmap(f), sc = Math.min(1, 1920 / Math.max(im.width, im.height));   // giới hạn 1920 cho nhẹ máy
           c.bmp = sc < 1 ? await createImageBitmap(im, { resizeWidth: Math.round(im.width * sc), resizeHeight: Math.round(im.height * sc), resizeQuality: "high" }) : im;
-          if (sc < 1) im.close(); c.dur = imgDur();
+          if (sc < 1) im.close();
         }
       } catch (e) { alert(e.message || "Không mở được " + f.name); continue; }
       MT.scenes.push(c);
     }
-    drawScenes(); updateGo(); if (S) rebuild();
+    $("status").hidden = true;
+    fitScenes(); drawScenes(); updateGo(); if (S) rebuild();
   }
   $("scFile").addEventListener("change", e => { addScenes([...e.target.files]); e.target.value = ""; });
   function drawScenes() {
@@ -3079,14 +3284,14 @@ const Render = (() => {
       const r1 = document.createElement("div"); r1.className = "row";
       const lb = document.createElement("b"); lb.textContent = (c.type === "video" ? "🎬 " : "🖼 ") + (i + 1);
       const du = document.createElement("select"); du.setAttribute("aria-label", "Thời gian cảnh " + (i + 1));
-      const opts = c.type === "video" ? [2, 3, 4, 5, 6, 8, 10, 12, 15].filter(v => v <= Math.max(2, Math.min(maxVid(), Math.floor(c.len)))) : [2, 3, 4, 5, 6, 8, 10, 12, 15].filter(v => v <= Math.max(5, imgDur() * 1.5));
+      const opts = c.type === "video" ? DUR_OPTS.filter(v => v <= Math.max(2, Math.min(maxVid(), Math.floor(c.len)))) : DUR_OPTS.filter(v => v <= 15);
       if (!opts.includes(c.dur)) opts.push(c.dur), opts.sort((a, b) => a - b);
       for (const v of opts) du.add(new Option(v + " giây", v, false, c.dur === v));
-      du.addEventListener("change", () => { c.dur = +du.value; drawScenes(); if (S) rebuild(); });
+      du.addEventListener("change", () => { c.dur = +du.value; c.manual = true; drawScenes(); if (S) rebuild(); });
       const mv = (dir, txt, lab) => { const b = document.createElement("button"); b.type = "button"; b.className = "mv"; b.textContent = txt; b.setAttribute("aria-label", lab); b.disabled = !MT.scenes[i + dir];
         b.addEventListener("click", () => { [MT.scenes[i], MT.scenes[i + dir]] = [MT.scenes[i + dir], MT.scenes[i]]; drawScenes(); if (S) rebuild(); }); return b; };
       const x = document.createElement("button"); x.type = "button"; x.className = "mv"; x.textContent = "✕"; x.setAttribute("aria-label", "Bỏ cảnh " + (i + 1));
-      x.addEventListener("click", () => { if (c.el) URL.revokeObjectURL(c.el.src); MT.scenes.splice(i, 1); drawScenes(); updateGo(); if (S && MT.scenes.length) rebuild(); });
+      x.addEventListener("click", () => { if (c.el) URL.revokeObjectURL(c.el.src); MT.scenes.splice(i, 1); fitScenes(); drawScenes(); updateGo(); if (S && MT.scenes.length) rebuild(); });
       r1.append(lb, du, mv(-1, "▲", "Lên trên"), mv(1, "▼", "Xuống dưới"), x); right.append(r1);
       const cap = document.createElement("input"); cap.type = "text"; cap.className = "cap"; cap.maxLength = 80; cap.value = c.text; cap.placeholder = "Chữ hiện trên cảnh này (không bắt buộc)";
       let tt = 0; cap.addEventListener("input", () => { c.text = cap.value; clearTimeout(tt); tt = setTimeout(() => S && rebuild(), 450); });
@@ -3113,7 +3318,7 @@ const Render = (() => {
   $("recBtn").addEventListener("click", async () => {
     if (rec) { rec.stop(); return; }
     let st; try { st = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } }); }
-    catch (e) { alert("Máy chưa cho dùng micro. Vào cài đặt trình duyệt cho phép micro rồi thử lại."); return; }
+    catch (e) { alert("Máy chưa cho dùng micro.\n\nNếu đang mở trong Zalo, Facebook…: mở bằng Safari (iPhone) hoặc Chrome (Android).\n\niPhone: bấm aA ở thanh địa chỉ → Cài đặt trang web → Micrô → Cho phép. Hoặc Cài đặt → Safari → Micrô → Cho phép.\n\nAndroid: bấm ổ khóa cạnh địa chỉ → Quyền → Micrô → Cho phép.\n\nRồi bấm Thu giọng lại."); return; }
     const mime = ["audio/mp4", "audio/webm;codecs=opus", "audio/webm"].find(m => window.MediaRecorder && MediaRecorder.isTypeSupported(m)) || "";
     const chunks = [], t0 = Date.now(); rec = new MediaRecorder(st, mime ? { mimeType: mime } : {});
     rec.ondataavailable = e => e.data.size && chunks.push(e.data);
@@ -3366,10 +3571,10 @@ const Render = (() => {
     // tiêu đề 3 tầng: ô trống hết thì máy tự chia câu nói đầu
     // tiêu đề: chưa sửa tay thì máy chia từ tít Diễm gõ, hoặc câu hay nhất gần đầu video (xem Title.suggest)
     const kind = tkNow();
-    if (!tierHand) {
+    if (!tierHand || ![1, 2, 3].some(i => $("tier" + i).value.trim())) {   // chưa sửa tay, hoặc ô tiêu đề trống hết: máy tự điền
       let src = $("hookText").value.trim();
       if (!src) { const sg = Title.suggest(liveLines()).filter(o => o.from === "loi_noi"); src = sg.length ? sg[0].text : out.slice(0, 8).map(w => w.w).join(" "); }   // tít mẫu có chỗ trống ___ thì không tự dùng
-      const tv = Title.split(kind, src); tv.forEach((x, i) => $("tier" + (i + 1)).value = x);
+      const tv = Title.split(kind, src); tv.forEach((x, i) => $("tier" + (i + 1)).value = x); titlePrev();
     }
     const title = { kind, color: tcolNow(), tiers: [1, 2, 3].map(i => $("tier" + i).hidden ? "" : $("tier" + i).value.trim()) };
     await Title.load(); if (my !== rebuildT) return;
@@ -3389,7 +3594,7 @@ const Render = (() => {
     if (prev) prev.close();
     prev = Render.preview(S.P, cv, audioOut, 48000, (t, playing) => { $("seek").value = Math.round(t / M.total * 1000); $("tnow").textContent = fmt(t) + " / " + fmt(M.total); if (!playing) setPlay(false); });
     setPlay(false);
-    $("save").hidden = $("save2").hidden = true; $("saveNote").textContent = "";
+    if (!$("exp").disabled) { $("doneBox").hidden = true; $("expArea").hidden = false; }   // sửa gì thì phải xuất lại
     if (my === rebuildT) await prev.still(keepT);
     $("tnow").textContent = fmt(keepT) + " / " + fmt(M.total);
   }
@@ -3397,18 +3602,37 @@ const Render = (() => {
   $("play").addEventListener("click", async () => { if (!prev) return; if (prev.playing) { prev.stop(); setPlay(false); } else { await prev.play(); setPlay(true); } });
   $("seek").addEventListener("input", () => { if (!prev || !S) return; prev.stop(); setPlay(false); prev.still($("seek").value / 1000 * S.P.M.total); });
 
+  // xem nhanh toàn bộ: tua về đầu, chạy hết video đã edit
+  $("quick").addEventListener("click", async () => {
+    if (!prev || !S) return;
+    prev.stop(); await prev.still(0); $("seek").value = 0;
+    $("stagebox").scrollIntoView({ behavior: "smooth", block: "start" });
+    await prev.play(); setPlay(true);
+  });
   // ---------- xuất ----------
-  let outFile = null, outFile2 = null;
+  let outFile = null, outFile2 = null, outUrl = "";
+  // thanh tiến trình: lúc xử lý nằm dưới nút Edit tự động, lúc xuất thì chuyển xuống ngay chỗ nút Xuất video
+  const statusHome = () => $("go").nextElementSibling.after($("status"));
+  const showOut = n => {
+    const f = n === 2 ? outFile2 : outFile; if (!f) return;
+    if (outUrl) URL.revokeObjectURL(outUrl); outUrl = URL.createObjectURL(f); $("outVid").src = outUrl;
+  };
+  document.querySelectorAll('input[name="dview"]').forEach(r => r.addEventListener("change", () => showOut(+radio("dview"))));
+  $("reEdit").addEventListener("click", () => {
+    $("doneBox").hidden = true; $("expArea").hidden = false; $("status").hidden = true; $("outVid").pause();
+    $("result").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
   $("exp").addEventListener("click", async () => {
     if (!S) return;
     if (prev) { prev.stop(); setPlay(false); }
     if (!Render.canExport()) { status("Trình duyệt này chưa xuất được video. iPhone: cập nhật iOS 26 trở lên và dùng Safari. Android: dùng Chrome.", null, "", true); return; }
-    $("exp").disabled = true; $("save").hidden = $("save2").hidden = true;
+    $("exp").disabled = true; $("doneBox").hidden = true; $("outVid").removeAttribute("src");
+    $("expSlot").append($("status")); $("expArea").hidden = true;
     const t0 = Date.now();
     try {
       let wake = null; try { wake = await navigator.wakeLock.request("screen"); } catch (e) { }
       status("Đang xuất video… 0%", 0, "Để màn hình sáng, đừng chuyển app. Máy chạy theo thời gian thật của video.");
-      $("stage").scrollIntoView({ block: "center" });
+      showQuote(); $("status").scrollIntoView({ behavior: "smooth", block: "center" });
       // xuất 1080p; máy yếu bị lỗi thì tự xuất lại 720p cho chắc lưu được. "Cả 2": xuất dọc trước, ngang sau
       const both = radio("ratio") === "ca2", rs = both ? ["doc", "ngang"] : [S.P.ratio];
       const base = modeNow() === "ghep" ? "video_ghep" : (file.name || "video").replace(/\.[^.]+$/, "");
@@ -3428,12 +3652,16 @@ const Render = (() => {
         mb += blob.size / 1e6;
       }
       try { wake && wake.release(); } catch (e) { }
-      status(`Xong! ${both ? "2 video" : "Video"} ${mb.toFixed(1)} MB, xuất trong ${fmt((Date.now() - t0) / 1000)}.`, 1, both ? "Bấm Lưu từng bản bên dưới." : "Bấm Lưu video vào máy bên dưới.");
+      $("status").hidden = true;
+      $("doneBox").querySelector(".step").lastChild.textContent = `${both ? "2 video" : "Video"} đã xong · ${mb.toFixed(1)} MB · ${fmt((Date.now() - t0) / 1000)}`;
       $("save").textContent = both ? "💾 Lưu bản dọc" : "💾 Lưu video vào máy";
-      $("save").hidden = false; $("save2").hidden = !both; $("save").scrollIntoView({ behavior: "smooth", block: "center" });
+      $("save2").hidden = !both; $("doneView").hidden = !both; setRadio("dview", "1"); showOut(1);
+      $("doneBox").hidden = false; $("saveNote").textContent = "";
+      $("doneBox").scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (e) {
       console.error(e);
-      status("Xuất video lỗi: " + (e && e.message || e), null, "Bấm Làm video thử lại. Vẫn lỗi thì tắt bớt app khác, khởi động lại máy rồi làm lại.", true);
+      status("Xuất video lỗi: " + (e && e.message || e), null, "Bấm Xuất video thử lại. Vẫn lỗi thì tắt bớt app khác, khởi động lại máy rồi làm lại.", true);
+      $("expArea").hidden = false;
     } finally { $("exp").disabled = false; }
   });
   // file phụ đề .srt: chữ đã sửa, giờ đã khớp sau khi cắt; chia theo dòng (~7 chữ) cho dễ đọc trên YouTube
