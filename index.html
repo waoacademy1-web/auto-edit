@@ -217,7 +217,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <div class="logo-mark" aria-hidden="true">✂</div>
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.4</span></div>
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.5</span></div>
   </header>
 
   <section class="card">
@@ -253,8 +253,8 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     </div></div>
     <label class="switch"><input type="checkbox" id="optSceneAudio"><span>Giữ tiếng gốc của video cảnh<small>Cho kiểu ASMR: lọc bớt ồn đều (quạt, máy lạnh, xì), làm rõ tiếng. Tiếng xe, người nói xung quanh thì không lọc được.</small></span></label>
     <span class="lbl">Giọng nói (không bắt buộc)</span>
-    <div class="row"><button type="button" id="recBtn">🎙 Thu giọng</button>
-      <label class="pickimg">Tải file ghi âm / video<input type="file" id="vFile" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac"></label>
+    <div class="row"><button type="button" id="recBtn" hidden>🎙 Thu giọng</button>
+      <label class="pickimg">🎙 Tải file ghi âm / video có giọng<input type="file" id="vFile" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac"></label>
       <button type="button" id="vDel" hidden>Bỏ giọng</button></div>
     <p class="note" id="vInfo">Có giọng: máy làm giọng trong, rõ, tự ra phụ đề và tự chia cảnh theo câu nói (dài tối đa theo độ dài đã chọn). Không có giọng: video chạy theo nhạc, gõ chữ cho từng cảnh ở trên.</p>
   </section>
