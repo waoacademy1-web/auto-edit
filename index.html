@@ -25,6 +25,7 @@ header{display:flex;gap:14px;align-items:center}
 .ic-timer{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 2h4M12 14l3-3'/><circle cx='12' cy='14' r='8'/></svg>")}
 .ic-pen{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21.2 6.8a1 1 0 0 0-4-4L3.8 16.2a2 2 0 0 0-.5.8L2 21.4a.5.5 0 0 0 .6.6l4.4-1.3a2 2 0 0 0 .8-.5z'/></svg>")}
 .ic-doc{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/><path d='M14 2v4a2 2 0 0 0 2 2h4M16 13H8M16 17H8M10 9H8'/></svg>")}
+.ic-down{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3v12M6 10l6 6 6-6M4 21h16'/></svg>")}
 .ic-play{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 3l14 9-14 9z' fill='%23000'/></svg>")}
 .ic-pause{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='6' y='4' width='4' height='16' rx='1' fill='%23000'/><rect x='14' y='4' width='4' height='16' rx='1' fill='%23000'/></svg>")}
 .ic-stop{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='5' width='14' height='14' rx='2' fill='%23000'/></svg>")}
@@ -113,7 +114,7 @@ body.hasvoice .sci .cap{display:none}
 .nxt{display:grid;gap:6px;padding:10px 12px;border:1.5px dashed var(--line);border-radius:14px;font:600 13px var(--body);color:var(--muted)}
 .nxt b{display:flex;align-items:center;gap:8px;font:700 14px var(--body);color:var(--ink);opacity:.75}.nxt i{font-style:normal;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--line);font:800 12px var(--display)}
 body:has(#result:not([hidden])) #nextSteps{display:none}
-.tustep[hidden]{display:none!important}.tunav{justify-content:space-between}
+.tustep[hidden]{display:none!important}.tunav{justify-content:space-between;gap:12px;margin-top:14px}.tunav button{min-height:52px;padding:0 22px;font-size:17px;font-weight:800;border:2px solid var(--flame);color:var(--flame);background:var(--panel)}#tuNext{flex:1;background:var(--flame);color:#fff;box-shadow:0 4px 0 var(--flamesh)}#tuNext:active{transform:translateY(2px);box-shadow:0 2px 0 var(--flamesh)}.tunav button:disabled{opacity:.3}
 .sdemo{display:grid;justify-items:center;gap:4px;margin:10px 0 4px}
 .sdemo video{width:min(52vw,220px);aspect-ratio:9/16;border-radius:14px;background:#000;box-shadow:0 4px 14px #0003}
 body.kieu .tuchinh{display:none!important}
@@ -237,12 +238,15 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 .how{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14px;color:var(--muted)}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 #quoteText{transition:opacity .45s}#quoteText.out{opacity:0}
+.brty{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.brty button{min-height:46px;font-weight:800;border:2px solid var(--line);background:var(--field);color:var(--ink);display:flex;align-items:center;justify-content:center}.brty button[aria-checked="true"]{border-color:var(--flame);background:var(--flame);color:#fff}
+.okmsg{color:var(--flame);font-weight:700}@keyframes brf{0%{box-shadow:0 0 0 3px var(--flame)}100%{box-shadow:0 0 0 0 transparent}}.bri.flash{animation:brf 1.6s ease-out}
+.exphere{display:flex;flex-direction:column;align-items:stretch;gap:8px;text-align:center;margin:10px 0;padding:10px 12px;border:2px solid var(--flame);border-radius:16px;background:var(--field)}.exphere span{font-weight:700;flex:none}.exphere .big{margin:0;white-space:nowrap}
 </style>
 
 <div class="wrap">
   <header>
     <img class="logo-mark" src="icon.png" alt="" aria-hidden="true">
-    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.6</span></div>
+    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.7</span></div>
   </header>
 
   <section class="card">
@@ -318,6 +322,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Tua">
         <span class="note" id="tnow">0:00</span>
       </div>
+      <div id="expHere" class="exphere" hidden><span>Xem xong thấy ổn?</span><button type="button" class="big" id="exp2"><i class="ic ic-down" aria-hidden="true"></i>Xuất video luôn</button></div>
     </div>
     <div id="tuBox" class="tuchinh tubox">
       <div class="tuhead"><b id="tuName"></b><span class="note" id="tuStep"></span></div>
@@ -340,6 +345,34 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     <label class="switch tuchinh"><input type="checkbox" id="optSubs" checked><span>Hiện phụ đề<small>Tắt nếu chỉ muốn tiêu đề, hình và nhạc. File phụ đề .srt vẫn lưu được.</small></span></label>
 <div id="subOpts">
     <div class="tprev" id="sPrevBox"><div class="tpair"><canvas id="sPrev" width="270" height="480" aria-label="Xem trước phụ đề cùng tiêu đề"></canvas><canvas id="sPrev2" class="p2" width="480" height="270" aria-label="Xem trước bản ngang"></canvas></div><small>Xem trước: tiêu đề + phụ đề + lớp phủ chân</small></div>
+    <div class="ctl"><span class="lbl">Màu chữ phụ đề <small>(chữ thường · chữ đang nói)</small></span><div class="cols" id="scs" role="radiogroup" aria-label="Màu chữ phụ đề">
+      <label class="col"><input type="radio" name="color" value="trang_den"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="trang_do"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="trang_vang" checked><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="den_trang"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="den_do"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="den_vang"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="vang_trang"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="vang_do"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="vang_den"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="do_trang"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="do_den"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
+      <label class="col"><input type="radio" name="color" value="do_vang"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
+      <button type="button" class="bgadd col" id="scAdd" aria-label="Thêm cặp màu riêng">＋<small>Màu riêng</small></button>
+    </div>
+      <div id="scPanel" class="bgpanel" hidden>
+        <div class="row"><span class="lbl" style="min-width:110px">Chữ thường</span><input type="color" id="scPick" value="#FFFFFF" aria-label="Màu chữ thường"><input type="text" id="scHex" value="#FFFFFF" maxlength="7" aria-label="Mã màu chữ thường" style="width:110px"></div>
+        <div class="row"><span class="lbl" style="min-width:110px">Chữ đang nói</span><input type="color" id="scPick2" value="#FFE100" aria-label="Màu chữ đang nói"><input type="text" id="scHex2" value="#FFE100" maxlength="7" aria-label="Mã màu chữ đang nói" style="width:110px"></div>
+        <label class="pickimg">Lấy màu từ ảnh (logo, bảng màu thương hiệu)<input type="file" id="scImg" accept="image/*"></label>
+        <div class="seg3" id="scFor" role="radiogroup" aria-label="Chạm ảnh lấy màu cho" hidden>
+          <label><input type="radio" name="scfor" value="1" checked><span>Lấy cho chữ thường</span></label>
+          <label><input type="radio" name="scfor" value="2"><span>Lấy cho chữ đang nói</span></label>
+        </div>
+        <canvas id="scCanvas" class="pickcv" hidden></canvas>
+        <p class="note" id="scHint" hidden>Chọn ô "Lấy cho…", chạm vào ảnh để lấy màu, rồi bấm Lưu màu.</p>
+        <div class="row"><button type="button" id="scSave">Lưu màu</button></div>
+        <p class="note">Màu đã lưu hiện thành ô ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa.</p>
+      </div></div>
     <div class="ctl" id="subPick"><span class="lbl">Chữ phụ đề <small>bấm từng mục để mở, xem trước nằm bên cạnh</small></span>
       <div class="fbtns"><button type="button" class="fbtn" data-l="lSize" aria-expanded="false"><span>Cỡ chữ</span><small id="v_lSize"></small></button><button type="button" class="fbtn" data-l="fList1" aria-expanded="false"><span><b style="font-family:&quot;Be Vietnam Pro&quot;;font-weight:900">Aa</b> Chữ đơn giản</span><small id="v_fList1"></small></button><button type="button" class="fbtn" data-l="fList2" aria-expanded="false"><span><b style="font-family:Pacifico">Aa</b> Chữ chill</span><small id="v_fList2"></small></button><button type="button" class="fbtn" data-l="lAnim" aria-expanded="false"><span>Kiểu hiện</span><small id="v_lAnim"></small></button><button type="button" class="fbtn" data-l="lUnit" aria-expanded="false"><span>Chia phụ đề</span><small id="v_lUnit"></small></button><button type="button" class="fbtn" data-l="lPos" aria-expanded="false"><span>Vị trí</span><small id="v_lPos"></small></button></div>
       <span id="fNow" hidden></span>
@@ -389,34 +422,6 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     </div>
       </div>
     </div>
-    <div class="ctl"><span class="lbl">Màu chữ phụ đề <small>(chữ thường · chữ đang nói)</small></span><div class="cols" id="scs" role="radiogroup" aria-label="Màu chữ phụ đề">
-      <label class="col"><input type="radio" name="color" value="trang_den"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="trang_do"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="trang_vang" checked><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="den_trang"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="den_do"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="den_vang"><span><b style="color:#111111;-webkit-text-stroke:3px #fff">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="vang_trang"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="vang_do"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="vang_den"><span><b style="color:#FFE100;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="do_trang"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFFFFF;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="do_den"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
-      <label class="col"><input type="radio" name="color" value="do_vang"><span><b style="color:#E8202A;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#FFE100;-webkit-text-stroke:3px #000">nói</b></span></label>
-      <button type="button" class="bgadd col" id="scAdd" aria-label="Thêm cặp màu riêng">＋<small>Màu riêng</small></button>
-    </div>
-      <div id="scPanel" class="bgpanel" hidden>
-        <div class="row"><span class="lbl" style="min-width:110px">Chữ thường</span><input type="color" id="scPick" value="#FFFFFF" aria-label="Màu chữ thường"><input type="text" id="scHex" value="#FFFFFF" maxlength="7" aria-label="Mã màu chữ thường" style="width:110px"></div>
-        <div class="row"><span class="lbl" style="min-width:110px">Chữ đang nói</span><input type="color" id="scPick2" value="#FFE100" aria-label="Màu chữ đang nói"><input type="text" id="scHex2" value="#FFE100" maxlength="7" aria-label="Mã màu chữ đang nói" style="width:110px"></div>
-        <label class="pickimg">Lấy màu từ ảnh (logo, bảng màu thương hiệu)<input type="file" id="scImg" accept="image/*"></label>
-        <div class="seg3" id="scFor" role="radiogroup" aria-label="Chạm ảnh lấy màu cho" hidden>
-          <label><input type="radio" name="scfor" value="1" checked><span>Lấy cho chữ thường</span></label>
-          <label><input type="radio" name="scfor" value="2"><span>Lấy cho chữ đang nói</span></label>
-        </div>
-        <canvas id="scCanvas" class="pickcv" hidden></canvas>
-        <p class="note" id="scHint" hidden>Chọn ô "Lấy cho…", chạm vào ảnh để lấy màu, rồi bấm Lưu màu.</p>
-        <div class="row"><button type="button" id="scSave">Lưu màu</button></div>
-        <p class="note">Màu đã lưu hiện thành ô ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa.</p>
-      </div></div>
     <div class="opts">
       <label class="switch" hidden><input type="checkbox" id="optSilence" checked><span>Cắt khoảng lặng<small>Ngừng nói lâu hơn 0,3 giây thì cắt, vẫn chừa hơi thở</small></span></label>
       <label class="switch" hidden><input type="checkbox" id="optFiller" checked><span>Cắt ậm, ờ, ừm<small>Cả tiếng ngân dài “thìiii…”</small></span></label>
@@ -452,6 +457,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <div id="brOn" class="tiers" hidden>
         <p class="note" id="brHint"></p>
         <div class="row"><button type="button" id="brAuto"><i class="ic ic-spark" aria-hidden="true"></i>Máy gợi ý chỗ chèn</button><button type="button" id="brClear">Xóa hết</button></div>
+        <p class="note okmsg" id="brMsg" role="status" hidden></p>
         <span class="lbl">Màu thẻ</span>
         <div class="bgs" id="bcs" role="radiogroup" aria-label="Màu thẻ">
           <label class="bgc"><input type="radio" name="bcol" value="trang" checked><i style="background:#fff"></i>Trắng</label>
@@ -467,7 +473,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         </div>
         <div id="brSum" class="row lsum" hidden><span id="brSumText"></span><button type="button" id="brAll">Xem tất cả</button></div>
         <div id="brList" class="brs"></div>
-        <p class="note">Bật B-roll là máy tự chèn thẻ màu ở các chỗ gợi ý, màu thẻ chọn 1 lần ở trên cho tất cả. Muốn dùng hình hay video ở chỗ nào thì đổi "Thẻ màu" thành Hình/Video ở chỗ đó. Bấm nút hình cuộn phim ở dòng phụ đề để chèn thêm.</p>
+        <p class="note">Bật B-roll là máy tự chèn thẻ màu ở các chỗ gợi ý, màu thẻ chọn 1 lần ở trên cho tất cả. Muốn dùng hình hay video ở chỗ nào thì bấm nút <b>Hình</b> hoặc <b>Video</b> ở chỗ đó rồi chọn file trong máy. Bấm nút hình cuộn phim ở dòng phụ đề để chèn thêm.</p>
       </div>
       </div>
       <div class="row tunav"><button type="button" id="tuBack">‹ Lại</button><button type="button" id="tuNext">Tiếp ›</button></div>
@@ -530,7 +536,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     <div id="expArea">
       <button class="big alt" id="quick"><i class="ic ic-play" aria-hidden="true"></i>Xem nhanh toàn bộ trước khi xuất</button>
       <p class="note">Xem lại từ đầu tới cuối đúng như video sẽ xuất. Thấy ổn thì bấm Xuất video.</p>
-      <button class="big" id="exp">⬇ Xuất video</button>
+      <button class="big" id="exp"><i class="ic ic-down" aria-hidden="true"></i>Xuất video</button>
     </div>
     <div id="expSlot"></div>
     <div id="doneBox" hidden>
@@ -2911,7 +2917,7 @@ const Render = (() => {
     const st = tuSteps(); tuI = Math.max(0, Math.min(st.length - 1, i));
     st.forEach((d, k) => d.hidden = k !== tuI);
     $("tuName").textContent = "Tự chỉnh: " + st[tuI].dataset.name; $("tuStep").textContent = `Phần ${tuI + 1}/${st.length}`;
-    $("tuBack").disabled = !tuI; $("tuNext").textContent = tuI === st.length - 1 ? "Xong, sang sửa tiêu đề ✓" : "Tiếp ›";
+    $("tuBack").disabled = !tuI; $("tuNext").textContent = tuI === st.length - 1 ? "Xong, sang sửa tiêu đề ›" : "Tiếp theo ›";
   }
   $("tuBack").addEventListener("click", () => tuShow(tuI - 1));
   $("tuNext").addEventListener("click", () => { if (tuI < tuSteps().length - 1) { tuShow(tuI + 1); $("tuBox").scrollIntoView({ behavior: "smooth", block: "start" }); } else $("titleRow").scrollIntoView({ behavior: "smooth", block: "start" }); });
@@ -2948,17 +2954,13 @@ const Render = (() => {
     viet_tay: ["Chữ viết tay to, ngắn thôi", "Dòng chữ nhỏ bên dưới", ""],
     toi_gian: ["Dòng in hoa mảnh", "Dòng chữ nghiêng màu nhạt", "Chữ nhỏ dưới cùng (vd: tên), để trống cũng được"],
   };
-  const TIER_NOTE = {
-    ba_tang: "Máy chọn câu hay nhất gần đầu video rồi chia: tầng 1 là 2 chữ đầu (mở bằng số thì 3 chữ, vd \"3 cách làm\"), tầng 3 là 2 chữ cuối, còn lại là tầng 2. Không để tầng 2 kết thúc bằng chữ nối (để, và, cho, của…).",
-    other: "Máy chọn câu hay nhất gần đầu video rồi ngắt làm 2 dòng dài gần bằng nhau, không ngắt ngay sau chữ nối (để, và, cho, của…).",
-  };
   let tierHand = false;   // Diễm đã sửa tay: máy không chia đè nữa
   { const v = store.get("ae_tkind", null); if (v) setRadio("tkind", v); }
   const tkNow = () => radio("tkind") || "ba_tang";
   function tierUI() {
     const k = tkNow(); $("tierBox").hidden = k === "khong"; if (k === "khong") return;
     TIER_TXT[k].forEach((t, i) => { const el = $("tier" + (i + 1)); el.placeholder = t; el.hidden = !t; });
-    $("tierNote").textContent = (TIER_NOTE[k] || TIER_NOTE.other) + " Bạn sửa từng ô cho đúng ý; gõ dấu / để tự chia, vd \"Làm video / không cần máy tính / dễ lắm\". Sửa rồi thì máy giữ nguyên; muốn đổi câu khác thì bấm Gợi ý tiêu đề.";
+    $("tierNote").hidden = true;   // Diễm: bỏ đoạn giải thích dài, không cần thiết
   }
   tierUI();
   // ô xem trước: vẽ đúng tiêu đề + phụ đề mẫu + lớp phủ chân đang chọn lên khung dọc/ngang, đổi gì vẽ lại liền
@@ -3588,9 +3590,14 @@ const Render = (() => {
       const r1 = document.createElement("div"); r1.className = "row";
       const tm = document.createElement("button"); tm.className = "tm"; tm.type = "button"; tm.textContent = fmt(L.s); tm.title = "Xem chỗ này";
       tm.addEventListener("click", () => { const w = L.orig.map(id => S.words[id]).find(x => !x.cut), t = w && S.P.M.map(w.s); if (t != null && prev) { prev.stop(); prev.still(t + 0.4); setPlay(false); } });
-      const ty = document.createElement("select"); ty.setAttribute("aria-label", "Loại B-roll");
-      for (const [v, n] of [["the", "Thẻ màu"], ["anh", "Hình"], ["video", "Video"]]) ty.add(new Option(n, v, false, b.type === v));
-      ty.addEventListener("change", () => { b.type = ty.value; b.dur = BR_DUR[b.type]; if (b.el || b.bmp) { b.el = b.bmp = null; b.name = ""; } drawBroll(); rebuild(); });
+      // loại B-roll: 3 nút to luôn hiện (trước là ô chọn, khó thấy chỗ đổi sang hình/video)
+      const ty = document.createElement("div"); ty.className = "brty"; ty.setAttribute("role", "radiogroup"); ty.setAttribute("aria-label", "Loại B-roll");
+      for (const [v, n, ic] of [["the", "Thẻ chữ", "doc"], ["anh", "Hình", "img"], ["video", "Video", "film"]]) {
+        const tb = document.createElement("button"); tb.type = "button"; tb.setAttribute("role", "radio"); tb.setAttribute("aria-checked", b.type === v);
+        tb.innerHTML = `<i class="ic ic-${ic}" aria-hidden="true"></i>${n}`;
+        tb.addEventListener("click", () => { if (b.type === v) return; b.type = v; b.dur = BR_DUR[b.type]; if (b.el || b.bmp) { b.el = b.bmp = null; b.name = ""; } drawBroll(); rebuild(); });
+        ty.append(tb);
+      }
       const dur = document.createElement("select"); dur.setAttribute("aria-label", "Thời gian");
       for (const v of (b.type === "video" ? [2, 3, 4] : [1.5, 2, 2.5, 3])) dur.add(new Option(String(v).replace(".", ",") + " giây", v, false, b.dur === v));
       dur.addEventListener("change", () => { b.dur = +dur.value; rebuild(); });
@@ -3599,7 +3606,7 @@ const Render = (() => {
       const ok = document.createElement("button"); ok.className = "ok"; ok.type = "button"; ok.textContent = "✓"; ok.title = "Xong chỗ này, thu gọn";
       ok.addEventListener("click", () => { b.done = !b.done; brQueue(); });
       b.wrap = d;
-      r1.append(x, tm, ty, dur, ok); d.append(r1);
+      r1.append(x, tm, dur, ok); d.append(r1, ty);
       const r2 = document.createElement("div"); r2.className = "row";
       if (b.type === "the") {
         const t = document.createElement("input"); t.type = "text"; t.value = b.text; t.maxLength = 60; t.placeholder = "Chữ hiện to trên thẻ"; t.setAttribute("aria-label", "Chữ trên thẻ");
@@ -3651,7 +3658,19 @@ const Render = (() => {
     if (S && on && !S.broll.length && S.P) { brAuto(); drawBroll(); }   // bật lên là máy tự chèn thẻ màu ở chỗ gợi ý, khỏi bấm từng chỗ
     if (S) rebuild();
   });
-  $("brAuto").addEventListener("click", () => { if (!S || !S.P) return; brAuto(); drawBroll(); rebuild(); });
+  // bấm gợi ý luôn báo kết quả: trước đây bật B-roll đã tự chèn đủ chỗ nên bấm lại không thấy gì
+  $("brAuto").addEventListener("click", () => {
+    const msg = $("brMsg");
+    if (!S || !S.P) { msg.textContent = "Bấm Edit / Làm video trước, máy mới biết chỗ để gợi ý."; msg.hidden = false; return; }
+    const before = S.broll.length; brAuto(); const added = S.broll.length - before;
+    msg.textContent = added ? `Đã thêm ${added} chỗ chèn mới. Xem danh sách ngay bên dưới, bấm Hình hoặc Video để đổi.`
+      : S.broll.length ? `Video này đã có đủ ${S.broll.length} chỗ chèn máy gợi ý (ở danh sách bên dưới). Bấm Hình hoặc Video ở từng chỗ để chọn file.`
+      : "Video ngắn quá nên máy chưa tìm được chỗ chèn hợp lý. Bấm nút hình cuộn phim ở dòng phụ đề để tự chèn.";
+    msg.hidden = false;
+    if (added) { showAllBr = false; drawBroll(); rebuild(); }
+    const first = S.broll.length && $("brList").querySelector(".bri:not([hidden])");
+    if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); first.classList.remove("flash"); void first.offsetWidth; first.classList.add("flash"); }
+  });
   $("brClear").addEventListener("click", () => { if (!S || !S.broll.length || !confirm("Xóa hết B-roll đã chèn?")) return; S.broll.forEach(b => b.el && URL.revokeObjectURL(b.el.src)); S.broll = []; drawBroll(); rebuild(); });
   // B-roll -> giờ ra; bỏ cái nằm trong dòng đã cắt, cái chưa có hình/video; không cho chồng lên nhau
   function brollOut(M) {
@@ -3740,9 +3759,11 @@ const Render = (() => {
   $("quick").addEventListener("click", async () => {
     if (!prev || !S) return;
     prev.stop(); await prev.still(0); $("seek").value = 0;
+    $("expHere").hidden = false;   // nút xuất ngay dưới khung xem, khỏi cuộn xuống lại
     $("stagebox").scrollIntoView({ behavior: "smooth", block: "start" });
     await prev.play(); setPlay(true);
   });
+  $("exp2").addEventListener("click", () => { if (prev) { prev.stop(); setPlay(false); } $("expHere").hidden = true; $("exp").click(); $("expSlot").scrollIntoView({ behavior: "smooth", block: "center" }); });
   // ---------- xuất ----------
   let outFile = null, outFile2 = null, outUrl = "";
   // thanh tiến trình: lúc xử lý nằm dưới nút Edit tự động, lúc xuất thì chuyển xuống ngay chỗ nút Xuất video
