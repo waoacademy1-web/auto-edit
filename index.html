@@ -246,7 +246,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <img class="logo-mark" src="icon.png" alt="" aria-hidden="true">
-    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.7</span></div>
+    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.8</span></div>
   </header>
 
   <section class="card">
@@ -2736,6 +2736,20 @@ const Render = (() => {
 
   // ---------- chọn video ----------
   const video = $("src");
+  // ảnh nền cho các khung xem trước (tiêu đề, phụ đề): giữ sẵn 1 khung hình của video đã thêm,
+  // vì iPhone hay chưa có khung hình sẵn trong thẻ video lúc vẽ xem trước -> trước đây hiện hình người mẫu xám
+  const bgSnap = document.createElement("canvas"); let bgSnapOk = false;
+  function snapVideo() {
+    if (video.readyState < 2 || !video.videoWidth) return false;
+    const k = Math.min(1, 1080 / Math.max(video.videoWidth, video.videoHeight));
+    bgSnap.width = Math.round(video.videoWidth * k); bgSnap.height = Math.round(video.videoHeight * k);
+    try { bgSnap.getContext("2d").drawImage(video, 0, 0, bgSnap.width, bgSnap.height); bgSnapOk = true; } catch (e) { }
+    return bgSnapOk;
+  }
+  function prevSource() {
+    if (modeNow() !== "ghep") { if (snapVideo() || bgSnapOk) return bgSnap; return null; }
+    const c = MT.scenes.find(x => x.bmp || x.thumb); return c ? (c.bmp || c.thumb) : null;
+  }
   let file = null, S = null, prev = null;
   $("file").addEventListener("change", async e => {
     for (const id of ["tier1", "tier2", "tier3"]) $(id).value = "";     // video mới: máy chia lại tiêu đề
@@ -2762,6 +2776,8 @@ const Render = (() => {
       if (ok === "err") throw new Error("Máy không mở được video này. Thử video khác, hoặc quay ở chế độ Tương thích nhất (iPhone: Cài đặt → Camera → Định dạng).");
       if (!ok) return;
       const d = video.duration;
+      bgSnapOk = false; video.addEventListener("seeked", () => { snapVideo(); titlePrev(); }, { once: true });
+      try { video.currentTime = Math.min(1, d / 2); } catch (e) { }
       $("pickInfo").textContent = `${fmt(d)} · ${video.videoWidth}×${video.videoHeight} · ${(f.size / 1e6).toFixed(0)} MB` + (d > 180 ? " · video dài, máy sẽ chạy lâu" : "") + " · bấm để đổi video";
       updateGo();
     } catch (err) { $("pickInfo").textContent = err.message; }
@@ -2973,7 +2989,8 @@ const Render = (() => {
     await Title.load(); await Draw.useFont(look.font);
     if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
     const ctx = cv.getContext("2d");
-    if (video.readyState >= 2 && video.videoWidth) { const sc = Math.max(W / video.videoWidth, H / video.videoHeight), dw = video.videoWidth * sc, dh = video.videoHeight * sc; ctx.drawImage(video, (W - dw) / 2, (H - dh) / 2, dw, dh); }
+    const src = prevSource();
+    if (src && src.width) { const sc = Math.max(W / src.width, H / src.height), dw = src.width * sc, dh = src.height * sc; ctx.drawImage(src, (W - dw) / 2, (H - dh) / 2, dw, dh); }
     else { const g = ctx.createLinearGradient(0, 0, W * 0.4, H); g.addColorStop(0, "#8FA6BF"); g.addColorStop(1, "#2B3A4F"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.fillStyle = "#ffffff22"; ctx.beginPath(); ctx.arc(W / 2, H * 0.36, Math.min(W, H) * 0.16, 0, 7); ctx.fill(); ctx.fillRect(W / 2 - Math.min(W, H) * 0.26, H * 0.52, Math.min(W, H) * 0.52, H); }
     ctx.save(); Draw.base(ctx, W, H, bgNow()); ctx.restore();
     ctx.save(); const sy = k === "khong" ? null : Title.draw(ctx, W, H, { kind: k, color: tcolNow(), tiers }, 6); ctx.restore();
