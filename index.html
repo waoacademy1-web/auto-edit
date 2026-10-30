@@ -95,6 +95,9 @@ body.hasvoice .sci .cap{display:none}
 .mhrow figcaption{font:700 10.5px/1.2 var(--body);text-align:center}.mharr{font:900 16px var(--body);color:var(--muted);margin-top:12px}
 .mhnote{margin:0;font:500 13px/1.4 var(--body);color:var(--muted)}
 .hint12{margin:-4px 0 8px;font-size:13px}
+.nxt{display:grid;gap:6px;padding:10px 12px;border:1.5px dashed var(--line);border-radius:14px;font:600 13px var(--body);color:var(--muted)}
+.nxt b{display:flex;align-items:center;gap:8px;font:700 14px var(--body);color:var(--ink);opacity:.75}.nxt i{font-style:normal;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--line);font:800 12px var(--display)}
+body:has(#result:not([hidden])) #nextSteps{display:none}
 .tustep[hidden]{display:none!important}.tunav{justify-content:space-between}
 .sdemo{display:grid;justify-items:center;gap:4px;margin:10px 0 4px}
 .sdemo video{width:min(52vw,220px);aspect-ratio:9/16;border-radius:14px;background:#000;box-shadow:0 4px 14px #0003}
@@ -218,7 +221,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <div class="logo-mark" aria-hidden="true">✂</div>
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.8</span></div>
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.9</span></div>
   </header>
 
   <section class="card">
@@ -263,6 +266,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 
 
   <button class="big" id="go" disabled>✂ Edit tự động</button>
+  <div id="nextSteps" class="nxt"><span>Bấm Edit xong sẽ hiện tiếp:</span><b><i>2</i>Chọn phong cách, xem thử</b><b><i>3</i>Sửa tiêu đề, phụ đề</b><b><i>4</i>Xuất video</b></div>
   <p class="note" id="firstNote">Lần đầu máy tải bộ nghe tiếng Việt khoảng <b id="mbNeed">290</b> MB (nên dùng Wi-Fi). Các lần sau không tải lại, tắt mạng vẫn dùng được.</p>
 
   <section id="status" hidden aria-live="polite">
