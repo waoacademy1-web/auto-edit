@@ -123,7 +123,8 @@ body.kieu .tuchinh{display:none!important}
 .seg3 label:has(input:checked),.seg4 label:has(input:checked),.col:has(input:checked),.fnt:has(input:checked){border-color:var(--flame);background:color-mix(in srgb,var(--flame) 8%,var(--field))}
 .seg3 label:has(input:focus-visible),.seg4 label:has(input:focus-visible),.col:has(input:focus-visible),.fnt:has(input:focus-visible){outline:3px solid var(--sun)}
 .cols{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
-.col{position:relative;border:2px solid var(--line);border-radius:12px;padding:8px 2px;cursor:pointer;background:#8a8fa8;text-align:center}
+.col{position:relative;border:2px solid var(--line);border-radius:12px;padding:8px 2px;cursor:pointer;background:#111;color:#fff;text-align:center}
+.cols .col:has(input:checked){background:#111;border:3px solid #2FBF71;box-shadow:0 0 0 2px #2FBF7155}
 .col b{font:900 15px var(--display);paint-order:stroke fill}
 .grp{font:700 12px var(--display);color:var(--muted)}
 .fonts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
@@ -221,7 +222,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <div class="logo-mark" aria-hidden="true">✂</div>
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.9</span></div>
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.0</span></div>
   </header>
 
   <section class="card">
