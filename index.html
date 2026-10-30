@@ -236,12 +236,13 @@ body.quote .quoteHint{display:block}
 details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 .how{margin:0;padding-left:20px;display:grid;gap:4px;font-size:14px;color:var(--muted)}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#quoteText{transition:opacity .45s}#quoteText.out{opacity:0}
 </style>
 
 <div class="wrap">
   <header>
     <img class="logo-mark" src="icon.png" alt="" aria-hidden="true">
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.2</span></div>
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.3</span></div>
   </header>
 
   <section class="card">
@@ -2631,70 +2632,37 @@ const Render = (() => {
   const tick = () => new Promise(r => setTimeout(r, 0));
 
   // ---------- câu ngắn xoay vòng lúc chờ làm video (đổi mỗi 7 giây) ----------
+  // Bộ câu lấy từ Xưởng video (6 câu nói về tính năng riêng của Xưởng đã đổi cho đúng Auto edit)
+  const QK = { kd: "Cảm hứng kinh doanh", cl: "Một chút dịu dàng", mo: "Mẹo nhỏ" };
   const QUOTES = [
-    ["Động lực", "Video đầu tiên không cần hay, chỉ cần được đăng."],
-    ["Động lực", "Làm đều mỗi ngày một chút thắng làm thật nhiều một lần rồi bỏ."],
-    ["Động lực", "Người xem không nhớ bạn quay vụng, họ nhớ bạn đã giúp họ điều gì."],
-    ["Động lực", "Bắt đầu từ chiếc điện thoại trong tay, không cần chờ đủ đồ."],
-    ["Động lực", "100 video bình thường dạy bạn nhiều hơn 1 video hoàn hảo nằm trong máy."],
-    ["Động lực", "Sợ thì vẫn làm, làm rồi sẽ bớt sợ."],
-    ["Động lực", "Mỗi lần bấm đăng là một lần bạn giỏi hơn hôm qua."],
-    ["Động lực", "Kết quả lớn đến từ những việc nhỏ lặp lại đủ lâu."],
-    ["Động lực", "Đừng so chương 1 của mình với chương 20 của người khác."],
-    ["Động lực", "Chậm mà đều vẫn hơn nhanh mà đứt."],
-    ["Chữa lành", "Hít một hơi thật sâu. Bạn đang làm tốt hơn bạn nghĩ."],
-    ["Chữa lành", "Nghỉ ngơi cũng là một phần của cố gắng."],
-    ["Chữa lành", "Không cần làm mọi thứ hôm nay, chỉ cần làm một việc cho tử tế."],
-    ["Chữa lành", "Đối xử với mình dịu dàng như cách bạn đối xử với người mình thương."],
-    ["Chữa lành", "Có những ngày chỉ cần đi qua được là đủ rồi."],
-    ["Chữa lành", "Buông bớt điều không kiểm soát được, giữ chặt điều mình làm được."],
-    ["Chữa lành", "Bình yên không phải nơi không có sóng, mà là lòng mình vững."],
-    ["Chữa lành", "Ly nước, giấc ngủ, vài phút nắng sớm: chữa lành bắt đầu từ việc nhỏ."],
-    ["Sống đẹp", "Nói lời tử tế không tốn gì, mà người nghe nhớ rất lâu."],
-    ["Sống đẹp", "Giữ chữ tín là vốn quý nhất của người bán hàng."],
-    ["Sống đẹp", "Biết ơn người đã giúp mình, kể cả khi họ chỉ giúp một lần."],
-    ["Sống đẹp", "Sống thật với mình thì không sợ người khác nhìn thấy."],
-    ["Sống đẹp", "Cho đi đúng lúc, nhận lại đúng người."],
-    ["Sống đẹp", "Lắng nghe nhiều hơn nói, bạn sẽ hiểu khách hàng hơn ai hết."],
-    ["Sống đẹp", "Làm việc tử tế cả khi không ai nhìn thấy."],
-    ["Sống đẹp", "Khiêm tốn để học, tự tin để làm."],
-    ["Kỹ năng", "3 giây đầu quyết định người xem ở lại hay lướt đi: nói điều hay nhất trước."],
-    ["Kỹ năng", "Quay chỗ sáng, ánh sáng chiếu vào mặt, video nhìn chuyên nghiệp ngay."],
-    ["Kỹ năng", "Mic gần miệng quan trọng hơn máy quay đắt tiền."],
-    ["Kỹ năng", "Mỗi video chỉ nói một ý, người xem dễ nhớ, dễ chia sẻ."],
-    ["Kỹ năng", "Kết video bằng một lời mời rõ ràng: theo dõi, bình luận hay nhắn tin."],
-    ["Kỹ năng", "Nói như đang kể chuyện với một người bạn, không như đọc bài."],
-    ["Kỹ năng", "Phụ đề giúp 8 trên 10 người xem hiểu video dù đang tắt tiếng."],
-    ["Kỹ năng", "Đăng cùng một khung giờ mỗi ngày để người xem quen chờ bạn."],
-    ["Kỹ năng", "Đọc bình luận để tìm ý tưởng cho video tiếp theo."],
-    ["Kỹ năng", "Ghi sẵn 3 ý chính ra giấy trước khi quay, nói trôi hơn hẳn."],
-    ["Ý tưởng content", "Kể lại một lỗi sai bạn từng mắc và bài học rút ra."],
-    ["Ý tưởng content", "Một ngày làm việc của bạn trong 60 giây."],
-    ["Ý tưởng content", "Trả lời câu hỏi khách hỏi nhiều nhất tuần này."],
-    ["Ý tưởng content", "Trước và sau: kết quả thật của khách hàng (có xin phép)."],
-    ["Ý tưởng content", "3 mẹo nhỏ trong nghề mà người mới chưa biết."],
-    ["Ý tưởng content", "Đập hộp, dùng thử, nói thật ưu và nhược."],
-    ["Ý tưởng content", "Phía sau hậu trường: bạn chuẩn bị sản phẩm thế nào."],
-    ["Ý tưởng content", "Một câu chuyện khách hàng làm bạn nhớ mãi."],
-    ["Ý tưởng content", "Sai lầm phổ biến trong ngành của bạn và cách tránh."],
-    ["Ý tưởng content", "Chia sẻ một cuốn sách, một câu nói đã thay đổi bạn."],
-    ["Ý tưởng content", "Ghép 12 tấm ảnh hành trình 1 năm thành một video kỷ niệm."],
-    ["Ý tưởng content", "Video ASMR làm việc: tiếng gõ phím, pha cà phê, gói hàng."],
-    ["Kiếm tiền từ video", "Bán hàng bằng video thật: khách tin cái họ được thấy tận mắt."],
-    ["Kiếm tiền từ video", "Nhận làm video cho tiệm quen: quán ăn, tiệm tóc, shop nhỏ đều cần."],
-    ["Kiếm tiền từ video", "Gắn link tiếp thị liên kết cho sản phẩm bạn thật sự dùng và thích."],
-    ["Kiếm tiền từ video", "Biến kinh nghiệm của bạn thành khóa học ngắn, video là cửa vào."],
-    ["Kiếm tiền từ video", "Mỗi video là một nhân viên bán hàng làm việc 24 giờ."],
-    ["Kiếm tiền từ video", "Kênh nhỏ mà đúng người xem vẫn bán được hàng đều."],
-    ["Kiếm tiền từ video", "Quay lại quá trình làm sản phẩm thủ công: người xem thích, khách tin."],
-    ["Kiếm tiền từ video", "Livestream sau khi đã có vài chục video: người xem đã quen mặt bạn."],
-    ["Kiếm tiền từ video", "Video review chân thật giúp bạn hợp tác được với nhãn hàng."],
-    ["Kiếm tiền từ video", "Một video hay có thể dùng lại trên TikTok, Reels, Shorts và Zalo."],
-    ["Kiếm tiền từ video", "Thu thập số điện thoại khách quan tâm từ bình luận, chăm sóc riêng."],
-    ["Kiếm tiền từ video", "Dạy lại điều bạn giỏi nhất: người khác sẵn sàng trả tiền để học nhanh."],
-  ];
-  let qi = Math.floor(Math.random() * QUOTES.length);
-  function showQuote() { const [c, t] = QUOTES[qi++ % QUOTES.length]; $("quoteCat").textContent = c; $("quoteText").textContent = t; }
+    ["kd", "Khách không mua sản phẩm tốt nhất. Khách mua thứ họ thấy rõ nhất. Đăng đều là cách để được thấy."],
+    ["kd", "Một video đăng hôm nay vẫn có thể bán hàng cho bạn vào tháng sau."],
+    ["kd", "Người đăng đều mỗi ngày thường đi xa hơn người đăng hay nhưng thất thường."],
+    ["kd", "Bạn không cần thật nhiều người xem. Bạn cần đúng người, xem nhiều lần."],
+    ["kd", "Mỗi video là một nhân viên bán hàng làm việc cả khi bạn ngủ."],
+    ["kd", "Đừng đợi hoàn hảo mới đăng. Video thứ 30 luôn đẹp hơn video đầu tiên."],
+    ["kd", "Khách tin người họ gặp thường xuyên. Hãy xuất hiện đều, dù chỉ là một clip ngắn quay bằng điện thoại."],
+    ["kd", "Một video hay mà chỉ đăng một nơi thì phí. Đăng cả TikTok, Reels, YouTube cho nó sống thêm nhiều lần."],
+    ["kd", "Thời gian tiết kiệm được hôm nay, hãy dành để trò chuyện với khách."],
+    ["cl", "Bạn đang làm tốt hơn bạn nghĩ. Cứ đi từng bước nhỏ."],
+    ["cl", "Không ai lớn lên trong một đêm. Kênh của bạn cũng vậy."],
+    ["cl", "Hôm nay ít đơn không có nghĩa là bạn đi sai đường."],
+    ["cl", "Nghỉ một chút cũng được, miễn là đừng bỏ cuộc."],
+    ["cl", "Nói điều mình hiểu, làm điều mình tin. Người hợp với bạn sẽ tự tìm đến."],
+    ["cl", "Mỗi video bạn làm là một lần bạn chọn tin vào chính mình."],
+    ["mo", "Câu đầu tiên quyết định khách có xem tiếp hay không. Nói ngắn, chạm đúng điều khách đang lo."],
+    ["mo", "Sửa chính tả phụ đề thì video giữ nguyên. Xóa chữ hay xóa câu thì đoạn video đó cũng được cắt bỏ."],
+    ["mo", "Chọn Cả hai để làm một lần ra cả bản dọc cho TikTok, Reels và bản ngang cho YouTube."],
+    ["mo", "Bật B-roll, chèn ảnh sản phẩm vào đúng chỗ nói về nó, khách sẽ nhớ lâu hơn."],
+    ["mo", "Câu cuối nên mời khách làm một việc: nhắn tin, bình luận hoặc bấm theo dõi."],
+    ["mo", "Quay chỗ sáng, để điện thoại gần miệng: video trông và nghe chuyên nghiệp ngay."]];
+  const QL = QUOTES.slice().sort(() => Math.random() - .5);
+  let qi = 0;
+  function showQuote() {
+    const t = $("quoteText"), q = QL[qi++ % QL.length];
+    t.classList.add("out");
+    setTimeout(() => { $("quoteCat").textContent = QK[q[0]]; t.textContent = q[1]; t.classList.remove("out"); }, 450);
+  }
   showQuote();
   setInterval(() => { if (!$("status").hidden && !$("status").classList.contains("err")) showQuote(); }, 7000);
 
