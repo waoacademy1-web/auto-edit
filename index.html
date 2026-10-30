@@ -94,6 +94,7 @@ body.hasvoice .sci .cap{display:none}
 .mhrow figure{margin:0;display:grid;justify-items:center;gap:3px;width:56px}.mhrow svg{width:44px;height:44px}
 .mhrow figcaption{font:700 10.5px/1.2 var(--body);text-align:center}.mharr{font:900 16px var(--body);color:var(--muted);margin-top:12px}
 .mhnote{margin:0;font:500 13px/1.4 var(--body);color:var(--muted)}
+.hint12{margin:-4px 0 8px;font-size:13px}
 .tustep[hidden]{display:none!important}.tunav{justify-content:space-between}
 .sdemo{display:grid;justify-items:center;gap:4px;margin:10px 0 4px}
 .sdemo video{width:min(52vw,220px);aspect-ratio:9/16;border-radius:14px;background:#000;box-shadow:0 4px 14px #0003}
@@ -217,7 +218,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <div class="logo-mark" aria-hidden="true">✂</div>
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.6</span></div>
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.8</span></div>
   </header>
 
   <section class="card">
@@ -243,7 +244,8 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 
   <section class="card" id="step1ghep" hidden>
     <div class="step"><b>1</b>Chọn hình, video (tối đa 12)</div>
-    <label class="pick"><span>＋ Thêm hình, video</span><small id="scInfo">Mỗi hình 3 giây, mỗi video lấy tối đa 40 giây. Video làm ra tối đa 5 phút.</small>
+    <p class="note hint12">⏱ Mỗi video nên <b>dưới 40 giây</b>. Video dài hơn máy chỉ lấy 40 giây, lại mở chậm và dễ treo máy. Cắt sẵn đoạn đẹp trong app Ảnh rồi hãy chọn.</p>
+    <label class="pick"><span>＋ Thêm hình, video</span><small id="scInfo">Mỗi hình hiện 3 giây, mỗi video hiện đúng độ dài của nó. Tổng dài quá thì máy tự rút ngắn các video cho vừa. Video làm ra dài tối đa 1 phút.</small>
       <input type="file" id="scFile" multiple accept="image/*,video/*"></label>
     <div id="scList" class="brs"></div>
     <div class="ctl"><span class="lbl">Độ dài video</span><div class="seg3" role="radiogroup" aria-label="Độ dài video ghép">
@@ -3377,7 +3379,7 @@ const Render = (() => {
   function drawScenes() {
     const box = $("scList"); box.textContent = "";
     const tot = MT.scenes.reduce((a, c) => a + c.dur, 0);
-    $("scInfo").textContent = MT.scenes.length ? `${MT.scenes.length}/${MAX_SC} cảnh · ${fmt(tot)}` + (tot > maxT() ? ` · quá ${fmt(maxT())}, máy chỉ lấy ${fmt(maxT())} đầu` : "") + (MT.voice ? " · có giọng: cảnh tự dàn theo độ dài giọng" : "") : `Mỗi hình ${imgDur()} giây, video lấy tối đa ${maxVid()} giây. Video làm ra tối đa ${fmt(maxT())}.`;
+    $("scInfo").textContent = MT.scenes.length ? `${MT.scenes.length}/${MAX_SC} cảnh · ${fmt(tot)}` + (tot > maxT() ? ` · quá ${fmt(maxT())}, máy chỉ lấy ${fmt(maxT())} đầu` : "") + (MT.voice ? " · có giọng: cảnh tự dàn theo độ dài giọng" : "") : `Mỗi hình hiện ${imgDur()} giây, mỗi video hiện đúng độ dài của nó. Tổng dài quá thì máy tự rút ngắn các video cho vừa. Video làm ra dài tối đa ${{ 60: "1 phút", 180: "3 phút", 300: "5 phút" }[maxT()] || fmt(maxT())}.`;
     MT.scenes.forEach((c, i) => {
       const d = document.createElement("div"); d.className = "sci";
       const th = document.createElement("canvas"); th.width = th.height = 128;
