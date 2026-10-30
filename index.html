@@ -217,7 +217,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <div class="logo-mark" aria-hidden="true">✂</div>
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.5</span></div>
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.6</span></div>
   </header>
 
   <section class="card">
@@ -551,7 +551,16 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <script>
 // lưu trang + bộ nghe vào máy (chạy không mạng) và bật chế độ cô lập để chạy nhiều luồng (nhanh hơn)
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
-  navigator.serviceWorker.register("sw.js").then(() => {
+  const hadSW = !!navigator.serviceWorker.controller, t0 = Date.now();
+  navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).then(reg => {
+    reg.update().catch(() => {});
+    // có bản mới: vừa mở app thì tự tải lại luôn; đang làm dở thì chỉ báo, chạm mới tải lại (khỏi mất việc)
+    if (hadSW) navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (Date.now() - t0 < 20000) { location.reload(); return; }
+      const b = document.createElement("button"); b.textContent = "✨ Có bản mới, chạm để cập nhật";
+      b.style.cssText = "position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:98;padding:12px 18px;border-radius:999px;border:0;background:#2F8F5B;color:#fff;font:700 15px system-ui,sans-serif;box-shadow:0 4px 14px #0005";
+      b.onclick = () => location.reload(); document.body.append(b);
+    });
     if (!self.crossOriginIsolated && navigator.serviceWorker.controller == null) {
       navigator.serviceWorker.addEventListener("controllerchange", () => {
         try { if (sessionStorage.getItem("ae_reload")) return; sessionStorage.setItem("ae_reload", "1"); } catch (e) { }
