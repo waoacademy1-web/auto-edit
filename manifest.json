@@ -1,6 +1,6 @@
 {
- "name": "Auto edit video",
- "short_name": "Auto edit",
+ "name": "Xưởng Edit",
+ "short_name": "Xưởng Edit",
  "start_url": "./index.html",
  "scope": "./",
  "display": "standalone",
