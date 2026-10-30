@@ -14,6 +14,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.5 var(--body
 .wrap{max-width:720px;margin:0 auto;display:grid;gap:18px}
 header{display:flex;gap:14px;align-items:center}
 .logo-mark{width:52px;height:52px;border-radius:50%;flex:none;background:repeating-conic-gradient(var(--sun) 0 12deg,#F9CBE2 12deg 24deg);display:grid;place-items:center;color:var(--flame);font:900 24px var(--display);box-shadow:0 4px 0 #E0549F}
+.ver{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:999px;background:rgba(127,127,127,.18);font:600 13px/1.6 var(--body);opacity:.85}
 h1{font:900 clamp(24px,6vw,32px)/1.1 var(--display);margin:0;color:var(--navy)}
 header p{margin:2px 0 0;color:var(--muted);font-size:14px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;gap:12px;min-width:0}
@@ -40,9 +41,12 @@ body[data-ratio="ca2"] #pickBox{width:min(80%,340px);aspect-ratio:1}
 .tprev small{font:600 11px var(--body);color:var(--muted)}
 body[data-ratio="doc"] .tprev canvas,body[data-ratio="ca2"] .tprev canvas{width:min(40vw,160px)}
 body[data-ratio="ngang"] .tprev canvas{width:min(78vw,340px)}
-body[data-ratio="doc"] #sPrevBox canvas,body[data-ratio="ca2"] #sPrevBox canvas{width:min(62vw,240px)}
+body[data-ratio="doc"] #sPrevBox canvas{width:min(62vw,240px)}body[data-ratio="ca2"] #sPrevBox canvas{width:min(30vw,130px)}body[data-ratio="ca2"] #sPrevBox canvas.p2{width:min(54vw,240px)}
 body[data-ratio="ngang"] #sPrevBox canvas{width:min(86vw,380px)}
 .tprev[hidden]{display:none}
+.tpair{display:flex;gap:8px;align-items:center;justify-content:center}.tprev canvas.p2{display:none}
+/* Cả hai: hiện bản dọc + bản ngang cạnh nhau */
+body[data-ratio="ca2"] .tprev canvas{width:min(24vw,110px)}body[data-ratio="ca2"] .tprev canvas.p2{display:block;width:min(50vw,240px)}
 .big.alt{background:var(--field);color:var(--ink);border:2px solid var(--flame);box-shadow:none}
 #outVid{display:block;width:100%;max-height:70vh;border-radius:14px;background:#000;margin:8px 0}
 body[data-ratio="doc"] #outVid{width:min(100%,360px);margin:8px auto}
@@ -78,6 +82,19 @@ body.hasvoice .sci .cap{display:none}
 .pre{padding:5px!important}.pre b{font-size:12.5px!important;line-height:1.2}.pre small{font-size:10px!important}
 .pvi{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:10px;background:var(--line)}
 .pvt{display:grid;place-items:center;font:900 30px var(--display);color:var(--flame);background:var(--field);border:2px dashed var(--line)}
+.tubox{border:2px dashed var(--line);border-radius:16px;padding:12px;margin:12px 0;display:grid;gap:10px}
+.tuhead{display:grid;gap:2px}.tuhead b{font:800 16px var(--display)}
+.tsty{border:1.5px solid var(--line);border-radius:14px;padding:8px 10px;margin:6px 0}.tsty summary{font:800 15px var(--display);cursor:pointer}.tsty[open] summary{margin-bottom:8px}
+#subOpts[hidden]{display:none!important}
+#tPrevBox{position:sticky;top:6px;z-index:3}
+.mhwrap{position:fixed;inset:0;z-index:50;background:#000a;display:grid;place-items:center;padding:16px;overflow:auto}.mhwrap[hidden]{display:none}
+.mhbox{background:var(--bg);color:var(--ink);border-radius:20px;padding:16px;max-width:520px;width:100%;display:grid;gap:8px}
+.mhbox h3{margin:0;font:900 20px var(--display)}.mhsub{margin:6px 0 0;font:800 14px var(--display);color:var(--muted)}
+.mhrow{display:flex;align-items:flex-start;justify-content:center;gap:2px;flex-wrap:nowrap}
+.mhrow figure{margin:0;display:grid;justify-items:center;gap:3px;width:56px}.mhrow svg{width:44px;height:44px}
+.mhrow figcaption{font:700 10.5px/1.2 var(--body);text-align:center}.mharr{font:900 16px var(--body);color:var(--muted);margin-top:12px}
+.mhnote{margin:0;font:500 13px/1.4 var(--body);color:var(--muted)}
+.tustep[hidden]{display:none!important}.tunav{justify-content:space-between}
 .sdemo{display:grid;justify-items:center;gap:4px;margin:10px 0 4px}
 .sdemo video{width:min(52vw,220px);aspect-ratio:9/16;border-radius:14px;background:#000;box-shadow:0 4px 14px #0003}
 body.kieu .tuchinh{display:none!important}
@@ -120,6 +137,8 @@ select{width:100%;font:700 16px var(--body);color:var(--ink);background:var(--fi
 .tk{grid-template-columns:repeat(3,1fr)}
 .sugs{display:grid;gap:6px}
 .sug{text-align:left;font:700 15px var(--body);padding:10px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--field);color:var(--ink);cursor:pointer}
+.sug{display:grid;grid-template-columns:84px 1fr;gap:10px;align-items:center}.sug span{display:grid;gap:2px}.sug.on{border-color:var(--flame);border-width:2px}
+.sugcv{width:84px;height:auto;aspect-ratio:9/16;border-radius:8px;background:#000}
 .sug small{display:block;font:600 11px var(--body);color:var(--muted)}
 #more{display:grid;gap:12px}#more[open]>summary{margin-bottom:10px}
 
@@ -198,7 +217,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <div class="logo-mark" aria-hidden="true">✂</div>
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p></div>
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 1.4</span></div>
   </header>
 
   <section class="card">
@@ -240,79 +259,60 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     <p class="note" id="vInfo">Có giọng: máy làm giọng trong, rõ, tự ra phụ đề và tự chia cảnh theo câu nói (dài tối đa theo độ dài đã chọn). Không có giọng: video chạy theo nhạc, gõ chữ cho từng cảnh ở trên.</p>
   </section>
 
-  <section class="card">
+
+  <button class="big" id="go" disabled>✂ Edit tự động</button>
+  <p class="note" id="firstNote">Lần đầu máy tải bộ nghe tiếng Việt khoảng <b id="mbNeed">290</b> MB (nên dùng Wi-Fi). Các lần sau không tải lại, tắt mạng vẫn dùng được.</p>
+
+  <section id="status" hidden aria-live="polite">
+    <div id="statusText">…</div>
+    <div class="track"><div id="bar"></div></div>
+    <p class="note" id="statusNote"></p>
+    <div class="quote" aria-live="off"><small id="quoteCat"></small><p id="quoteText"></p></div>
+  </section>
+
+  <section class="card" id="result" hidden>
     <div class="step"><b>2</b>Chọn phong cách</div>
     <div class="presets" role="radiogroup" aria-label="Phong cách">
-      <label class="pre"><input type="radio" name="preset" value="co_ban" checked><img class="pvi" src="mau/co_ban.jpg" alt=""><b>Mặc định</b><small>Phụ đề rõ, tiêu đề 3 tầng, không nhạc</small></label>
-      <label class="pre"><input type="radio" name="preset" value="giat_tit"><img class="pvi" src="mau/giat_tit.jpg" alt=""><b>Giật tít năng lượng</b><small>Tít to 3 giây đầu, chữ nảy, nhạc sôi</small></label>
-      <label class="pre"><input type="radio" name="preset" value="chua_lanh"><img class="pvi" src="mau/chua_lanh.jpg" alt=""><b>Chữa lành</b><small>Chữ mềm, màu ấm, nhạc piano êm</small></label>
+      <label class="pre"><input type="radio" name="preset" value="co_ban" checked><div class="pvi pv"><span>Phụ đề <i>rõ</i></span></div><b>Mặc định</b><small>Phụ đề rõ, tiêu đề 3 tầng, không nhạc</small></label>
+      <label class="pre"><input type="radio" name="preset" value="giat_tit"><div class="pvi pv pv-gt"><em>TÍT TO</em><span>chữ <i>nảy</i></span></div><b>Giật tít năng lượng</b><small>Tít to 3 giây đầu, chữ nảy, nhạc sôi</small></label>
+      <label class="pre"><input type="radio" name="preset" value="chua_lanh"><div class="pvi pv pv-cl"><span class="soft">nhẹ nhàng</span></div><b>Chữa lành</b><small>Chữ mềm, màu ấm, nhạc piano êm</small></label>
       <label class="pre pre-tu"><input type="radio" name="preset" value="tu_chinh"><div class="pvi pvt">＋</div><b>Tự chỉnh</b><small>Tự chọn nhạc, chữ, màu, tiêu đề</small></label>
     </div>
-    <div id="styleDemo" class="sdemo">
-      <video id="styleVid" controls playsinline preload="none" poster="mau/co_ban.jpg" src="mau/co_ban.mp4"></video>
-      <p class="note" id="styleNote">Video mẫu phong cách Mặc định. Bấm ▶ để xem, bấm ⛶ để xem to.</p>
+    <p class="note" id="styleNote">Bấm 1 phong cách, máy chạy thử 16 giây đầu bằng chính video của bạn ở khung bên dưới.</p>
+    <div class="stat" id="stat"></div>
+    <div class="seg3 vw" id="viewRow" hidden role="radiogroup" aria-label="Xem khung">
+      <label><input type="radio" name="view" value="doc" checked><span>Xem bản dọc</span></label>
+      <label><input type="radio" name="view" value="ngang"><span>Xem bản ngang</span></label>
     </div>
+    <div class="media">
+      <div id="stagebox"><video id="src" playsinline muted preload="auto"></video><canvas id="stage" width="540" height="960"></canvas></div>
+      <div class="ctrl">
+        <button id="play">▶ Xem</button>
+        <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Tua">
+        <span class="note" id="tnow">0:00</span>
+      </div>
+    </div>
+    <div id="tuBox" class="tuchinh tubox">
+      <div class="tuhead"><b id="tuName"></b><span class="note" id="tuStep"></span></div>
+      <div class="tustep" data-name="Nhạc nền">
     <label class="switch tuchinh" id="musicRow"><input type="checkbox" id="optMusic" checked><span>Nhạc nền + tiếng hiệu ứng<small>Không bản quyền, tự nhỏ lại khi có giọng nói</small></span></label>
     <div class="ctl tuchinh" id="musicPick"><span class="lbl">Nhạc nền</span>
       <div class="row"><select id="musicSel" aria-label="Chọn nhạc nền" style="flex:1"></select><button type="button" id="musicPlay" aria-label="Nghe thử">▶ Nghe</button></div>
       <input type="file" id="musicFile" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac" hidden>
       <p class="note" id="musicInfo"></p>
     </div>
+      </div>
+      <div class="tustep" data-name="Giọng nói">
     <div class="bgrow tuchinh"><span class="lbl">Giọng</span>
       <div class="seg" role="radiogroup" aria-label="Giọng">
         <label><input type="radio" name="voice" value="trong" checked><span>Giọng thật, trong<small>Khử ồn, bớt vang, không méo</small></span></label>
         <label><input type="radio" name="voice" value="to"><span>To, rõ hơn<small>Giọng nhỏ, ồ, khàn</small></span></label>
       </div></div>
+      </div>
+      <div class="tustep" data-name="Chữ phụ đề: cỡ, màu, phông, vị trí">
     <label class="switch tuchinh"><input type="checkbox" id="optSubs" checked><span>Hiện phụ đề<small>Tắt nếu chỉ muốn tiêu đề, hình và nhạc. File phụ đề .srt vẫn lưu được.</small></span></label>
-    <div class="ctl" id="titleRow"><span class="lbl">Tiêu đề suốt video</span>
-      <div class="seg3 tk tuchinh" role="radiogroup" aria-label="Tiêu đề suốt video">
-        <label><input type="radio" name="tkind" value="ba_tang" checked><span>3 tầng<small>kiểu Công việc</small></span></label>
-        <label><input type="radio" name="tkind" value="kinh"><span>Thẻ kính mờ<small>sang, gọn</small></span></label>
-        <label><input type="radio" name="tkind" value="tap_chi"><span>Tạp chí<small>sâu lắng</small></span></label>
-        <label><input type="radio" name="tkind" value="nhan"><span>Nhãn dán chéo<small>vui, năng lượng</small></span></label>
-        <label><input type="radio" name="tkind" value="viet_tay"><span>Chữ viết tay<small>chill, mềm</small></span></label>
-        <label><input type="radio" name="tkind" value="toi_gian"><span>Tối giản<small>nhẹ, cao cấp</small></span></label>
-        <label><input type="radio" name="tkind" value="khong"><span>Không có<small></small></span></label>
-      </div>
-      <div id="tierBox" class="tiers">
-        <span class="lbl tuchinh">Màu tiêu đề</span>
-        <div class="bgs tuchinh" id="tcs" role="radiogroup" aria-label="Màu tiêu đề">
-          <label class="bgc"><input type="radio" name="tcol" value="vang" checked><i style="background:#FACA16"></i>Vàng</label>
-          <label class="bgc"><input type="radio" name="tcol" value="trang"><i style="background:#fff"></i>Trắng</label>
-          <label class="bgc"><input type="radio" name="tcol" value="do"><i style="background:#E5262E"></i>Đỏ</label>
-          <label class="bgc"><input type="radio" name="tcol" value="den"><i style="background:#111"></i>Đen</label>
-          <button type="button" class="bgadd" id="tcAdd" aria-label="Thêm màu tiêu đề riêng">＋<small>Màu riêng</small></button>
-        </div>
-        <div id="tcPanel" class="bgpanel" hidden>
-          <div class="row"><input type="color" id="tcPick" value="#2B2F8C" aria-label="Chọn màu"><input type="text" id="tcHex" value="#2B2F8C" maxlength="7" aria-label="Mã màu" style="width:120px"><button type="button" id="tcSave">Lưu màu</button></div>
-          <label class="pickimg">Lấy màu từ ảnh (logo, bảng màu thương hiệu)<input type="file" id="tcImg" accept="image/*"></label>
-          <canvas id="tcCanvas" class="pickcv" hidden></canvas>
-          <p class="note" id="tcHint" hidden>Chạm vào ảnh để lấy màu, rồi bấm Lưu màu.</p>
-          <p class="note">Màu đã lưu hiện thành ô tròn ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa. Màu có sẵn thì không xóa.</p>
-        </div>
-        <div class="tprev" id="tPrevBox"><canvas id="tPrev" width="270" height="480" aria-label="Xem trước tiêu đề"></canvas><small>Xem trước tiêu đề</small></div>
-        <span class="lbl">Chữ tiêu đề, sửa từng tầng</span>
-        <input type="text" id="tier1" maxlength="80" aria-label="Tầng 1">
-        <input type="text" id="tier2" maxlength="80" aria-label="Tầng 2">
-        <input type="text" id="tier3" maxlength="80" aria-label="Tầng 3">
-        <div class="row"><button type="button" id="sugBtn" aria-expanded="false">✨ Gợi ý tiêu đề ▾</button></div>
-        <div id="sugBox" class="bgpanel" hidden>
-          <select id="sugCat" aria-label="Dạng video">
-            <option value="">Mọi dạng video</option><option value="kinh_nghiem">Chia sẻ kinh nghiệm</option><option value="cong_viec">Công việc</option>
-            <option value="review">Review</option><option value="tam_su">Vlog tâm sự</option><option value="tin_tuc">Tin tức</option>
-          </select>
-          <div id="sugList" class="sugs"></div>
-          <div class="row"><button type="button" id="sugMore">↻ Gợi ý khác</button></div>
-          <p class="note">2 tít lấy từ chính lời bạn nói, 1 tít từ bảng mẫu có điền từ khóa trong video. Chạm để dùng, máy tự chia tầng, rồi sửa từng ô cho đúng ý.</p>
-        </div>
-        <p class="note" id="tierNote"></p>
-      </div>
-    </div>
-    <div id="hookRow" class="bgrow" hidden><span class="lbl">Tít 3 giây đầu</span>
-      <input type="text" id="hookText" maxlength="60" placeholder="Để trống thì máy lấy câu nói đầu tiên"></div>
-    <details id="more" class="tuchinh">
-      <summary>Tùy chỉnh thêm (chữ, màu, phông, vị trí, lớp phủ chân)</summary>
-    <div class="tprev" id="sPrevBox"><canvas id="sPrev" width="270" height="480" aria-label="Xem trước phụ đề cùng tiêu đề"></canvas><small>Xem trước: tiêu đề + phụ đề + lớp phủ chân</small></div>
+<div id="subOpts">
+    <div class="tprev" id="sPrevBox"><div class="tpair"><canvas id="sPrev" width="270" height="480" aria-label="Xem trước phụ đề cùng tiêu đề"></canvas><canvas id="sPrev2" class="p2" width="480" height="270" aria-label="Xem trước bản ngang"></canvas></div><small>Xem trước: tiêu đề + phụ đề + lớp phủ chân</small></div>
     <div class="ctl"><span class="lbl">Cỡ chữ phụ đề</span><div class="seg3" role="radiogroup" aria-label="Cỡ chữ phụ đề">
       <label><input type="radio" name="size" value="lon" checked><span>Lớn<small>dễ đọc nhất</small></span></label>
       <label><input type="radio" name="size" value="vua"><span>Vừa<small>cân đối</small></span></label>
@@ -385,6 +385,15 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <label><input type="radio" name="pos" value="giua"><span>Giữa</span></label>
       <label><input type="radio" name="pos" value="sat_chan"><span>Sát chân<small>TikTok che</small></span></label>
     </div></div>
+    <div class="opts">
+      <label class="switch" hidden><input type="checkbox" id="optSilence" checked><span>Cắt khoảng lặng<small>Ngừng nói lâu hơn 0,3 giây thì cắt, vẫn chừa hơi thở</small></span></label>
+      <label class="switch" hidden><input type="checkbox" id="optFiller" checked><span>Cắt ậm, ờ, ừm<small>Cả tiếng ngân dài “thìiii…”</small></span></label>
+      <label class="switch" hidden><input type="checkbox" id="optDenoise" checked><span>Khử ồn, làm rõ giọng<small>Bớt tiếng xì, ù quạt, tiếng xe; giọng sáng, đều</small></span></label>
+      <label class="switch"><input type="checkbox" id="optZoom" checked><span>Đổi góc máy ở chỗ cắt<small>Zoom nhẹ 7% xen kẽ cho khỏi giật hình</small></span></label>
+    </div>
+      </div>
+      </div>
+      <div class="tustep" data-name="Màu chân nền (lớp phủ dưới chân video)">
     <div class="ctl"><span class="lbl">Lớp phủ chân nền</span>
       <div class="bgs" id="bgs" role="radiogroup" aria-label="Lớp phủ chân nền">
         <label class="bgc"><input type="radio" name="bg" value="khong"><i style="background:repeating-linear-gradient(45deg,#ccc 0 4px,#fff 4px 8px)"></i>Không dùng</label>
@@ -401,53 +410,12 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <p class="note">Màu đã lưu hiện thành ô tròn ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa. Màu có sẵn thì không xóa.</p>
       </div>
     </div>
-    <div class="opts">
-      <label class="switch" hidden><input type="checkbox" id="optSilence" checked><span>Cắt khoảng lặng<small>Ngừng nói lâu hơn 0,3 giây thì cắt, vẫn chừa hơi thở</small></span></label>
-      <label class="switch" hidden><input type="checkbox" id="optFiller" checked><span>Cắt ậm, ờ, ừm<small>Cả tiếng ngân dài “thìiii…”</small></span></label>
-      <label class="switch" hidden><input type="checkbox" id="optDenoise" checked><span>Khử ồn, làm rõ giọng<small>Bớt tiếng xì, ù quạt, tiếng xe; giọng sáng, đều</small></span></label>
-      <label class="switch"><input type="checkbox" id="optZoom" checked><span>Đổi góc máy ở chỗ cắt<small>Zoom nhẹ 7% xen kẽ cho khỏi giật hình</small></span></label>
-    </div>
-    </details>
-    <details class="tuchinh">
-      <summary>Từ điển sửa chữ (tên riêng, thương hiệu)</summary>
+      </div>
+      <div class="tustep" data-name="Từ điển sửa chữ (tên riêng, thương hiệu)">
       <p class="note">Mỗi dòng 1 cặp: <code>chữ máy nghe sai =&gt; chữ đúng</code>. Máy tự nhớ cho các video sau.</p>
       <textarea id="dict" rows="4" placeholder="bi rôn => B-roll&#10;umi cai => Umikai"></textarea>
-    </details>
-  </section>
-
-  <button class="big" id="go" disabled>✂ Edit tự động</button>
-  <p class="note" id="firstNote">Lần đầu máy tải bộ nghe tiếng Việt khoảng <b id="mbNeed">290</b> MB (nên dùng Wi-Fi). Các lần sau không tải lại, tắt mạng vẫn dùng được.</p>
-
-  <section id="status" hidden aria-live="polite">
-    <div id="statusText">…</div>
-    <div class="track"><div id="bar"></div></div>
-    <p class="note" id="statusNote"></p>
-    <div class="quote" aria-live="off"><small id="quoteCat"></small><p id="quoteText"></p></div>
-  </section>
-
-  <section class="card" id="result" hidden>
-    <div class="step"><b>3</b>Xem lại và sửa chữ</div>
-    <div class="stat" id="stat"></div>
-    <div class="seg3 vw" id="viewRow" hidden role="radiogroup" aria-label="Xem khung">
-      <label><input type="radio" name="view" value="doc" checked><span>Xem bản dọc</span></label>
-      <label><input type="radio" name="view" value="ngang"><span>Xem bản ngang</span></label>
-    </div>
-    <div class="media">
-      <div id="stagebox"><video id="src" playsinline muted preload="auto"></video><canvas id="stage" width="540" height="960"></canvas></div>
-      <div class="ctrl">
-        <button id="play">▶ Xem</button>
-        <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Tua">
-        <span class="note" id="tnow">0:00</span>
       </div>
-    </div>
-    <details open>
-      <summary>Phụ đề từng dòng: sửa chữ sai, ✕ cắt bỏ câu, ✓ xong thì gọn lại</summary>
-      <p class="note quoteHint">Kiểu Hiện cả cụm: chạm vào chữ bên dưới mỗi dòng để tô màu hoặc bỏ tô.</p>
-      <div id="linesSum" class="row lsum" hidden><span id="linesSumText"></span><button type="button" id="linesDone">✓ Xong hết</button><button type="button" id="linesAll">Xem tất cả</button></div>
-      <div id="lines"></div>
-    </details>
-    <details id="brBox" class="tuchinh">
-      <summary>B-roll: chèn thẻ màu, hình, video (tùy chọn)</summary>
+      <div class="tustep" data-name="B-roll: chèn thẻ màu, hình, video" id="brBox">
       <label class="switch"><input type="checkbox" id="optBroll"><span>Thêm B-roll<small>Tắt thì video giữ nguyên hình quay</small></span></label>
       <div id="brOn" class="tiers" hidden>
         <p class="note" id="brHint"></p>
@@ -469,6 +437,63 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <div id="brList" class="brs"></div>
         <p class="note">Bật B-roll là máy tự chèn thẻ màu ở các chỗ gợi ý, màu thẻ chọn 1 lần ở trên cho tất cả. Muốn dùng hình hay video ở chỗ nào thì đổi "Thẻ màu" thành Hình/Video ở chỗ đó. Bấm 🎬 ở dòng phụ đề để chèn thêm.</p>
       </div>
+      </div>
+      <div class="row tunav"><button type="button" id="tuBack">‹ Lại</button><button type="button" id="tuNext">Tiếp ›</button></div>
+    </div>
+    <div class="step"><b>3</b>Sửa tiêu đề, phụ đề</div>
+    <div class="ctl" id="titleRow"><span class="lbl">Tiêu đề suốt video</span>
+      <details id="tStyle" class="tuchinh tsty"><summary>🎨 Kiểu tiêu đề, màu tiêu đề (bấm để mở)</summary>
+      <div class="seg3 tk" role="radiogroup" aria-label="Tiêu đề suốt video">
+        <label><input type="radio" name="tkind" value="ba_tang" checked><span>3 tầng<small>kiểu Công việc</small></span></label>
+        <label><input type="radio" name="tkind" value="kinh"><span>Thẻ kính mờ<small>sang, gọn</small></span></label>
+        <label><input type="radio" name="tkind" value="tap_chi"><span>Tạp chí<small>sâu lắng</small></span></label>
+        <label><input type="radio" name="tkind" value="nhan"><span>Nhãn dán chéo<small>vui, năng lượng</small></span></label>
+        <label><input type="radio" name="tkind" value="viet_tay"><span>Chữ viết tay<small>chill, mềm</small></span></label>
+        <label><input type="radio" name="tkind" value="toi_gian"><span>Tối giản<small>nhẹ, cao cấp</small></span></label>
+        <label><input type="radio" name="tkind" value="khong"><span>Không có<small></small></span></label>
+      </div>
+        <span class="lbl">Màu tiêu đề</span>
+        <div class="bgs" id="tcs" role="radiogroup" aria-label="Màu tiêu đề">
+          <label class="bgc"><input type="radio" name="tcol" value="vang" checked><i style="background:#FACA16"></i>Vàng</label>
+          <label class="bgc"><input type="radio" name="tcol" value="trang"><i style="background:#fff"></i>Trắng</label>
+          <label class="bgc"><input type="radio" name="tcol" value="do"><i style="background:#E5262E"></i>Đỏ</label>
+          <label class="bgc"><input type="radio" name="tcol" value="den"><i style="background:#111"></i>Đen</label>
+          <button type="button" class="bgadd" id="tcAdd" aria-label="Thêm màu tiêu đề riêng">＋<small>Màu riêng</small></button>
+        </div>
+        <div id="tcPanel" class="bgpanel" hidden>
+          <div class="row"><input type="color" id="tcPick" value="#2B2F8C" aria-label="Chọn màu"><input type="text" id="tcHex" value="#2B2F8C" maxlength="7" aria-label="Mã màu" style="width:120px"><button type="button" id="tcSave">Lưu màu</button></div>
+          <label class="pickimg">Lấy màu từ ảnh (logo, bảng màu thương hiệu)<input type="file" id="tcImg" accept="image/*"></label>
+          <canvas id="tcCanvas" class="pickcv" hidden></canvas>
+          <p class="note" id="tcHint" hidden>Chạm vào ảnh để lấy màu, rồi bấm Lưu màu.</p>
+          <p class="note">Màu đã lưu hiện thành ô tròn ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa. Màu có sẵn thì không xóa.</p>
+        </div>
+      </details>
+      <div id="tierBox" class="tiers">
+        <div class="tprev" id="tPrevBox"><div class="tpair"><canvas id="tPrev" width="270" height="480" aria-label="Xem trước tiêu đề"></canvas><canvas id="tPrev2" class="p2" width="480" height="270" aria-label="Xem trước tiêu đề bản ngang"></canvas></div><small>Xem trước tiêu đề</small></div>
+        <span class="lbl">Chữ tiêu đề, sửa từng tầng</span>
+        <input type="text" id="tier1" maxlength="80" aria-label="Tầng 1">
+        <input type="text" id="tier2" maxlength="80" aria-label="Tầng 2">
+        <input type="text" id="tier3" maxlength="80" aria-label="Tầng 3">
+        <div class="row"><button type="button" id="sugBtn" aria-expanded="false">✨ Gợi ý tiêu đề ▾</button></div>
+        <div id="sugBox" class="bgpanel" hidden>
+          <select id="sugCat" aria-label="Dạng video">
+            <option value="">Mọi dạng video</option><option value="kinh_nghiem">Chia sẻ kinh nghiệm</option><option value="cong_viec">Công việc</option>
+            <option value="review">Review</option><option value="tam_su">Vlog tâm sự</option><option value="tin_tuc">Tin tức</option>
+          </select>
+          <div id="sugList" class="sugs"></div>
+          <div class="row"><button type="button" id="sugMore">↻ Gợi ý khác</button></div>
+          <p class="note">2 tít lấy từ chính lời bạn nói, 1 tít từ bảng mẫu có điền từ khóa trong video. Chạm để dùng, máy tự chia tầng, rồi sửa từng ô cho đúng ý.</p>
+        </div>
+        <p class="note" id="tierNote"></p>
+      </div>
+    </div>
+    <div id="hookRow" class="bgrow" hidden><span class="lbl">Tít 3 giây đầu</span>
+      <input type="text" id="hookText" maxlength="60" placeholder="Để trống thì máy lấy câu nói đầu tiên"></div>
+    <details open>
+      <summary>Phụ đề từng dòng: sửa chữ sai, ✕ cắt bỏ câu, ✓ xong thì gọn lại</summary>
+      <p class="note quoteHint">Kiểu Hiện cả cụm: chạm vào chữ bên dưới mỗi dòng để tô màu hoặc bỏ tô.</p>
+      <div id="linesSum" class="row lsum" hidden><span id="linesSumText"></span><button type="button" id="linesDone">✓ Xong hết</button><button type="button" id="linesAll">Xem tất cả</button></div>
+      <div id="lines"></div>
     </details>
     <div id="expArea">
       <button class="big alt" id="quick">▶ Xem nhanh toàn bộ trước khi xuất</button>
@@ -497,7 +522,8 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <summary>Cách dùng và lưu ý</summary>
       <ol class="how">
         <li>Bấm Chọn video, lấy clip trong Ảnh (iPhone) hoặc Thư viện (Android).</li>
-        <li>Chọn kiểu phụ đề, bấm Edit tự động. Video 1 phút mất khoảng vài phút, để màn hình sáng và đừng chuyển app.</li>
+        <li>Bấm Edit tự động. Video 1 phút mất khoảng vài phút, để màn hình sáng và đừng chuyển app.</li>
+        <li>Xong thì chọn phong cách: máy chạy thử 16 giây đầu bằng chính video của bạn. Chọn Tự chỉnh thì chỉnh lần lượt từng phần.</li>
         <li>Xem lại, sửa chữ sai ngay trong ô (chữ mới hiện liền trên video), bấm ✕ để cắt câu nói hỏng.</li>
         <li>Bấm Xuất video rồi Lưu video vào máy (iPhone chọn “Lưu video”).</li>
         <li>Thêm vào màn hình chính để mở như app: Safari bấm Chia sẻ → Thêm vào MH chính; Chrome bấm ⋮ → Thêm vào màn hình chính.</li>
@@ -507,6 +533,20 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <p class="note" id="devInfo"></p>
     </details>
   </section>
+</div>
+<div id="micHelp" class="mhwrap" hidden role="dialog" aria-modal="true" aria-labelledby="mhT">
+  <div class="mhbox">
+    <h3 id="mhT">🎙 Micro chưa bật</h3>
+    <p class="mhsub">iPhone</p>
+    <div class="mhrow"><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#8E8E93"/><circle cx="32" cy="32" r="9" fill="none" stroke="#fff" stroke-width="5"/><g stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M32 12v6M32 46v6M12 32h6M46 32h6M18 18l4 4M42 42l4 4M46 18l-4 4M18 46l4-4"/></g></svg><figcaption>Cài đặt</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#5856D6"/><rect x="12" y="12" width="11" height="11" rx="3" fill="#fff"/><rect x="12" y="26.5" width="11" height="11" rx="3" fill="#fff"/><rect x="12" y="41" width="11" height="11" rx="3" fill="#fff"/><rect x="26.5" y="12" width="11" height="11" rx="3" fill="#fff"/><rect x="26.5" y="26.5" width="11" height="11" rx="3" fill="#fff"/><rect x="26.5" y="41" width="11" height="11" rx="3" fill="#fff"/><rect x="41" y="12" width="11" height="11" rx="3" fill="#fff"/><rect x="41" y="26.5" width="11" height="11" rx="3" fill="#fff"/><rect x="41" y="41" width="11" height="11" rx="3" fill="#fff"/></svg><figcaption>Ứng dụng</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1E90FF"/><circle cx="32" cy="32" r="21" fill="#fff"/><path d="M41 23l-6 12-12 6 6-12z" fill="#FF3B30"/><path d="M23 41l6-12 6 6z" fill="#8E8E93"/></svg><figcaption>Safari</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#FF9500"/><rect x="25" y="12" width="14" height="26" rx="7" fill="#fff"/><path d="M19 30a13 13 0 0 0 26 0M32 43v8M24 51h16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><figcaption>Micrô</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#34C759"/><rect x="10" y="22" width="44" height="22" rx="11" fill="#fff"/><circle cx="43" cy="33" r="8" fill="#34C759"/><path d="M14 33h14" stroke="#34C759" stroke-width="4" stroke-linecap="round"/></svg><figcaption>Cho phép</figcaption></figure></div>
+    <p class="mhsub">Android</p>
+    <div class="mhrow"><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#5F6368"/><rect x="18" y="30" width="28" height="20" rx="4" fill="#fff"/><path d="M24 30v-6a8 8 0 0 1 16 0v6" fill="none" stroke="#fff" stroke-width="5"/></svg><figcaption>🔒 / ⋮</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#FF9500"/><rect x="25" y="12" width="14" height="26" rx="7" fill="#fff"/><path d="M19 30a13 13 0 0 0 26 0M32 43v8M24 51h16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><figcaption>Micrô</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#34C759"/><rect x="10" y="22" width="44" height="22" rx="11" fill="#fff"/><circle cx="43" cy="33" r="8" fill="#34C759"/><path d="M14 33h14" stroke="#34C759" stroke-width="4" stroke-linecap="round"/></svg><figcaption>Cho phép</figcaption></figure></div>
+    <p class="mhnote">Xong thì tắt hẳn app, mở lại, bấm 🎙 Thu giọng. Máy hỏi micro thì chọn <b>Cho phép</b>.</p>
+    <p class="mhsub">Hoặc thu bằng app Ghi âm có sẵn</p>
+    <div class="mhrow"><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1C1C1E"/><g stroke="#FF3B30" stroke-width="4" stroke-linecap="round"><path d="M14 28v8M21 22v20M28 16v32M35 24v16M42 18v28M49 27v10"/></g></svg><figcaption>Ghi âm</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#007AFF"/><path d="M24 26h-6v24h28V26h-6" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/><path d="M32 38V12M24 19l8-8 8 8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><figcaption>Chia sẻ</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1E90FF"/><path d="M12 22h16l4 5h20v23H12z" fill="#fff"/></svg><figcaption>Lưu vào Tệp</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#E0457B"/><path d="M32 44V18M22 28l10-10 10 10" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 48h32" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg><figcaption>Tải file ghi âm</figcaption></figure></div>
+    <p class="mhnote" id="mhErr"></p>
+    <button type="button" class="big" id="mhClose">Đã hiểu</button>
+  </div>
 </div>
 <script>
 // lưu trang + bộ nghe vào máy (chạy không mạng) và bật chế độ cô lập để chạy nhiều luồng (nhanh hơn)
@@ -2854,14 +2894,39 @@ const Render = (() => {
       $("optSubs").checked = true; store.set("ae_optSubs", "1");
       tierUI(); musicInfo();
     }
-    const id = P.custom ? null : presetNow(), v = $("styleVid");
-    $("styleDemo").hidden = !id;
-    if (id && !v.src.endsWith(`mau/${id}.mp4`)) { v.pause(); v.poster = `mau/${id}.jpg`; v.src = `mau/${id}.mp4`; $("styleNote").textContent = `Video mẫu phong cách ${P.name}. Bấm ▶ để xem, bấm ⛶ để xem to.`; }
+    if (P.custom) tuShow(0);
+  }
+  // Tự chỉnh: hiện từng phần một (nhạc, giọng, chữ phụ đề, từ điển, B-roll), bấm Tiếp để qua phần sau
+  let tuI = 0;
+  const tuSteps = () => [...document.querySelectorAll("#tuBox .tustep")];
+  function tuShow(i) {
+    const st = tuSteps(); tuI = Math.max(0, Math.min(st.length - 1, i));
+    st.forEach((d, k) => d.hidden = k !== tuI);
+    $("tuName").textContent = "Tự chỉnh: " + st[tuI].dataset.name; $("tuStep").textContent = `Phần ${tuI + 1}/${st.length}`;
+    $("tuBack").disabled = !tuI; $("tuNext").textContent = tuI === st.length - 1 ? "Xong, sang sửa tiêu đề ✓" : "Tiếp ›";
+  }
+  $("tuBack").addEventListener("click", () => tuShow(tuI - 1));
+  $("tuNext").addEventListener("click", () => { if (tuI < tuSteps().length - 1) { tuShow(tuI + 1); $("tuBox").scrollIntoView({ behavior: "smooth", block: "start" }); } else $("titleRow").scrollIntoView({ behavior: "smooth", block: "start" }); });
+  // chạy thử 16 giây đầu bằng chính video đã edit, theo phong cách vừa chọn (khung xem này là video mẫu luôn)
+  let sampleIv = 0;
+  async function playSample() {
+    if (!prev || !S) return;
+    const name = Style.PRESETS[presetNow()].name || "Tự chỉnh";
+    clearInterval(sampleIv); prev.stop(); await prev.still(0); $("seek").value = 0;
+    $("stagebox").scrollIntoView({ behavior: "smooth", block: "center" });
+    const p = prev; await Promise.race([p.play(), new Promise(r => setTimeout(r, 1500))]);
+    if (p !== prev) return;
+    if (!p.playing) { $("styleNote").textContent = `Phong cách ${name}: bấm ▶ Xem bên dưới để xem thử.`; return; }
+    setPlay(true); $("styleNote").textContent = `Đang chạy thử 16 giây đầu, phong cách ${name}.`;
+    sampleIv = setInterval(() => {
+      if (p !== prev || !p.playing) { clearInterval(sampleIv); return; }
+      if (p.time >= 16) { clearInterval(sampleIv); p.stop(); setPlay(false); $("styleNote").textContent = `Xong 16 giây thử phong cách ${name}. Ưng thì sửa tiêu đề, phụ đề ở bước 3 rồi xuất. Bấm ▶ Xem để xem tiếp.`; }
+    }, 200);
   }
   { const pv = store.get("ae_preset", null); if (pv && Style.PRESETS[pv] && ["co_ban", "giat_tit", "chua_lanh", "tu_chinh"].includes(pv)) setRadio("preset", pv); }
   setTimeout(() => { applyPreset(true); titlePrev(); }, 0);   // mỗi lần mở: áp phong cách đang chọn (Tự chỉnh thì giữ lựa chọn tay); chờ danh sách nhạc dựng xong
   $("hookRow").hidden = !Style.PRESETS[presetNow()].hook;
-  document.querySelectorAll('input[name="preset"]').forEach(r => r.addEventListener("change", () => { store.set("ae_preset", presetNow()); store.set("ae_bg_hand", ""); applyPreset(); titlePrev(); if (S) rebuild(); }));   // đổi phong cách: lớp phủ chân nền theo phong cách mới
+  document.querySelectorAll('input[name="preset"]').forEach(r => r.addEventListener("change", async () => { store.set("ae_preset", presetNow()); store.set("ae_bg_hand", ""); applyPreset(); titlePrev(); if (S) { await rebuild(); playSample(); } }));   // đổi phong cách: lớp phủ chân nền theo phong cách mới
   { const v = store.get("ae_optMusic", null); if (v != null) $("optMusic").checked = v === "1"; }
   $("optMusic").addEventListener("change", () => { store.set("ae_optMusic", $("optMusic").checked ? "1" : "0"); if (S) rebuild(); });
   $("hookText").addEventListener("change", () => { if (S) rebuild(); });
@@ -2892,30 +2957,37 @@ const Render = (() => {
   // (2 ô: 1 ở chỗ tiêu đề, 1 ở chỗ chữ phụ đề, cùng 1 hình)
   const SAMPLE = "làm video bằng điện thoại".split(" ").map((w, i) => ({ w, s: i * 0.3, e: i * 0.3 + 0.28 }));
   let tpT = 0;
+  // vẽ 1 khung xem trước: hình video + lớp phủ chân + tiêu đề (+ phụ đề mẫu)
+  async function drawPrev(cv, tiers, subs, rr) {
+    const k = tkNow(), r = rr || viewRatio(), [W, H] = r === "ngang" ? [960, 540] : [540, 960], look = lookNow();   // vẽ gấp đôi cho nét
+    await Title.load(); await Draw.useFont(look.font);
+    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+    const ctx = cv.getContext("2d");
+    if (video.readyState >= 2 && video.videoWidth) { const sc = Math.max(W / video.videoWidth, H / video.videoHeight), dw = video.videoWidth * sc, dh = video.videoHeight * sc; ctx.drawImage(video, (W - dw) / 2, (H - dh) / 2, dw, dh); }
+    else { const g = ctx.createLinearGradient(0, 0, W * 0.4, H); g.addColorStop(0, "#8FA6BF"); g.addColorStop(1, "#2B3A4F"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.fillStyle = "#ffffff22"; ctx.beginPath(); ctx.arc(W / 2, H * 0.36, Math.min(W, H) * 0.16, 0, 7); ctx.fill(); ctx.fillRect(W / 2 - Math.min(W, H) * 0.26, H * 0.52, Math.min(W, H) * 0.52, H); }
+    ctx.save(); Draw.base(ctx, W, H, bgNow()); ctx.restore();
+    ctx.save(); const sy = k === "khong" ? null : Title.draw(ctx, W, H, { kind: k, color: tcolNow(), tiers }, 6); ctx.restore();
+    if (subs && $("optSubs").checked) { ctx.save(); Draw.subtitle(ctx, W, H, { words: SAMPLE, s: 0, e: 1.5, kw: new Set([1]) }, 1.3, sy ? { ...look, y: sy / H, small: true } : look); ctx.restore(); }
+  }
+  const tiersNow = () => [1, 2, 3].map(i => $("tier" + i).hidden ? "" : $("tier" + i).value.trim());
   function titlePrev() {
     clearTimeout(tpT); tpT = setTimeout(async () => {
       const k = tkNow(); $("tPrevBox").hidden = k === "khong";
-      const r = viewRatio(), [W, H] = r === "ngang" ? [960, 540] : [540, 960], look = lookNow();   // vẽ gấp đôi cho nét
-      await Title.load(); await Draw.useFont(look.font);
-      let tiers = [1, 2, 3].map(i => $("tier" + i).hidden ? "" : $("tier" + i).value.trim());
+      let tiers = tiersNow();
       if (!tiers.some(Boolean)) tiers = Title.split(k, "Làm video / bằng điện thoại / dễ lắm");
-      for (const id of ["tPrev", "sPrev"]) {
-        const cv = $(id); if (id === "tPrev" && k === "khong") continue;
-        if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
-        const ctx = cv.getContext("2d");
-        if (video.readyState >= 2 && video.videoWidth) { const sc = Math.max(W / video.videoWidth, H / video.videoHeight), dw = video.videoWidth * sc, dh = video.videoHeight * sc; ctx.drawImage(video, (W - dw) / 2, (H - dh) / 2, dw, dh); }
-        else { const g = ctx.createLinearGradient(0, 0, W * 0.4, H); g.addColorStop(0, "#8FA6BF"); g.addColorStop(1, "#2B3A4F"); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); ctx.fillStyle = "#ffffff22"; ctx.beginPath(); ctx.arc(W / 2, H * 0.36, Math.min(W, H) * 0.16, 0, 7); ctx.fill(); ctx.fillRect(W / 2 - Math.min(W, H) * 0.26, H * 0.52, Math.min(W, H) * 0.52, H); }
-        ctx.save(); Draw.base(ctx, W, H, bgNow()); ctx.restore();
-        ctx.save(); const sy = Title.draw(ctx, W, H, { kind: k, color: tcolNow(), tiers }, 6); ctx.restore();
-        if ($("optSubs").checked) { ctx.save(); Draw.subtitle(ctx, W, H, { words: SAMPLE, s: 0, e: 1.5, kw: new Set([1]) }, 1.3, sy ? { ...look, y: sy / H, small: true } : look); ctx.restore(); }
-      }
+      const two = radio("ratio") === "ca2";   // Cả hai: vẽ thêm bản ngang bên cạnh bản dọc
+      if (k !== "khong") { await drawPrev($("tPrev"), tiers, true, two ? "doc" : null); if (two) await drawPrev($("tPrev2"), tiers, true, "ngang"); }
+      await drawPrev($("sPrev"), tiers, true, two ? "doc" : null); if (two) await drawPrev($("sPrev2"), tiers, true, "ngang");
+      if (!$("sugBox").hidden) drawSugPrev();
     }, 60);
   }
   document.querySelectorAll('input[name="tkind"]').forEach(r => r.addEventListener("change", titlePrev));
   for (const id of ["tier1", "tier2", "tier3"]) $(id).addEventListener("input", titlePrev);
   document.querySelectorAll('input[name="ratio"],input[name="view"]').forEach(r => r.addEventListener("change", titlePrev));
   video.addEventListener("loadeddata", titlePrev); video.addEventListener("seeked", titlePrev);
-  $("optSubs").addEventListener("change", titlePrev);
+  const subsUI = () => $("subOpts").hidden = !$("optSubs").checked;   // tắt phụ đề thì gọn hết tùy chỉnh phụ đề, bật thì mở ra
+  $("optSubs").addEventListener("change", () => { subsUI(); titlePrev(); });
+  subsUI();
   titlePrev();
   document.querySelectorAll('input[name="tkind"]').forEach(r => r.addEventListener("change", () => { store.set("ae_tkind", tkNow()); tierUI(); if (S) rebuild(); }));
   let tierT = 0;
@@ -2942,11 +3014,22 @@ const Render = (() => {
     if (!list.length) { box.textContent = "Làm xong bước Edit video thì máy mới gợi ý được."; return; }
     for (const o of list) {
       const b = document.createElement("button"); b.type = "button"; b.className = "sug";
-      b.textContent = o.text; const sm = document.createElement("small"); sm.textContent = CAT_NAME[o.from] || ""; b.append(sm);
-      b.addEventListener("click", () => { tierHand = true; Title.split(tkNow(), o.text).forEach((x, i) => $("tier" + (i + 1)).value = x); if (S) rebuild(); });
+      const cv = document.createElement("canvas"); cv.className = "sugcv"; cv.dataset.text = o.text;
+      const tx = document.createElement("span"); tx.textContent = o.text; const sm = document.createElement("small"); sm.textContent = (CAT_NAME[o.from] || "") + (o.text.includes("___") ? " · chạm rồi gõ vào chỗ ___" : ""); tx.append(sm);
+      b.append(cv, tx);
+      b.addEventListener("click", () => {
+        tierHand = true; Title.split(tkNow(), o.text).forEach((x, i) => $("tier" + (i + 1)).value = x);
+        box.querySelectorAll(".sug").forEach(x => x.classList.toggle("on", x === b));
+        titlePrev(); if (S) rebuild();
+        const blank = [1, 2, 3].map(i => $("tier" + i)).find(el => !el.hidden && el.value.includes("___"));
+        if (blank) { const p = blank.value.indexOf("___"); blank.focus(); blank.setSelectionRange(p, p + 3); }
+        else $("tPrevBox").scrollIntoView({ behavior: "smooth", block: "center" });
+      });
       box.append(b);
     }
+    drawSugPrev();
   }
+  function drawSugPrev() { $("sugList").querySelectorAll(".sugcv").forEach(cv => drawPrev(cv, Title.split(tkNow(), cv.dataset.text), false)); }
   $("sugBtn").addEventListener("click", () => { const open = $("sugBox").hidden; $("sugBox").hidden = !open; $("sugBtn").setAttribute("aria-expanded", open); $("sugBtn").textContent = "✨ Gợi ý tiêu đề " + (open ? "▴" : "▾"); if (open) drawSug(); });
   $("sugCat").addEventListener("change", () => { sugSeed = 0; drawSug(); });
   $("sugMore").addEventListener("click", () => { sugSeed++; drawSug(); });
@@ -3189,7 +3272,7 @@ const Render = (() => {
   }));
   const mtTotal = () => Math.min(maxT(), MT.scenes.reduce((a, c) => a + c.dur, 0)) || 1;
   // khung gốc cho "Như video gốc": theo cảnh đầu
-  function mtSize() { const c = MT.scenes[0]; if (!c) return [1080, 1920]; return c.bmp ? [c.bmp.width, c.bmp.height] : [c.el.videoWidth, c.el.videoHeight]; }
+  function mtSize() { const c = MT.scenes[0]; if (!c) return [1080, 1920]; return c.bmp ? [c.bmp.width, c.bmp.height] : [c.vw || c.el.videoWidth, c.vh || c.el.videoHeight]; }
   // giờ ra của từng cảnh. Có giọng: chia theo tỉ lệ thời lượng, mỗi chỗ đổi cảnh dời về cuối câu nói gần nhất (±1,2 s)
   function mtTimeline(T, sentEnds, voiced) {
     const sc = MT.scenes, sum = sc.reduce((a, c) => a + c.dur, 0) || 1, b = [0];
@@ -3247,6 +3330,13 @@ const Render = (() => {
       el.src = URL.createObjectURL(f); el.load();
     });
   }
+  // trước khi dựng / xem / xuất: mở lại các video cảnh (chỉ đọc thông tin, chưa giải mã)
+  async function wakeScenes() {
+    for (const c of MT.scenes) if (c.el && !c.el.getAttribute("src")) {
+      c.el.preload = "auto"; c.el.src = c.url;
+      await new Promise(res => { const to = setTimeout(res, 8000); c.el.onloadedmetadata = () => { clearTimeout(to); res(); }; c.el.onerror = () => { clearTimeout(to); res(); }; c.el.load(); });
+    }
+  }
   async function addScenes(files) {
     const room = MAX_SC - MT.scenes.length;
     if (files.length > room) { alert(`Tối đa ${MAX_SC} cảnh, máy chỉ lấy ${Math.max(0, room)} cái đầu.`); files = files.slice(0, Math.max(0, room)); }
@@ -3259,6 +3349,10 @@ const Render = (() => {
         if (isVid) {
           const el = await openVid(f);
           c.el = el; c.len = isFinite(el.duration) && el.duration > 0 ? el.duration : MAX_VID;
+          c.thumb = document.createElement("canvas"); c.thumb.width = c.thumb.height = 128;
+          const k = Math.max(128 / el.videoWidth, 128 / el.videoHeight); c.vw = el.videoWidth; c.vh = el.videoHeight;
+          try { c.thumb.getContext("2d").drawImage(el, (128 - el.videoWidth * k) / 2, (128 - el.videoHeight * k) / 2, el.videoWidth * k, el.videoHeight * k); } catch (e) { }
+          c.url = el.src; el.removeAttribute("src"); el.load();   // nhả bộ giải mã: 12 video mở cùng lúc dễ làm iPhone tràn bộ nhớ, đen màn hình
         } else {
           const im = await createImageBitmap(f), sc = Math.min(1, 1920 / Math.max(im.width, im.height));   // giới hạn 1920 cho nhẹ máy
           c.bmp = sc < 1 ? await createImageBitmap(im, { resizeWidth: Math.round(im.width * sc), resizeHeight: Math.round(im.height * sc), resizeQuality: "high" }) : im;
@@ -3278,7 +3372,7 @@ const Render = (() => {
     MT.scenes.forEach((c, i) => {
       const d = document.createElement("div"); d.className = "sci";
       const th = document.createElement("canvas"); th.width = th.height = 128;
-      const src = c.bmp || c.el, sw = c.bmp ? c.bmp.width : c.el.videoWidth, sh = c.bmp ? c.bmp.height : c.el.videoHeight, k = Math.max(128 / sw, 128 / sh);
+      const src = c.bmp || c.thumb, sw = src.width, sh = src.height, k = Math.max(128 / sw, 128 / sh);
       try { th.getContext("2d").drawImage(src, (128 - sw * k) / 2, (128 - sh * k) / 2, sw * k, sh * k); } catch (e) { }
       const right = document.createElement("div"); right.style.display = "grid"; right.style.gap = "6px";
       const r1 = document.createElement("div"); r1.className = "row";
@@ -3291,7 +3385,7 @@ const Render = (() => {
       const mv = (dir, txt, lab) => { const b = document.createElement("button"); b.type = "button"; b.className = "mv"; b.textContent = txt; b.setAttribute("aria-label", lab); b.disabled = !MT.scenes[i + dir];
         b.addEventListener("click", () => { [MT.scenes[i], MT.scenes[i + dir]] = [MT.scenes[i + dir], MT.scenes[i]]; drawScenes(); if (S) rebuild(); }); return b; };
       const x = document.createElement("button"); x.type = "button"; x.className = "mv"; x.textContent = "✕"; x.setAttribute("aria-label", "Bỏ cảnh " + (i + 1));
-      x.addEventListener("click", () => { if (c.el) URL.revokeObjectURL(c.el.src); MT.scenes.splice(i, 1); fitScenes(); drawScenes(); updateGo(); if (S && MT.scenes.length) rebuild(); });
+      x.addEventListener("click", () => { if (c.el) { URL.revokeObjectURL(c.url || c.el.src); c.el.removeAttribute("src"); c.el.load(); } MT.scenes.splice(i, 1); fitScenes(); drawScenes(); updateGo(); if (S && MT.scenes.length) rebuild(); });
       r1.append(lb, du, mv(-1, "▲", "Lên trên"), mv(1, "▼", "Xuống dưới"), x); right.append(r1);
       const cap = document.createElement("input"); cap.type = "text"; cap.className = "cap"; cap.maxLength = 80; cap.value = c.text; cap.placeholder = "Chữ hiện trên cảnh này (không bắt buộc)";
       let tt = 0; cap.addEventListener("input", () => { c.text = cap.value; clearTimeout(tt); tt = setTimeout(() => S && rebuild(), 450); });
@@ -3315,10 +3409,14 @@ const Render = (() => {
   $("vFile").addEventListener("change", e => { const f = e.target.files[0]; if (f) setVoice(f); e.target.value = ""; });
   $("vDel").addEventListener("click", () => setVoice(null));
   let rec = null;
+  $("mhClose").addEventListener("click", () => $("micHelp").hidden = true);
   $("recBtn").addEventListener("click", async () => {
     if (rec) { rec.stop(); return; }
     let st; try { st = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: true } }); }
-    catch (e) { alert("Máy chưa cho dùng micro.\n\nNếu đang mở trong Zalo, Facebook…: mở bằng Safari (iPhone) hoặc Chrome (Android).\n\niPhone: bấm aA ở thanh địa chỉ → Cài đặt trang web → Micrô → Cho phép. Hoặc Cài đặt → Safari → Micrô → Cho phép.\n\nAndroid: bấm ổ khóa cạnh địa chỉ → Quyền → Micrô → Cho phép.\n\nRồi bấm Thu giọng lại."); return; }
+    catch (e) {   // hướng dẫn bằng hình (biểu tượng), kèm mã lỗi để chụp gửi
+      $("mhErr").textContent = "Mã lỗi: " + ((e && (e.name || e.message)) || e) + (navigator.standalone || matchMedia("(display-mode: standalone)").matches ? " · mở từ màn hình chính" : "");
+      $("micHelp").hidden = false; return;
+    }
     const mime = ["audio/mp4", "audio/webm;codecs=opus", "audio/webm"].find(m => window.MediaRecorder && MediaRecorder.isTypeSupported(m)) || "";
     const chunks = [], t0 = Date.now(); rec = new MediaRecorder(st, mime ? { mimeType: mime } : {});
     rec.ondataavailable = e => e.data.size && chunks.push(e.data);
@@ -3544,6 +3642,7 @@ const Render = (() => {
     await Draw.useFont(look.font);
     const words = S.words.filter(w => !w.gone && !w.cut).sort((a, b) => a.s - b.s);
     const ghep = modeNow() === "ghep";
+    if (ghep) await wakeScenes();
     if (S.noVoice) { const T = mtTotal(); if (Math.abs(S.dur - T) > 1e-3) { S.dur = T; S.y = new Float32Array(Math.round(T * 48000)); } }
     let keep = S.noVoice ? [{ a: 0, b: S.dur }] : Edit.plan(words, S.hums, S.dur, { cutSilence: $("optSilence").checked, cutFillers: $("optFiller").checked });
     for (const [a, b] of cutRanges()) keep = Edit.subtract(keep, a, b);
