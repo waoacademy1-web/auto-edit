@@ -13,7 +13,22 @@
 body{margin:0;background:var(--bg);color:var(--ink);font:500 16px/1.5 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px}
 .wrap{max-width:720px;margin:0 auto;display:grid;gap:18px}
 header{display:flex;gap:14px;align-items:center}
-.logo-mark{width:52px;height:52px;border-radius:50%;flex:none;background:repeating-conic-gradient(var(--sun) 0 12deg,#F9CBE2 12deg 24deg);display:grid;place-items:center;color:var(--flame);font:900 24px var(--display);box-shadow:0 4px 0 #E0549F}
+.logo-mark{width:56px;height:56px;border-radius:14px;flex:none;object-fit:cover;box-shadow:0 4px 14px #3a1a6a55}
+.ic{display:inline-block;width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.35em;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic-mic{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='9' y='2' width='6' height='12' rx='3'/><path d='M19 10v2a7 7 0 0 1-14 0v-2M12 19v3'/></svg>")}
+.ic-img{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect width='18' height='18' x='3' y='3' rx='2'/><circle cx='9' cy='9' r='2'/><path d='m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21'/></svg>")}
+.ic-cut{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><circle cx='6' cy='6' r='3'/><path d='M8.1 8.1 12 12M20 4 8.1 15.9M14.8 14.8 20 20'/><circle cx='6' cy='18' r='3'/></svg>")}
+.ic-spark{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M9.9 15.5a2 2 0 0 0-1.4-1.4l-6.1-1.6a.5.5 0 0 1 0-1l6.1-1.6a2 2 0 0 0 1.4-1.4l1.6-6.1a.5.5 0 0 1 1 0l1.6 6.1a2 2 0 0 0 1.4 1.4l6.1 1.6a.5.5 0 0 1 0 1l-6.1 1.6a2 2 0 0 0-1.4 1.4l-1.6 6.1a.5.5 0 0 1-1 0z'/></svg>")}
+.ic-film{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect width='18' height='18' x='3' y='3' rx='2'/><path d='M7 3v18M17 3v18M3 7.5h4M3 12h18M3 16.5h4M17 7.5h4M17 16.5h4'/></svg>")}
+.ic-save{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3'/></svg>")}
+.ic-palette{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.3a1.8 1.8 0 0 0-1.4 2.8l.3.4a1.8 1.8 0 0 1-1.4 2.8z'/><circle cx='13.5' cy='6.5' r='1'/><circle cx='17.5' cy='10.5' r='1'/><circle cx='6.5' cy='12.5' r='1'/><circle cx='8.5' cy='7.5' r='1'/></svg>")}
+.ic-timer{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 2h4M12 14l3-3'/><circle cx='12' cy='14' r='8'/></svg>")}
+.ic-pen{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21.2 6.8a1 1 0 0 0-4-4L3.8 16.2a2 2 0 0 0-.5.8L2 21.4a.5.5 0 0 0 .6.6l4.4-1.3a2 2 0 0 0 .8-.5z'/></svg>")}
+.ic-doc{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/><path d='M14 2v4a2 2 0 0 0 2 2h4M16 13H8M16 17H8M10 9H8'/></svg>")}
+.ic-play{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 3l14 9-14 9z' fill='%23000'/></svg>")}
+.ic-pause{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='6' y='4' width='4' height='16' rx='1' fill='%23000'/><rect x='14' y='4' width='4' height='16' rx='1' fill='%23000'/></svg>")}
+.ic-stop{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='5' width='14' height='14' rx='2' fill='%23000'/></svg>")}
+
 .ver{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:999px;background:rgba(127,127,127,.18);font:600 13px/1.6 var(--body);opacity:.85}
 h1{font:900 clamp(24px,6vw,32px)/1.1 var(--display);margin:0;color:var(--navy)}
 header p{margin:2px 0 0;color:var(--muted);font-size:14px}
@@ -225,14 +240,14 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 
 <div class="wrap">
   <header>
-    <div class="logo-mark" aria-hidden="true">✂</div>
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.1</span></div>
+    <img class="logo-mark" src="icon.png" alt="" aria-hidden="true">
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.2</span></div>
   </header>
 
   <section class="card">
     <div class="modes" role="radiogroup" aria-label="Dạng video">
-      <label class="mode"><input type="radio" name="mode" value="noi" checked><b>🎙 Video quay nói</b><small>Tự quay nói chuyện: cắt lặng, cắt ậm ờ, phụ đề, làm giọng</small></label>
-      <label class="mode"><input type="radio" name="mode" value="ghep"><b>🖼 Ghép hình và video</b><small>Tối đa 12 hình, video (mỗi video 40 giây) + nhạc, lồng tiếng nếu muốn</small></label>
+      <label class="mode"><input type="radio" name="mode" value="noi" checked><b><i class="ic ic-mic" aria-hidden="true"></i>Video quay nói</b><small>Tự quay nói chuyện: cắt lặng, cắt ậm ờ, phụ đề, làm giọng</small></label>
+      <label class="mode"><input type="radio" name="mode" value="ghep"><b><i class="ic ic-img" aria-hidden="true"></i>Ghép hình và video</b><small>Tối đa 12 hình, video (mỗi video 40 giây) + nhạc, lồng tiếng nếu muốn</small></label>
     </div>
     <div class="ctl" id="ratioRow"><span class="lbl">Video làm ra</span><div class="seg3" role="radiogroup" aria-label="Khung video">
       <label><input type="radio" name="ratio" value="doc" checked><span>Dọc 9:16<small>TikTok, Reels</small></span></label>
@@ -252,7 +267,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 
   <section class="card" id="step1ghep" hidden>
     <div class="step"><b>1</b>Chọn hình, video (tối đa 12)</div>
-    <p class="note hint12">⏱ Mỗi video nên <b>dưới 40 giây</b>. Video dài hơn máy chỉ lấy 40 giây, lại mở chậm và dễ treo máy. Cắt sẵn đoạn đẹp trong app Ảnh rồi hãy chọn.</p>
+    <p class="note hint12"><i class="ic ic-timer" aria-hidden="true"></i>Mỗi video nên <b>dưới 40 giây</b>. Video dài hơn máy chỉ lấy 40 giây, lại mở chậm và dễ treo máy. Cắt sẵn đoạn đẹp trong app Ảnh rồi hãy chọn.</p>
     <label class="pick"><span>＋ Thêm hình, video</span><small id="scInfo">Mỗi hình hiện 3 giây, mỗi video hiện đúng độ dài của nó. Tổng dài quá thì máy tự rút ngắn các video cho vừa. Video làm ra dài tối đa 1 phút.</small>
       <input type="file" id="scFile" multiple accept="image/*,video/*"></label>
     <div id="scList" class="brs"></div>
@@ -264,13 +279,13 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     <label class="switch"><input type="checkbox" id="optSceneAudio"><span>Giữ tiếng gốc của video cảnh<small>Cho kiểu ASMR: lọc bớt ồn đều (quạt, máy lạnh, xì), làm rõ tiếng. Tiếng xe, người nói xung quanh thì không lọc được.</small></span></label>
     <span class="lbl">Giọng nói (không bắt buộc)</span>
     <div class="row"><button type="button" id="recBtn" hidden>🎙 Thu giọng</button>
-      <label class="pickimg">🎙 Tải file ghi âm / video có giọng<input type="file" id="vFile" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac"></label>
+      <label class="pickimg"><i class="ic ic-mic" aria-hidden="true"></i>Tải file ghi âm / video có giọng<input type="file" id="vFile" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac"></label>
       <button type="button" id="vDel" hidden>Bỏ giọng</button></div>
     <p class="note" id="vInfo">Có giọng: máy làm giọng trong, rõ, tự ra phụ đề và tự chia cảnh theo câu nói (dài tối đa theo độ dài đã chọn). Không có giọng: video chạy theo nhạc, gõ chữ cho từng cảnh ở trên.</p>
   </section>
 
 
-  <button class="big" id="go" disabled>✂ Edit tự động</button>
+  <button class="big" id="go" disabled><i class="ic ic-cut" aria-hidden="true"></i>Edit tự động</button>
   <div id="nextSteps" class="nxt"><span>Bấm Edit xong sẽ hiện tiếp:</span><b><i>2</i>Chọn phong cách, xem thử</b><b><i>3</i>Sửa tiêu đề, phụ đề</b><b><i>4</i>Xuất video</b></div>
   <p class="note" id="firstNote">Lần đầu máy tải bộ nghe tiếng Việt khoảng <b id="mbNeed">290</b> MB (nên dùng Wi-Fi). Các lần sau không tải lại, tắt mạng vẫn dùng được.</p>
 
@@ -298,7 +313,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     <div class="media">
       <div id="stagebox"><video id="src" playsinline muted preload="auto"></video><canvas id="stage" width="540" height="960"></canvas></div>
       <div class="ctrl">
-        <button id="play">▶ Xem</button>
+        <button id="play"><i class="ic ic-play" aria-hidden="true"></i>Xem</button>
         <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Tua">
         <span class="note" id="tnow">0:00</span>
       </div>
@@ -308,7 +323,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <div class="tustep" data-name="Nhạc nền">
     <label class="switch tuchinh" id="musicRow"><input type="checkbox" id="optMusic" checked><span>Nhạc nền + tiếng hiệu ứng<small>Không bản quyền, tự nhỏ lại khi có giọng nói</small></span></label>
     <div class="ctl tuchinh" id="musicPick"><span class="lbl">Nhạc nền</span>
-      <div class="row"><select id="musicSel" aria-label="Chọn nhạc nền" style="flex:1"></select><button type="button" id="musicPlay" aria-label="Nghe thử">▶ Nghe</button></div>
+      <div class="row"><select id="musicSel" aria-label="Chọn nhạc nền" style="flex:1"></select><button type="button" id="musicPlay" aria-label="Nghe thử"><i class="ic ic-play" aria-hidden="true"></i>Nghe</button></div>
       <input type="file" id="musicFile" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac" hidden>
       <p class="note" id="musicInfo"></p>
     </div>
@@ -435,7 +450,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <label class="switch"><input type="checkbox" id="optBroll"><span>Thêm B-roll<small>Tắt thì video giữ nguyên hình quay</small></span></label>
       <div id="brOn" class="tiers" hidden>
         <p class="note" id="brHint"></p>
-        <div class="row"><button type="button" id="brAuto">✨ Máy gợi ý chỗ chèn</button><button type="button" id="brClear">Xóa hết</button></div>
+        <div class="row"><button type="button" id="brAuto"><i class="ic ic-spark" aria-hidden="true"></i>Máy gợi ý chỗ chèn</button><button type="button" id="brClear">Xóa hết</button></div>
         <span class="lbl">Màu thẻ</span>
         <div class="bgs" id="bcs" role="radiogroup" aria-label="Màu thẻ">
           <label class="bgc"><input type="radio" name="bcol" value="trang" checked><i style="background:#fff"></i>Trắng</label>
@@ -451,14 +466,14 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         </div>
         <div id="brSum" class="row lsum" hidden><span id="brSumText"></span><button type="button" id="brAll">Xem tất cả</button></div>
         <div id="brList" class="brs"></div>
-        <p class="note">Bật B-roll là máy tự chèn thẻ màu ở các chỗ gợi ý, màu thẻ chọn 1 lần ở trên cho tất cả. Muốn dùng hình hay video ở chỗ nào thì đổi "Thẻ màu" thành Hình/Video ở chỗ đó. Bấm 🎬 ở dòng phụ đề để chèn thêm.</p>
+        <p class="note">Bật B-roll là máy tự chèn thẻ màu ở các chỗ gợi ý, màu thẻ chọn 1 lần ở trên cho tất cả. Muốn dùng hình hay video ở chỗ nào thì đổi "Thẻ màu" thành Hình/Video ở chỗ đó. Bấm nút hình cuộn phim ở dòng phụ đề để chèn thêm.</p>
       </div>
       </div>
       <div class="row tunav"><button type="button" id="tuBack">‹ Lại</button><button type="button" id="tuNext">Tiếp ›</button></div>
     </div>
     <div class="step"><b>3</b>Sửa tiêu đề, phụ đề</div>
     <div class="ctl" id="titleRow"><span class="lbl">Tiêu đề suốt video</span>
-      <details id="tStyle" class="tuchinh tsty"><summary>🎨 Kiểu tiêu đề, màu tiêu đề (bấm để mở)</summary>
+      <details id="tStyle" class="tuchinh tsty"><summary><i class="ic ic-palette" aria-hidden="true"></i>Kiểu tiêu đề, màu tiêu đề (bấm để mở)</summary>
       <div class="seg3 tk" role="radiogroup" aria-label="Tiêu đề suốt video">
         <label><input type="radio" name="tkind" value="ba_tang" checked><span>3 tầng<small>kiểu Công việc</small></span></label>
         <label><input type="radio" name="tkind" value="kinh"><span>Thẻ kính mờ<small>sang, gọn</small></span></label>
@@ -490,7 +505,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <input type="text" id="tier1" maxlength="80" aria-label="Tầng 1">
         <input type="text" id="tier2" maxlength="80" aria-label="Tầng 2">
         <input type="text" id="tier3" maxlength="80" aria-label="Tầng 3">
-        <div class="row"><button type="button" id="sugBtn" aria-expanded="false">✨ Gợi ý tiêu đề ▾</button></div>
+        <div class="row"><button type="button" id="sugBtn" aria-expanded="false"><i class="ic ic-spark" aria-hidden="true"></i>Gợi ý tiêu đề ▾</button></div>
         <div id="sugBox" class="bgpanel" hidden>
           <select id="sugCat" aria-label="Dạng video">
             <option value="">Mọi dạng video</option><option value="kinh_nghiem">Chia sẻ kinh nghiệm</option><option value="cong_viec">Công việc</option>
@@ -512,7 +527,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <div id="lines"></div>
     </details>
     <div id="expArea">
-      <button class="big alt" id="quick">▶ Xem nhanh toàn bộ trước khi xuất</button>
+      <button class="big alt" id="quick"><i class="ic ic-play" aria-hidden="true"></i>Xem nhanh toàn bộ trước khi xuất</button>
       <p class="note">Xem lại từ đầu tới cuối đúng như video sẽ xuất. Thấy ổn thì bấm Xuất video.</p>
       <button class="big" id="exp">⬇ Xuất video</button>
     </div>
@@ -524,12 +539,12 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <label><input type="radio" name="dview" value="2"><span>Bản ngang</span></label>
       </div>
       <video id="outVid" controls playsinline></video>
-      <button class="big ok" id="save">💾 Lưu video vào máy</button>
-      <button class="big ok" id="save2" hidden>💾 Lưu bản ngang</button>
+      <button class="big ok" id="save"><i class="ic ic-save" aria-hidden="true"></i>Lưu video vào máy</button>
+      <button class="big ok" id="save2" hidden><i class="ic ic-save" aria-hidden="true"></i>Lưu bản ngang</button>
       <p class="note" id="saveNote"></p>
-      <button class="big alt" id="reEdit">✏ Sửa lại video</button>
+      <button class="big alt" id="reEdit"><i class="ic ic-pen" aria-hidden="true"></i>Sửa lại video</button>
     </div>
-    <button id="srt">📝 Lưu file phụ đề (.srt) cho YouTube</button>
+    <button id="srt"><i class="ic ic-doc" aria-hidden="true"></i>Lưu file phụ đề (.srt) cho YouTube</button>
     <p class="note" id="srtNote">Đăng YouTube: tải video lên, vào mục Phụ đề, chọn Tải tệp lên rồi chọn file này. YouTube, Google đọc được lời nói, giúp video dễ được tìm thấy.</p>
   </section>
 
@@ -552,7 +567,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 </div>
 <div id="micHelp" class="mhwrap" hidden role="dialog" aria-modal="true" aria-labelledby="mhT">
   <div class="mhbox">
-    <h3 id="mhT">🎙 Micro chưa bật</h3>
+    <h3 id="mhT"><i class="ic ic-mic" aria-hidden="true"></i>Micro chưa bật</h3>
     <p class="mhsub">iPhone</p>
     <div class="mhrow"><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#8E8E93"/><circle cx="32" cy="32" r="9" fill="none" stroke="#fff" stroke-width="5"/><g stroke="#fff" stroke-width="7" stroke-linecap="round"><path d="M32 12v6M32 46v6M12 32h6M46 32h6M18 18l4 4M42 42l4 4M46 18l-4 4M18 46l4-4"/></g></svg><figcaption>Cài đặt</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#5856D6"/><rect x="12" y="12" width="11" height="11" rx="3" fill="#fff"/><rect x="12" y="26.5" width="11" height="11" rx="3" fill="#fff"/><rect x="12" y="41" width="11" height="11" rx="3" fill="#fff"/><rect x="26.5" y="12" width="11" height="11" rx="3" fill="#fff"/><rect x="26.5" y="26.5" width="11" height="11" rx="3" fill="#fff"/><rect x="26.5" y="41" width="11" height="11" rx="3" fill="#fff"/><rect x="41" y="12" width="11" height="11" rx="3" fill="#fff"/><rect x="41" y="26.5" width="11" height="11" rx="3" fill="#fff"/><rect x="41" y="41" width="11" height="11" rx="3" fill="#fff"/></svg><figcaption>Ứng dụng</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#1E90FF"/><circle cx="32" cy="32" r="21" fill="#fff"/><path d="M41 23l-6 12-12 6 6-12z" fill="#FF3B30"/><path d="M23 41l6-12 6 6z" fill="#8E8E93"/></svg><figcaption>Safari</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#FF9500"/><rect x="25" y="12" width="14" height="26" rx="7" fill="#fff"/><path d="M19 30a13 13 0 0 0 26 0M32 43v8M24 51h16" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><figcaption>Micrô</figcaption></figure><span class="mharr">→</span><figure><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#34C759"/><rect x="10" y="22" width="44" height="22" rx="11" fill="#fff"/><circle cx="43" cy="33" r="8" fill="#34C759"/><path d="M14 33h14" stroke="#34C759" stroke-width="4" stroke-linecap="round"/></svg><figcaption>Cho phép</figcaption></figure></div>
     <p class="mhsub">Android</p>
@@ -2617,66 +2632,66 @@ const Render = (() => {
 
   // ---------- câu ngắn xoay vòng lúc chờ làm video (đổi mỗi 7 giây) ----------
   const QUOTES = [
-    ["💪 Động lực", "Video đầu tiên không cần hay, chỉ cần được đăng."],
-    ["💪 Động lực", "Làm đều mỗi ngày một chút thắng làm thật nhiều một lần rồi bỏ."],
-    ["💪 Động lực", "Người xem không nhớ bạn quay vụng, họ nhớ bạn đã giúp họ điều gì."],
-    ["💪 Động lực", "Bắt đầu từ chiếc điện thoại trong tay, không cần chờ đủ đồ."],
-    ["💪 Động lực", "100 video bình thường dạy bạn nhiều hơn 1 video hoàn hảo nằm trong máy."],
-    ["💪 Động lực", "Sợ thì vẫn làm, làm rồi sẽ bớt sợ."],
-    ["💪 Động lực", "Mỗi lần bấm đăng là một lần bạn giỏi hơn hôm qua."],
-    ["💪 Động lực", "Kết quả lớn đến từ những việc nhỏ lặp lại đủ lâu."],
-    ["💪 Động lực", "Đừng so chương 1 của mình với chương 20 của người khác."],
-    ["💪 Động lực", "Chậm mà đều vẫn hơn nhanh mà đứt."],
-    ["🌿 Chữa lành", "Hít một hơi thật sâu. Bạn đang làm tốt hơn bạn nghĩ."],
-    ["🌿 Chữa lành", "Nghỉ ngơi cũng là một phần của cố gắng."],
-    ["🌿 Chữa lành", "Không cần làm mọi thứ hôm nay, chỉ cần làm một việc cho tử tế."],
-    ["🌿 Chữa lành", "Đối xử với mình dịu dàng như cách bạn đối xử với người mình thương."],
-    ["🌿 Chữa lành", "Có những ngày chỉ cần đi qua được là đủ rồi."],
-    ["🌿 Chữa lành", "Buông bớt điều không kiểm soát được, giữ chặt điều mình làm được."],
-    ["🌿 Chữa lành", "Bình yên không phải nơi không có sóng, mà là lòng mình vững."],
-    ["🌿 Chữa lành", "Ly nước, giấc ngủ, vài phút nắng sớm: chữa lành bắt đầu từ việc nhỏ."],
-    ["🧭 Sống đẹp", "Nói lời tử tế không tốn gì, mà người nghe nhớ rất lâu."],
-    ["🧭 Sống đẹp", "Giữ chữ tín là vốn quý nhất của người bán hàng."],
-    ["🧭 Sống đẹp", "Biết ơn người đã giúp mình, kể cả khi họ chỉ giúp một lần."],
-    ["🧭 Sống đẹp", "Sống thật với mình thì không sợ người khác nhìn thấy."],
-    ["🧭 Sống đẹp", "Cho đi đúng lúc, nhận lại đúng người."],
-    ["🧭 Sống đẹp", "Lắng nghe nhiều hơn nói, bạn sẽ hiểu khách hàng hơn ai hết."],
-    ["🧭 Sống đẹp", "Làm việc tử tế cả khi không ai nhìn thấy."],
-    ["🧭 Sống đẹp", "Khiêm tốn để học, tự tin để làm."],
-    ["🛠 Kỹ năng", "3 giây đầu quyết định người xem ở lại hay lướt đi: nói điều hay nhất trước."],
-    ["🛠 Kỹ năng", "Quay chỗ sáng, ánh sáng chiếu vào mặt, video nhìn chuyên nghiệp ngay."],
-    ["🛠 Kỹ năng", "Mic gần miệng quan trọng hơn máy quay đắt tiền."],
-    ["🛠 Kỹ năng", "Mỗi video chỉ nói một ý, người xem dễ nhớ, dễ chia sẻ."],
-    ["🛠 Kỹ năng", "Kết video bằng một lời mời rõ ràng: theo dõi, bình luận hay nhắn tin."],
-    ["🛠 Kỹ năng", "Nói như đang kể chuyện với một người bạn, không như đọc bài."],
-    ["🛠 Kỹ năng", "Phụ đề giúp 8 trên 10 người xem hiểu video dù đang tắt tiếng."],
-    ["🛠 Kỹ năng", "Đăng cùng một khung giờ mỗi ngày để người xem quen chờ bạn."],
-    ["🛠 Kỹ năng", "Đọc bình luận để tìm ý tưởng cho video tiếp theo."],
-    ["🛠 Kỹ năng", "Ghi sẵn 3 ý chính ra giấy trước khi quay, nói trôi hơn hẳn."],
-    ["💡 Ý tưởng content", "Kể lại một lỗi sai bạn từng mắc và bài học rút ra."],
-    ["💡 Ý tưởng content", "Một ngày làm việc của bạn trong 60 giây."],
-    ["💡 Ý tưởng content", "Trả lời câu hỏi khách hỏi nhiều nhất tuần này."],
-    ["💡 Ý tưởng content", "Trước và sau: kết quả thật của khách hàng (có xin phép)."],
-    ["💡 Ý tưởng content", "3 mẹo nhỏ trong nghề mà người mới chưa biết."],
-    ["💡 Ý tưởng content", "Đập hộp, dùng thử, nói thật ưu và nhược."],
-    ["💡 Ý tưởng content", "Phía sau hậu trường: bạn chuẩn bị sản phẩm thế nào."],
-    ["💡 Ý tưởng content", "Một câu chuyện khách hàng làm bạn nhớ mãi."],
-    ["💡 Ý tưởng content", "Sai lầm phổ biến trong ngành của bạn và cách tránh."],
-    ["💡 Ý tưởng content", "Chia sẻ một cuốn sách, một câu nói đã thay đổi bạn."],
-    ["💡 Ý tưởng content", "Ghép 12 tấm ảnh hành trình 1 năm thành một video kỷ niệm."],
-    ["💡 Ý tưởng content", "Video ASMR làm việc: tiếng gõ phím, pha cà phê, gói hàng."],
-    ["💰 Kiếm tiền từ video", "Bán hàng bằng video thật: khách tin cái họ được thấy tận mắt."],
-    ["💰 Kiếm tiền từ video", "Nhận làm video cho tiệm quen: quán ăn, tiệm tóc, shop nhỏ đều cần."],
-    ["💰 Kiếm tiền từ video", "Gắn link tiếp thị liên kết cho sản phẩm bạn thật sự dùng và thích."],
-    ["💰 Kiếm tiền từ video", "Biến kinh nghiệm của bạn thành khóa học ngắn, video là cửa vào."],
-    ["💰 Kiếm tiền từ video", "Mỗi video là một nhân viên bán hàng làm việc 24 giờ."],
-    ["💰 Kiếm tiền từ video", "Kênh nhỏ mà đúng người xem vẫn bán được hàng đều."],
-    ["💰 Kiếm tiền từ video", "Quay lại quá trình làm sản phẩm thủ công: người xem thích, khách tin."],
-    ["💰 Kiếm tiền từ video", "Livestream sau khi đã có vài chục video: người xem đã quen mặt bạn."],
-    ["💰 Kiếm tiền từ video", "Video review chân thật giúp bạn hợp tác được với nhãn hàng."],
-    ["💰 Kiếm tiền từ video", "Một video hay có thể dùng lại trên TikTok, Reels, Shorts và Zalo."],
-    ["💰 Kiếm tiền từ video", "Thu thập số điện thoại khách quan tâm từ bình luận, chăm sóc riêng."],
-    ["💰 Kiếm tiền từ video", "Dạy lại điều bạn giỏi nhất: người khác sẵn sàng trả tiền để học nhanh."],
+    ["Động lực", "Video đầu tiên không cần hay, chỉ cần được đăng."],
+    ["Động lực", "Làm đều mỗi ngày một chút thắng làm thật nhiều một lần rồi bỏ."],
+    ["Động lực", "Người xem không nhớ bạn quay vụng, họ nhớ bạn đã giúp họ điều gì."],
+    ["Động lực", "Bắt đầu từ chiếc điện thoại trong tay, không cần chờ đủ đồ."],
+    ["Động lực", "100 video bình thường dạy bạn nhiều hơn 1 video hoàn hảo nằm trong máy."],
+    ["Động lực", "Sợ thì vẫn làm, làm rồi sẽ bớt sợ."],
+    ["Động lực", "Mỗi lần bấm đăng là một lần bạn giỏi hơn hôm qua."],
+    ["Động lực", "Kết quả lớn đến từ những việc nhỏ lặp lại đủ lâu."],
+    ["Động lực", "Đừng so chương 1 của mình với chương 20 của người khác."],
+    ["Động lực", "Chậm mà đều vẫn hơn nhanh mà đứt."],
+    ["Chữa lành", "Hít một hơi thật sâu. Bạn đang làm tốt hơn bạn nghĩ."],
+    ["Chữa lành", "Nghỉ ngơi cũng là một phần của cố gắng."],
+    ["Chữa lành", "Không cần làm mọi thứ hôm nay, chỉ cần làm một việc cho tử tế."],
+    ["Chữa lành", "Đối xử với mình dịu dàng như cách bạn đối xử với người mình thương."],
+    ["Chữa lành", "Có những ngày chỉ cần đi qua được là đủ rồi."],
+    ["Chữa lành", "Buông bớt điều không kiểm soát được, giữ chặt điều mình làm được."],
+    ["Chữa lành", "Bình yên không phải nơi không có sóng, mà là lòng mình vững."],
+    ["Chữa lành", "Ly nước, giấc ngủ, vài phút nắng sớm: chữa lành bắt đầu từ việc nhỏ."],
+    ["Sống đẹp", "Nói lời tử tế không tốn gì, mà người nghe nhớ rất lâu."],
+    ["Sống đẹp", "Giữ chữ tín là vốn quý nhất của người bán hàng."],
+    ["Sống đẹp", "Biết ơn người đã giúp mình, kể cả khi họ chỉ giúp một lần."],
+    ["Sống đẹp", "Sống thật với mình thì không sợ người khác nhìn thấy."],
+    ["Sống đẹp", "Cho đi đúng lúc, nhận lại đúng người."],
+    ["Sống đẹp", "Lắng nghe nhiều hơn nói, bạn sẽ hiểu khách hàng hơn ai hết."],
+    ["Sống đẹp", "Làm việc tử tế cả khi không ai nhìn thấy."],
+    ["Sống đẹp", "Khiêm tốn để học, tự tin để làm."],
+    ["Kỹ năng", "3 giây đầu quyết định người xem ở lại hay lướt đi: nói điều hay nhất trước."],
+    ["Kỹ năng", "Quay chỗ sáng, ánh sáng chiếu vào mặt, video nhìn chuyên nghiệp ngay."],
+    ["Kỹ năng", "Mic gần miệng quan trọng hơn máy quay đắt tiền."],
+    ["Kỹ năng", "Mỗi video chỉ nói một ý, người xem dễ nhớ, dễ chia sẻ."],
+    ["Kỹ năng", "Kết video bằng một lời mời rõ ràng: theo dõi, bình luận hay nhắn tin."],
+    ["Kỹ năng", "Nói như đang kể chuyện với một người bạn, không như đọc bài."],
+    ["Kỹ năng", "Phụ đề giúp 8 trên 10 người xem hiểu video dù đang tắt tiếng."],
+    ["Kỹ năng", "Đăng cùng một khung giờ mỗi ngày để người xem quen chờ bạn."],
+    ["Kỹ năng", "Đọc bình luận để tìm ý tưởng cho video tiếp theo."],
+    ["Kỹ năng", "Ghi sẵn 3 ý chính ra giấy trước khi quay, nói trôi hơn hẳn."],
+    ["Ý tưởng content", "Kể lại một lỗi sai bạn từng mắc và bài học rút ra."],
+    ["Ý tưởng content", "Một ngày làm việc của bạn trong 60 giây."],
+    ["Ý tưởng content", "Trả lời câu hỏi khách hỏi nhiều nhất tuần này."],
+    ["Ý tưởng content", "Trước và sau: kết quả thật của khách hàng (có xin phép)."],
+    ["Ý tưởng content", "3 mẹo nhỏ trong nghề mà người mới chưa biết."],
+    ["Ý tưởng content", "Đập hộp, dùng thử, nói thật ưu và nhược."],
+    ["Ý tưởng content", "Phía sau hậu trường: bạn chuẩn bị sản phẩm thế nào."],
+    ["Ý tưởng content", "Một câu chuyện khách hàng làm bạn nhớ mãi."],
+    ["Ý tưởng content", "Sai lầm phổ biến trong ngành của bạn và cách tránh."],
+    ["Ý tưởng content", "Chia sẻ một cuốn sách, một câu nói đã thay đổi bạn."],
+    ["Ý tưởng content", "Ghép 12 tấm ảnh hành trình 1 năm thành một video kỷ niệm."],
+    ["Ý tưởng content", "Video ASMR làm việc: tiếng gõ phím, pha cà phê, gói hàng."],
+    ["Kiếm tiền từ video", "Bán hàng bằng video thật: khách tin cái họ được thấy tận mắt."],
+    ["Kiếm tiền từ video", "Nhận làm video cho tiệm quen: quán ăn, tiệm tóc, shop nhỏ đều cần."],
+    ["Kiếm tiền từ video", "Gắn link tiếp thị liên kết cho sản phẩm bạn thật sự dùng và thích."],
+    ["Kiếm tiền từ video", "Biến kinh nghiệm của bạn thành khóa học ngắn, video là cửa vào."],
+    ["Kiếm tiền từ video", "Mỗi video là một nhân viên bán hàng làm việc 24 giờ."],
+    ["Kiếm tiền từ video", "Kênh nhỏ mà đúng người xem vẫn bán được hàng đều."],
+    ["Kiếm tiền từ video", "Quay lại quá trình làm sản phẩm thủ công: người xem thích, khách tin."],
+    ["Kiếm tiền từ video", "Livestream sau khi đã có vài chục video: người xem đã quen mặt bạn."],
+    ["Kiếm tiền từ video", "Video review chân thật giúp bạn hợp tác được với nhãn hàng."],
+    ["Kiếm tiền từ video", "Một video hay có thể dùng lại trên TikTok, Reels, Shorts và Zalo."],
+    ["Kiếm tiền từ video", "Thu thập số điện thoại khách quan tâm từ bình luận, chăm sóc riêng."],
+    ["Kiếm tiền từ video", "Dạy lại điều bạn giỏi nhất: người khác sẵn sàng trả tiền để học nhanh."],
   ];
   let qi = Math.floor(Math.random() * QUOTES.length);
   function showQuote() { const [c, t] = QUOTES[qi++ % QUOTES.length]; $("quoteCat").textContent = c; $("quoteText").textContent = t; }
@@ -2755,7 +2770,7 @@ const Render = (() => {
     file = f; S = null; $("result").hidden = true; $("doneBox").hidden = true; $("expArea").hidden = false; $("saveNote").textContent = "";
     if (prev) { prev.close(); prev = null; }
     if (video.src) URL.revokeObjectURL(video.src);
-    $("pickText").textContent = "🎬 " + f.name;
+    $("pickText").innerHTML = '<i class="ic ic-film"></i>'; $("pickText").append(f.name);
     $("pickInfo").textContent = "Đang đọc video…";
     // không chờ trình duyệt đọc xong mới cho làm: phần nghe đọc thẳng từ file. Thông tin video hiện sau khi máy đọc được
     $("pickInfo").textContent = `Đã chọn video · ${(f.size / 1e6).toFixed(0)} MB · bấm Edit tự động để làm`;
@@ -2941,11 +2956,11 @@ const Render = (() => {
     $("stagebox").scrollIntoView({ behavior: "smooth", block: "center" });
     const p = prev; await Promise.race([p.play(), new Promise(r => setTimeout(r, 1500))]);
     if (p !== prev) return;
-    if (!p.playing) { $("styleNote").textContent = `Phong cách ${name}: bấm ▶ Xem bên dưới để xem thử.`; return; }
+    if (!p.playing) { $("styleNote").textContent = `Phong cách ${name}: bấm Xem bên dưới để xem thử.`; return; }
     setPlay(true); $("styleNote").textContent = `Đang chạy thử 16 giây đầu, phong cách ${name}.`;
     sampleIv = setInterval(() => {
       if (p !== prev || !p.playing) { clearInterval(sampleIv); return; }
-      if (p.time >= 16) { clearInterval(sampleIv); p.stop(); setPlay(false); $("styleNote").textContent = `Xong 16 giây thử phong cách ${name}. Ưng thì sửa tiêu đề, phụ đề ở bước 3 rồi xuất. Bấm ▶ Xem để xem tiếp.`; }
+      if (p.time >= 16) { clearInterval(sampleIv); p.stop(); setPlay(false); $("styleNote").textContent = `Xong 16 giây thử phong cách ${name}. Ưng thì sửa tiêu đề, phụ đề ở bước 3 rồi xuất. Bấm Xem để xem tiếp.`; }
     }, 200);
   }
   { const pv = store.get("ae_preset", null); if (pv && Style.PRESETS[pv] && ["co_ban", "giat_tit", "chua_lanh", "tu_chinh"].includes(pv)) setRadio("preset", pv); }
@@ -3082,7 +3097,7 @@ const Render = (() => {
     drawSugPrev();
   }
   function drawSugPrev() { $("sugList").querySelectorAll(".sugcv").forEach(cv => drawPrev(cv, Title.split(tkNow(), cv.dataset.text), false)); }
-  $("sugBtn").addEventListener("click", () => { const open = $("sugBox").hidden; $("sugBox").hidden = !open; $("sugBtn").setAttribute("aria-expanded", open); $("sugBtn").textContent = "✨ Gợi ý tiêu đề " + (open ? "▴" : "▾"); if (open) drawSug(); });
+  $("sugBtn").addEventListener("click", () => { const open = $("sugBox").hidden; $("sugBox").hidden = !open; $("sugBtn").setAttribute("aria-expanded", open); $("sugBtn").innerHTML = '<i class="ic ic-spark"></i>Gợi ý tiêu đề ' + (open ? "▴" : "▾"); if (open) drawSug(); });
   $("sugCat").addEventListener("change", () => { sugSeed = 0; drawSug(); });
   $("sugMore").addEventListener("click", () => { sugSeed++; drawSug(); });
   // giọng: "trong" (mặc định, bớt vang) hoặc "vang" (to, đầy). Đổi thì làm lại giọng, không phải nghe lại
@@ -3189,7 +3204,7 @@ const Render = (() => {
         else if (S.cutLines.has(L.i)) S.cutLines.delete(L.i); else { S.cutLines.add(L.i); L.done = true; }   // cắt rồi thì gọn luôn, dòng kế đẩy lên
         wrap.classList.toggle("cut", S.cutLines.has(L.i)); lineQueue(); rebuild(); });
       tm.addEventListener("click", () => { const t = S.P && S.P.M.map(L.s); if (t != null && prev) { prev.stop(); prev.still(t); setPlay(false); } });
-      const br = document.createElement("button"); br.className = "br"; br.textContent = "🎬"; br.title = "Chèn B-roll ở câu này";
+      const br = document.createElement("button"); br.className = "br"; br.innerHTML = '<i class="ic ic-film" style="margin:0"></i>'; br.title = "Chèn B-roll ở câu này";
       br.addEventListener("click", () => { let b = S.broll.find(o => o.line === L.i); if (!b) { b = newBroll(L); S.broll.push(b); drawBroll(); rebuild(); } const el = document.getElementById("bri" + b.id); if (el) el.scrollIntoView({ block: "center", behavior: "smooth" }); });
       const ok = document.createElement("button"); ok.className = "ok"; ok.textContent = "✓"; ok.title = "Xong dòng này, thu gọn";
       ok.addEventListener("click", () => {
@@ -3215,7 +3230,7 @@ const Render = (() => {
     }
     const n = S.lines.length;
     $("linesSum").hidden = !n;
-    $("linesSumText").textContent = pending ? `Đã xem ${n - pending}/${n} dòng · còn ${pending}` : `Đã xem hết ${n} dòng 👍`;
+    $("linesSumText").textContent = pending ? `Đã xem ${n - pending}/${n} dòng · còn ${pending}` : `Đã xem hết ${n} dòng`;
     $("linesAll").textContent = showAllLines ? "Thu gọn" : "Xem tất cả";
     $("linesDone").hidden = !pending;
   }
@@ -3310,7 +3325,7 @@ const Render = (() => {
   const MT = { scenes: [], voice: null };
   let scId = 0;
   const modeNow = () => radio("mode") || "noi";
-  function updateGo() { $("go").disabled = modeNow() === "ghep" ? !MT.scenes.length : !file; $("go").textContent = modeNow() === "ghep" ? "✨ Làm video" : "✂ Edit tự động"; }
+  function updateGo() { $("go").disabled = modeNow() === "ghep" ? !MT.scenes.length : !file; $("go").innerHTML = modeNow() === "ghep" ? '<i class="ic ic-spark"></i>Làm video' : '<i class="ic ic-cut"></i>Edit tự động'; }
   function modeUI() {
     const g = modeNow() === "ghep";
     document.body.classList.toggle("ghep", g); $("step1noi").hidden = g; $("step1ghep").hidden = !g;
@@ -3428,7 +3443,7 @@ const Render = (() => {
       try { th.getContext("2d").drawImage(src, (128 - sw * k) / 2, (128 - sh * k) / 2, sw * k, sh * k); } catch (e) { }
       const right = document.createElement("div"); right.style.display = "grid"; right.style.gap = "6px";
       const r1 = document.createElement("div"); r1.className = "row";
-      const lb = document.createElement("b"); lb.textContent = (c.type === "video" ? "🎬 " : "🖼 ") + (i + 1);
+      const lb = document.createElement("b"); lb.innerHTML = `<i class="ic ic-${c.type === "video" ? "film" : "img"}"></i>${i + 1}`;
       const du = document.createElement("select"); du.setAttribute("aria-label", "Thời gian cảnh " + (i + 1));
       const opts = c.type === "video" ? DUR_OPTS.filter(v => v <= Math.max(2, Math.min(maxVid(), Math.floor(c.len)))) : DUR_OPTS.filter(v => v <= 15);
       if (!opts.includes(c.dur)) opts.push(c.dur), opts.sort((a, b) => a - b);
@@ -3494,7 +3509,7 @@ const Render = (() => {
     const sel = $("musicSel");
     sel.add(new Option("Nhạc tự tạo hợp phong cách", "tu_tao"));
     for (const [n, name, ts] of TRACKS) { const g = document.createElement("optgroup"); g.label = name; ts.forEach((t, i) => g.append(new Option(`${name.split(/[,(]/)[0].trim()} ${"ABCD"[i]} · ${t}`, n + "ABCD"[i]))); sel.append(g); }
-    sel.add(new Option("🎵 Nhạc của tôi (tải file nhạc hoặc video)…", "cua_toi"));
+    sel.add(new Option("Nhạc của tôi (tải file nhạc hoặc video)…", "cua_toi"));
     const v = store.get("ae_music", "tu_tao"); sel.value = v === "cua_toi" ? "tu_tao" : v; if (!sel.value) sel.value = "tu_tao";
   }
   let myMusic = null;   // {name, x: Float32Array 48 kHz, speech: tỉ lệ có giọng}
@@ -3512,7 +3527,7 @@ const Render = (() => {
   function musicInfo() {
     const v = $("musicSel").value;
     $("musicInfo").textContent = v === "tu_tao" ? "Nhạc máy tự tạo theo phong cách đã chọn (Gọn gàng thì không có nhạc)."
-      : v === "cua_toi" ? (myMusic ? `Nhạc của tôi: ${myMusic.name}.` + (myMusic.speech > 0.12 ? " ⚠ File này có giọng nói hoặc lời hát. Máy không tách bỏ giọng được, giọng sẽ lẫn vào nền; nên chọn file chỉ có nhạc." : "") : "Chọn file nhạc hoặc video, máy chỉ lấy tiếng.")
+      : v === "cua_toi" ? (myMusic ? `Nhạc của tôi: ${myMusic.name}.` + (myMusic.speech > 0.12 ? " Lưu ý: file này có giọng nói hoặc lời hát. Máy không tách bỏ giọng được, giọng sẽ lẫn vào nền; nên chọn file chỉ có nhạc." : "") : "Chọn file nhạc hoặc video, máy chỉ lấy tiếng.")
       : "Nhạc FreePD (Kevin MacLeod), CC0: dùng miễn phí kể cả video kiếm tiền.";
   }
   musicInfo();
@@ -3536,14 +3551,14 @@ const Render = (() => {
     musicInfo(); if (S) rebuild();
   });
   const listen = new Audio(); listen.preload = "none";
-  function stopListen() { listen.pause(); $("musicPlay").textContent = "▶ Nghe"; }
+  function stopListen() { listen.pause(); $("musicPlay").innerHTML = "<i class=\"ic ic-play\" aria-hidden=\"true\"></i>Nghe"; }
   listen.addEventListener("ended", stopListen);
   $("musicPlay").addEventListener("click", () => {
     if (!listen.paused) { stopListen(); return; }
     const v = $("musicSel").value;
-    if (v === "tu_tao") { $("musicInfo").textContent = "Nhạc tự tạo: bấm Edit / Làm video rồi bấm ▶ Xem để nghe cùng video."; return; }
+    if (v === "tu_tao") { $("musicInfo").textContent = "Nhạc tự tạo: bấm Edit / Làm video rồi bấm Xem để nghe cùng video."; return; }
     if (v === "cua_toi") { if (!myMusic) { $("musicFile").click(); return; } listen.src = myMusic.url; } else listen.src = `nhac/${v}.mp3`;
-    listen.currentTime = 0; listen.play().then(() => $("musicPlay").textContent = "⏸ Dừng").catch(() => {});
+    listen.currentTime = 0; listen.play().then(() => $("musicPlay").innerHTML = '<i class="ic ic-pause"></i>Dừng').catch(() => {});
   });
 
   // ---------- B-roll: thẻ màu / hình / video chèn theo dòng phụ đề ----------
@@ -3593,7 +3608,7 @@ const Render = (() => {
     let shown = 0; const all = [...S.broll].sort((a, b) => a.line - b.line), pending = all.filter(b => !b.done).length;
     for (const b of all) { if (!b.wrap) continue; b.wrap.hidden = !showAllBr && (b.done || shown >= 3); if (!b.done) shown++; }
     $("brSum").hidden = !all.length;
-    $("brSumText").textContent = pending ? `Đã xem ${all.length - pending}/${all.length} chỗ chèn` : `Đã xem hết ${all.length} chỗ chèn 👍`;
+    $("brSumText").textContent = pending ? `Đã xem ${all.length - pending}/${all.length} chỗ chèn` : `Đã xem hết ${all.length} chỗ chèn`;
     $("brAll").textContent = showAllBr ? "Thu gọn" : "Xem tất cả";
   }
   $("brAll").addEventListener("click", () => { showAllBr = !showAllBr; brQueue(); });
@@ -3749,7 +3764,7 @@ const Render = (() => {
     if (my === rebuildT) await prev.still(keepT);
     $("tnow").textContent = fmt(keepT) + " / " + fmt(M.total);
   }
-  function setPlay(on) { $("play").textContent = on ? "⏸ Dừng" : "▶ Xem"; }
+  function setPlay(on) { $("play").innerHTML = on ? '<i class="ic ic-pause"></i>Dừng' : '<i class="ic ic-play"></i>Xem'; }
   $("play").addEventListener("click", async () => { if (!prev) return; if (prev.playing) { prev.stop(); setPlay(false); } else { await prev.play(); setPlay(true); } });
   $("seek").addEventListener("input", () => { if (!prev || !S) return; prev.stop(); setPlay(false); prev.still($("seek").value / 1000 * S.P.M.total); });
 
@@ -3805,7 +3820,7 @@ const Render = (() => {
       try { wake && wake.release(); } catch (e) { }
       $("status").hidden = true;
       $("doneBox").querySelector(".step").lastChild.textContent = `${both ? "2 video" : "Video"} đã xong · ${mb.toFixed(1)} MB · ${fmt((Date.now() - t0) / 1000)}`;
-      $("save").textContent = both ? "💾 Lưu bản dọc" : "💾 Lưu video vào máy";
+      $("save").innerHTML = '<i class="ic ic-save"></i>' + (both ? "Lưu bản dọc" : "Lưu video vào máy");
       $("save2").hidden = !both; $("doneView").hidden = !both; setRadio("dview", "1"); showOut(1);
       $("doneBox").hidden = false; $("saveNote").textContent = "";
       $("doneBox").scrollIntoView({ behavior: "smooth", block: "start" });
