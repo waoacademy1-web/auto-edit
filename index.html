@@ -126,6 +126,10 @@ body.kieu .tuchinh{display:none!important}
 .col{position:relative;border:2px solid var(--line);border-radius:12px;padding:8px 2px;cursor:pointer;background:#111;color:#fff;text-align:center}
 .cols .col:has(input:checked){background:#111;border:3px solid #2FBF71;box-shadow:0 0 0 2px #2FBF7155}
 .col b{font:900 15px var(--display);paint-order:stroke fill}
+.fbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fbtn{font:800 14px var(--display);padding:8px 6px;display:grid;gap:1px;line-height:1.2}.fbtn small{font:600 11.5px var(--body);color:var(--muted)}.fbtn[aria-expanded="true"]{border-color:var(--flame);background:color-mix(in srgb,var(--flame) 10%,var(--field))}.fbtn b{font-size:18px;margin-right:4px}
+.fpanel{display:grid;grid-template-columns:42% 1fr;gap:8px;align-items:start;margin-top:8px}.fpanel[hidden]{display:none}
+.fpv{position:sticky;top:6px;display:grid;gap:2px;justify-items:center}.fpv canvas{width:100%;height:auto;border-radius:10px;box-shadow:0 2px 10px #0003}.fpv small{font:600 11px var(--body);color:var(--muted)}
+.flist{grid-template-columns:1fr!important;max-height:62vh;overflow:auto;padding-right:2px}.flist[hidden]{display:none!important}.flist .fnt{font-size:17px}.flist.seg3,.flist.seg4{display:grid;gap:6px}.abtn{text-align:left;font:700 15px var(--body);padding:10px}.abtn[aria-pressed="true"]{border-color:var(--flame);background:color-mix(in srgb,var(--flame) 10%,var(--field))}
 .grp{font:700 12px var(--display);color:var(--muted)}
 .fonts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
 .fnt{position:relative;border:2px solid var(--line);border-radius:12px;padding:6px 8px;cursor:pointer;background:var(--field);font-size:19px;line-height:1.25}
@@ -222,7 +226,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <div class="logo-mark" aria-hidden="true">✂</div>
-    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.0</span></div>
+    <div><h1>Auto edit video</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.1</span></div>
   </header>
 
   <section class="card">
@@ -320,11 +324,55 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     <label class="switch tuchinh"><input type="checkbox" id="optSubs" checked><span>Hiện phụ đề<small>Tắt nếu chỉ muốn tiêu đề, hình và nhạc. File phụ đề .srt vẫn lưu được.</small></span></label>
 <div id="subOpts">
     <div class="tprev" id="sPrevBox"><div class="tpair"><canvas id="sPrev" width="270" height="480" aria-label="Xem trước phụ đề cùng tiêu đề"></canvas><canvas id="sPrev2" class="p2" width="480" height="270" aria-label="Xem trước bản ngang"></canvas></div><small>Xem trước: tiêu đề + phụ đề + lớp phủ chân</small></div>
-    <div class="ctl"><span class="lbl">Cỡ chữ phụ đề</span><div class="seg3" role="radiogroup" aria-label="Cỡ chữ phụ đề">
+    <div class="ctl" id="subPick"><span class="lbl">Chữ phụ đề <small>bấm từng mục để mở, xem trước nằm bên cạnh</small></span>
+      <div class="fbtns"><button type="button" class="fbtn" data-l="lSize" aria-expanded="false"><span>Cỡ chữ</span><small id="v_lSize"></small></button><button type="button" class="fbtn" data-l="fList1" aria-expanded="false"><span><b style="font-family:&quot;Be Vietnam Pro&quot;;font-weight:900">Aa</b> Chữ đơn giản</span><small id="v_fList1"></small></button><button type="button" class="fbtn" data-l="fList2" aria-expanded="false"><span><b style="font-family:Pacifico">Aa</b> Chữ chill</span><small id="v_fList2"></small></button><button type="button" class="fbtn" data-l="lAnim" aria-expanded="false"><span>Kiểu hiện</span><small id="v_lAnim"></small></button><button type="button" class="fbtn" data-l="lUnit" aria-expanded="false"><span>Chia phụ đề</span><small id="v_lUnit"></small></button><button type="button" class="fbtn" data-l="lPos" aria-expanded="false"><span>Vị trí</span><small id="v_lPos"></small></button></div>
+      <span id="fNow" hidden></span>
+      <div id="fPanel" class="fpanel" hidden>
+        <div class="fpv"><canvas id="fPrev" width="270" height="480" aria-label="Xem trước phông chữ"></canvas><small>Xem trước</small></div>
+        <div class="fonts flist" id="fList1" hidden role="radiogroup" aria-label="Cơ bản, dễ đọc">
+        <label class="fnt"><input type="radio" name="font" value="be_vietnam" checked><span style="font-family:&quot;Be Vietnam Pro&quot;;font-weight:900">mình làm được<small>Be Vietnam Pro</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="montserrat"><span style="font-family:Montserrat;font-weight:800">mình làm được<small>Montserrat</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="lexend"><span style="font-family:Lexend;font-weight:700">mình làm được<small>Lexend</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="nunito"><span style="font-family:Nunito;font-weight:800">mình làm được<small>Nunito</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="quicksand"><span style="font-family:Quicksand;font-weight:700">mình làm được<small>Quicksand</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="baloo"><span style="font-family:&quot;Baloo 2&quot;;font-weight:700">mình làm được<small>Baloo 2</small></span></label>
+      </div>
+        <div class="fonts flist" id="fList2" hidden role="radiogroup" aria-label="Điệu đà, chill">
+        <label class="fnt"><input type="radio" name="font" value="playfair"><span style="font-family:&quot;Playfair Display&quot;;font-weight:700;font-style:italic">mình làm được<small>Playfair</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="dancing"><span style="font-family:&quot;Dancing Script&quot;;font-weight:700">mình làm được<small>Dancing Script</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="charm"><span style="font-family:Charm;font-weight:700">mình làm được<small>Charm</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="patrick"><span style="font-family:&quot;Patrick Hand&quot;;font-weight:400">mình làm được<small>Patrick Hand</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="itim"><span style="font-family:Itim;font-weight:400">mình làm được<small>Itim</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="pacifico"><span style="font-family:Pacifico;font-weight:400">mình làm được<small>Pacifico</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="lobster"><span style="font-family:Lobster;font-weight:400">mình làm được<small>Lobster</small></span></label>
+        <label class="fnt"><input type="radio" name="font" value="comfortaa"><span style="font-family:Comfortaa;font-weight:700">mình làm được<small>Comfortaa</small></span></label>
+      </div>
+        <div class="seg3 flist" id="lSize" hidden role="radiogroup" aria-label="Cỡ chữ phụ đề">
       <label><input type="radio" name="size" value="lon" checked><span>Lớn<small>dễ đọc nhất</small></span></label>
       <label><input type="radio" name="size" value="vua"><span>Vừa<small>cân đối</small></span></label>
       <label><input type="radio" name="size" value="nho"><span>Nhỏ<small>gọn, ít che hình</small></span></label>
-    </div><p class="note">Có tiêu đề suốt video thì phụ đề tự gọn lại cho khỏi chật, nhìn ô xem trước ở trên là biết.</p></div>
+    </div>
+        <div class="seg3 flist" id="lAnim" hidden role="radiogroup" aria-label="Kiểu hiện phụ đề"><select id="anim" hidden>
+      <option value="nay">Nảy từng chữ</option>
+      <option value="karaoke">Karaoke</option>
+      <option value="mo_truot">Mờ trượt lên</option>
+      <option value="hop">Hộp màu</option>
+      <option value="go_chu">Gõ chữ</option>
+      <option value="ca_cum">Hiện cả cụm (chọn chữ tô màu)</option>
+    </select></div>
+        <div class="seg3 flist" id="lUnit" hidden role="radiogroup" aria-label="Chia phụ đề">
+      <label><input type="radio" name="unit" value="cum" checked><span>Từng cụm từ<small>1–3 chữ</small></span></label>
+      <label><input type="radio" name="unit" value="dong"><span>Từng dòng<small>~7 chữ</small></span></label>
+      <label><input type="radio" name="unit" value="cau"><span>Từng câu<small>2–3 dòng</small></span></label>
+    </div>
+        <div class="seg4 flist" id="lPos" hidden role="radiogroup" aria-label="Vị trí phụ đề">
+      <label><input type="radio" name="pos" value="duoi_cam" checked><span>Dưới cằm<small>mặc định</small></span></label>
+      <label><input type="radio" name="pos" value="cao"><span>Cao hơn</span></label>
+      <label><input type="radio" name="pos" value="giua"><span>Giữa</span></label>
+      <label><input type="radio" name="pos" value="sat_chan"><span>Sát chân<small>TikTok che</small></span></label>
+    </div>
+      </div>
+    </div>
     <div class="ctl"><span class="lbl">Màu chữ phụ đề <small>(chữ thường · chữ đang nói)</small></span><div class="cols" id="scs" role="radiogroup" aria-label="Màu chữ phụ đề">
       <label class="col"><input type="radio" name="color" value="trang_den"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#111111;-webkit-text-stroke:3px #fff">nói</b></span></label>
       <label class="col"><input type="radio" name="color" value="trang_do"><span><b style="color:#FFFFFF;-webkit-text-stroke:3px #000">chữ</b> <b style="color:#E8202A;-webkit-text-stroke:3px #000">nói</b></span></label>
@@ -353,45 +401,6 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <div class="row"><button type="button" id="scSave">Lưu màu</button></div>
         <p class="note">Màu đã lưu hiện thành ô ở trên, lần sau vẫn còn. Bấm ✕ nhỏ ở góc ô để xóa.</p>
       </div></div>
-    <div class="ctl"><span class="lbl">Phông chữ</span>
-      <small class="grp">Cơ bản, dễ đọc</small><div class="fonts" role="radiogroup" aria-label="Cơ bản, dễ đọc">
-        <label class="fnt"><input type="radio" name="font" value="be_vietnam" checked><span style="font-family:&quot;Be Vietnam Pro&quot;;font-weight:900">mình làm được<small>Be Vietnam Pro</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="montserrat"><span style="font-family:Montserrat;font-weight:800">mình làm được<small>Montserrat</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="lexend"><span style="font-family:Lexend;font-weight:700">mình làm được<small>Lexend</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="nunito"><span style="font-family:Nunito;font-weight:800">mình làm được<small>Nunito</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="quicksand"><span style="font-family:Quicksand;font-weight:700">mình làm được<small>Quicksand</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="baloo"><span style="font-family:&quot;Baloo 2&quot;;font-weight:700">mình làm được<small>Baloo 2</small></span></label>
-      </div>
-      <small class="grp">Điệu đà, chill</small><div class="fonts" role="radiogroup" aria-label="Điệu đà, chill">
-        <label class="fnt"><input type="radio" name="font" value="playfair"><span style="font-family:&quot;Playfair Display&quot;;font-weight:700;font-style:italic">mình làm được<small>Playfair</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="dancing"><span style="font-family:&quot;Dancing Script&quot;;font-weight:700">mình làm được<small>Dancing Script</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="charm"><span style="font-family:Charm;font-weight:700">mình làm được<small>Charm</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="patrick"><span style="font-family:&quot;Patrick Hand&quot;;font-weight:400">mình làm được<small>Patrick Hand</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="itim"><span style="font-family:Itim;font-weight:400">mình làm được<small>Itim</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="pacifico"><span style="font-family:Pacifico;font-weight:400">mình làm được<small>Pacifico</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="lobster"><span style="font-family:Lobster;font-weight:400">mình làm được<small>Lobster</small></span></label>
-        <label class="fnt"><input type="radio" name="font" value="comfortaa"><span style="font-family:Comfortaa;font-weight:700">mình làm được<small>Comfortaa</small></span></label>
-      </div>
-    </div>
-    <div class="ctl"><label class="lbl" for="anim">Kiểu hiện phụ đề</label><select id="anim">
-      <option value="nay">Nảy từng chữ</option>
-      <option value="karaoke">Karaoke</option>
-      <option value="mo_truot">Mờ trượt lên</option>
-      <option value="hop">Hộp màu</option>
-      <option value="go_chu">Gõ chữ</option>
-      <option value="ca_cum">Hiện cả cụm (chọn chữ tô màu)</option>
-    </select></div>
-    <div class="ctl"><span class="lbl">Chia phụ đề</span><div class="seg3" role="radiogroup" aria-label="Chia phụ đề">
-      <label><input type="radio" name="unit" value="cum" checked><span>Từng cụm từ<small>1–3 chữ</small></span></label>
-      <label><input type="radio" name="unit" value="dong"><span>Từng dòng<small>~7 chữ</small></span></label>
-      <label><input type="radio" name="unit" value="cau"><span>Từng câu<small>2–3 dòng</small></span></label>
-    </div></div>
-    <div class="ctl"><span class="lbl">Vị trí phụ đề</span><div class="seg4" role="radiogroup" aria-label="Vị trí phụ đề">
-      <label><input type="radio" name="pos" value="duoi_cam" checked><span>Dưới cằm<small>mặc định</small></span></label>
-      <label><input type="radio" name="pos" value="cao"><span>Cao hơn</span></label>
-      <label><input type="radio" name="pos" value="giua"><span>Giữa</span></label>
-      <label><input type="radio" name="pos" value="sat_chan"><span>Sát chân<small>TikTok che</small></span></label>
-    </div></div>
     <div class="opts">
       <label class="switch" hidden><input type="checkbox" id="optSilence" checked><span>Cắt khoảng lặng<small>Ngừng nói lâu hơn 0,3 giây thì cắt, vẫn chừa hơi thở</small></span></label>
       <label class="switch" hidden><input type="checkbox" id="optFiller" checked><span>Cắt ậm, ờ, ừm<small>Cả tiếng ngân dài “thìiii…”</small></span></label>
@@ -2994,6 +3003,8 @@ const Render = (() => {
       const two = radio("ratio") === "ca2";   // Cả hai: vẽ thêm bản ngang bên cạnh bản dọc
       if (k !== "khong") { await drawPrev($("tPrev"), tiers, true, two ? "doc" : null); if (two) await drawPrev($("tPrev2"), tiers, true, "ngang"); }
       await drawPrev($("sPrev"), tiers, true, two ? "doc" : null); if (two) await drawPrev($("sPrev2"), tiers, true, "ngang");
+      if (!$("fPanel").hidden) await drawPrev($("fPrev"), tiers, true, two ? "doc" : null);
+      pickLabels();
       if (!$("sugBox").hidden) drawSugPrev();
     }, 60);
   }
@@ -3001,6 +3012,31 @@ const Render = (() => {
   for (const id of ["tier1", "tier2", "tier3"]) $(id).addEventListener("input", titlePrev);
   document.querySelectorAll('input[name="ratio"],input[name="view"]').forEach(r => r.addEventListener("change", titlePrev));
   video.addEventListener("loadeddata", titlePrev); video.addEventListener("seeked", titlePrev);
+  // chữ phụ đề: mỗi mục (cỡ, phông đơn giản, phông chill, kiểu hiện, chia, vị trí) là 1 nút; bấm mở menu 1 bên + khung xem trước bên cạnh.
+  // bấm lại hoặc cuộn lên khỏi menu thì tự thu gọn
+  { const sel = $("anim"), box = $("lAnim");
+    for (const o of sel.options) { const b = document.createElement("button"); b.type = "button"; b.className = "abtn"; b.textContent = o.textContent; b.dataset.v = o.value;
+      b.addEventListener("click", () => { sel.value = o.value; sel.dispatchEvent(new Event("change")); pickLabels(); }); box.append(b); } }
+  function pickLabels() {
+    const nameOf = n => { const r = document.querySelector(`input[name="${n}"]:checked`); if (!r) return ""; const L = r.closest("label"); return n === "font" ? L.querySelector("small").textContent : L.querySelector("span").firstChild.textContent; };
+    $("v_lSize").textContent = nameOf("size"); $("v_lUnit").textContent = nameOf("unit"); $("v_lPos").textContent = nameOf("pos");
+    const f = document.querySelector('input[name="font"]:checked'), fl = f && f.closest(".flist");
+    $("v_fList1").textContent = fl && fl.id === "fList1" ? "✓ " + nameOf("font") : ""; $("v_fList2").textContent = fl && fl.id === "fList2" ? "✓ " + nameOf("font") : "";
+    $("v_lAnim").textContent = $("anim").selectedOptions[0] ? $("anim").selectedOptions[0].textContent : "";
+    $("lAnim").querySelectorAll(".abtn").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === $("anim").value));
+  }
+  function pickClose() { document.querySelectorAll(".fbtn").forEach(x => x.setAttribute("aria-expanded", "false")); $("fPanel").hidden = true; }
+  document.querySelectorAll(".fbtn").forEach(b => b.addEventListener("click", () => {
+    const open = b.getAttribute("aria-expanded") !== "true";
+    if (!open) { pickClose(); return; }
+    document.querySelectorAll(".fbtn").forEach(x => x.setAttribute("aria-expanded", x === b ? "true" : "false"));
+    $("fPanel").querySelectorAll(".flist").forEach(l => l.hidden = l.id !== b.dataset.l);
+    $("fPanel").hidden = false; pickLabels(); titlePrev();
+    setTimeout(() => $("fPanel").scrollIntoView({ behavior: "smooth", block: "start" }), 50);
+  }));
+  if ("IntersectionObserver" in window) new IntersectionObserver(es => { for (const en of es) if (!en.isIntersecting && en.boundingClientRect.top > 0 && !$("fPanel").hidden) pickClose(); }).observe($("fPanel"));
+  document.querySelectorAll('input[name="size"],input[name="unit"],input[name="pos"],input[name="font"]').forEach(r => r.addEventListener("change", pickLabels));
+  setTimeout(pickLabels, 0);
   const subsUI = () => $("subOpts").hidden = !$("optSubs").checked;   // tắt phụ đề thì gọn hết tùy chỉnh phụ đề, bật thì mở ra
   $("optSubs").addEventListener("change", () => { subsUI(); titlePrev(); });
   subsUI();
