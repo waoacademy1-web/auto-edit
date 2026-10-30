@@ -1,0 +1,17 @@
+{
+ "name": "Auto edit video",
+ "short_name": "Auto edit",
+ "start_url": "./index.html",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#FDF0F6",
+ "theme_color": "#2F8F5B",
+ "icons": [
+  {
+   "src": "icon.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  }
+ ]
+}
