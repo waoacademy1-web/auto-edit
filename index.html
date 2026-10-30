@@ -30,7 +30,7 @@ header{display:flex;gap:14px;align-items:center}
 .ic-pause{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='6' y='4' width='4' height='16' rx='1' fill='%23000'/><rect x='14' y='4' width='4' height='16' rx='1' fill='%23000'/></svg>")}
 .ic-stop{--i:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='5' width='14' height='14' rx='2' fill='%23000'/></svg>")}
 
-.ver{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:999px;background:rgba(127,127,127,.18);font:600 13px/1.6 var(--body);opacity:.85}
+.ver{cursor:pointer;display:inline-block;margin-top:6px;padding:2px 10px;border-radius:999px;background:rgba(127,127,127,.18);font:600 13px/1.6 var(--body);opacity:.85}
 h1{font:900 clamp(24px,6vw,32px)/1.1 var(--display);margin:0;color:var(--navy)}
 header p{margin:2px 0 0;color:var(--muted);font-size:14px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;gap:12px;min-width:0}
@@ -241,12 +241,13 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 .brty{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.brty button{min-height:46px;font-weight:800;border:2px solid var(--line);background:var(--field);color:var(--ink);display:flex;align-items:center;justify-content:center}.brty button[aria-checked="true"]{border-color:var(--flame);background:var(--flame);color:#fff}
 .okmsg{color:var(--flame);font-weight:700}@keyframes brf{0%{box-shadow:0 0 0 3px var(--flame)}100%{box-shadow:0 0 0 0 transparent}}.bri.flash{animation:brf 1.6s ease-out}
 .exphere{display:flex;flex-direction:column;align-items:stretch;gap:8px;text-align:center;margin:10px 0;padding:10px 12px;border:2px solid var(--flame);border-radius:16px;background:var(--field)}.exphere span{font-weight:700;flex:none}.exphere .big{margin:0;white-space:nowrap}
+.logorow{align-items:center;gap:10px;flex-wrap:wrap}#logoThumb{width:96px;height:56px;border-radius:10px;background:repeating-conic-gradient(#8884 0 25%,#0000 0 50%) 0 0/12px 12px;border:1px solid var(--line)}
 </style>
 
 <div class="wrap">
   <header>
     <img class="logo-mark" src="icon.png" alt="" aria-hidden="true">
-    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.8</span></div>
+    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 2.9</span></div>
   </header>
 
   <section class="card">
@@ -479,6 +480,11 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <div class="row tunav"><button type="button" id="tuBack">‹ Lại</button><button type="button" id="tuNext">Tiếp ›</button></div>
     </div>
     <div class="step"><b>3</b>Sửa tiêu đề, phụ đề</div>
+    <div class="ctl" id="logoRow"><span class="lbl">Logo <small>(không bắt buộc) nhỏ ở góc trên bên phải, suốt video</small></span>
+      <div class="row logorow"><canvas id="logoThumb" width="96" height="56" hidden aria-label="Logo đang dùng"></canvas><label class="pickimg"><i class="ic ic-img" aria-hidden="true"></i>Chọn logo trong máy<input type="file" id="logoFile" accept="image/*"></label><button type="button" id="logoClear" hidden>Bỏ logo</button></div>
+      <p class="note" id="logoName">Chưa có logo</p>
+      <p class="note">Logo nền trong suốt (PNG) nhìn đẹp nhất. Máy nhớ logo, lần sau làm video khác không cần chọn lại.</p>
+    </div>
     <div class="ctl" id="titleRow"><span class="lbl">Tiêu đề suốt video</span>
       <details id="tStyle" class="tuchinh tsty"><summary><i class="ic ic-palette" aria-hidden="true"></i>Kiểu tiêu đề, màu tiêu đề (bấm để mở)</summary>
       <div class="seg3 tk" role="radiogroup" aria-label="Tiêu đề suốt video">
@@ -1816,7 +1822,15 @@ const Draw = (() => {
     try { await document.fonts.load(fontStr(f, 40), "aăâđêôơư ờữễạỹ"); } catch (e) { console.warn("font", key, e); }
   }
 
-  return { BG, base, subtitle, pair, frame, POS_NGANG, loadFonts, useFont, SIZES, COLORS, FONTS, ANIMS, POS, DEF, fontStr };
+  // logo: nhỏ, gọn góc trên bên phải, đứng yên suốt video (cùng cỡ, cùng chỗ như Xưởng video)
+  function logo(ctx, W, H, im) {
+    if (!im || !im.width) return;
+    const P = H > W, U = Math.min(W, H) / 1080, bw = (P ? 190 : 210) * U, bh = (P ? 110 : 100) * U, m = 34 * U;
+    const sc = Math.min(bw / im.width, bh / im.height), w = im.width * sc, h = im.height * sc;
+    ctx.save(); ctx.globalAlpha = .95; ctx.shadowColor = "rgba(0,0,0,0.25)"; ctx.shadowBlur = 10 * U;
+    ctx.drawImage(im, W - m - w, m + 14 * U, w, h); ctx.restore();
+  }
+  return { BG, base, subtitle, logo, pair, frame, POS_NGANG, loadFonts, useFont, SIZES, COLORS, FONTS, ANIMS, POS, DEF, fontStr };
 })();
 if (typeof module !== "undefined") module.exports = Draw;
 
@@ -2427,7 +2441,7 @@ const Render = (() => {
 
   function overlay(ctx, W, H, P, t, onCard) {
     Style.grade(ctx, W, H, P.style);
-    if (onCard) { Style.edges(ctx, W, H, P.style, t, P.M.total); return; }   // thẻ màu: chữ trên thẻ thay phụ đề, tiêu đề
+    if (onCard) { Style.edges(ctx, W, H, P.style, t, P.M.total); Draw.logo(ctx, W, H, P.logo); return; }   // thẻ màu: chữ trên thẻ thay phụ đề, tiêu đề
     Draw.base(ctx, W, H, P.bg);
     const hookOn = P.style && P.style.hook && P.hookText && t < 3.2;   // giật tít: 3 giây đầu là tít to, sau đó mới hiện tiêu đề suốt video
     const sy = hookOn ? null : Title.draw(ctx, W, H, P.title, t - (P.style && P.style.hook && P.hookText ? 3.2 : 0));   // tiêu đề suốt video: phụ đề dời lên ngay trên tiêu đề
@@ -2435,6 +2449,7 @@ const Render = (() => {
     if (g) Draw.subtitle(ctx, W, H, g, t, sy ? { ...P.look, y: sy / H, small: true } : P.look);
     if (hookOn) Style.hook(ctx, W, H, P.hookText, t);
     Style.edges(ctx, W, H, P.style, t, P.M.total);
+    Draw.logo(ctx, W, H, P.logo);   // logo luôn hiện, kể cả lúc giật tít
   }
 
   // P: {video, keep, zoom[], groups, mode, M (mapper), groupAt(t)}
@@ -2995,7 +3010,48 @@ const Render = (() => {
     ctx.save(); Draw.base(ctx, W, H, bgNow()); ctx.restore();
     ctx.save(); const sy = k === "khong" ? null : Title.draw(ctx, W, H, { kind: k, color: tcolNow(), tiers }, 6); ctx.restore();
     if (subs && $("optSubs").checked) { ctx.save(); Draw.subtitle(ctx, W, H, { words: SAMPLE, s: 0, e: 1.5, kw: new Set([1]) }, 1.3, sy ? { ...look, y: sy / H, small: true } : look); ctx.restore(); }
+    Draw.logo(ctx, W, H, logoImg);
   }
+  // ---------- bấm dòng "Phiên bản" để tự kiểm tra bản mới trên mạng và cập nhật ngay ----------
+  { const ver = document.querySelector(".ver"), base = ver ? ver.textContent : "";
+    if (ver && "serviceWorker" in navigator) {
+      ver.setAttribute("role", "button"); ver.tabIndex = 0; ver.title = "Bấm để kiểm tra bản mới";
+      ver.addEventListener("click", async () => {
+        ver.textContent = "Đang kiểm tra bản mới…";
+        try {
+          const r = await fetch("sw.js?t=" + Date.now(), { cache: "no-store" }), m = /autoedit-[0-9a-f]+/.exec(await r.text());
+          const have = await caches.keys();
+          if (m && !have.includes(m[0])) {
+            ver.textContent = "Có bản mới, đang cập nhật…";
+            const reg = await navigator.serviceWorker.getRegistration(); if (reg) await reg.unregister();   // bộ nghe đã tải vẫn giữ, bản mới tự chép sang
+            location.reload(); return;
+          }
+          ver.textContent = base + " · đã là bản mới nhất";
+        } catch (e) { ver.textContent = base + " · chưa kiểm tra được (cần mạng)"; }
+        setTimeout(() => { ver.textContent = base; }, 4000);
+      });
+    } }
+  // ---------- logo góc trên bên phải: chọn 1 lần, máy nhớ, video nào cũng có ----------
+  let logoImg = null;
+  function logoUI() {
+    $("logoClear").hidden = !logoImg; $("logoThumb").hidden = !logoImg;
+    $("logoName").textContent = logoImg ? "Logo đang dùng, hiện ở góc trên bên phải mọi video" : "Chưa có logo";
+    if (logoImg) { const t = $("logoThumb"), c = t.getContext("2d"), k = Math.min(t.width / logoImg.width, t.height / logoImg.height); c.clearRect(0, 0, t.width, t.height); c.drawImage(logoImg, (t.width - logoImg.width * k) / 2, (t.height - logoImg.height * k) / 2, logoImg.width * k, logoImg.height * k); }
+    if (S && S.P) { S.P.logo = logoImg; if (prev) prev.still(+$("seek").value / 1000 * S.P.M.total); }
+    titlePrev();
+  }
+  async function logoFrom(src) {
+    const k = Math.min(1, 600 / Math.max(src.width, src.height)), c = document.createElement("canvas");
+    c.width = Math.max(1, Math.round(src.width * k)); c.height = Math.max(1, Math.round(src.height * k)); c.getContext("2d").drawImage(src, 0, 0, c.width, c.height); return c;
+  }
+  { const u = store.get("ae_logo", ""); if (u) { const im = new Image(); im.onload = async () => { logoImg = await logoFrom(im); logoUI(); }; im.src = u; } }
+  $("logoFile").addEventListener("change", async e => {
+    const f = e.target.files[0]; if (!f) return;
+    try { const bm = await createImageBitmap(f); logoImg = await logoFrom(bm); bm.close && bm.close(); store.set("ae_logo", logoImg.toDataURL("image/png")); }
+    catch (err) { alert("Không đọc được ảnh logo này, thử ảnh PNG hoặc JPG khác."); }
+    e.target.value = ""; logoUI();
+  });
+  $("logoClear").addEventListener("click", () => { logoImg = null; store.set("ae_logo", ""); logoUI(); });
   const tiersNow = () => [1, 2, 3].map(i => $("tier" + i).hidden ? "" : $("tier" + i).value.trim());
   function titlePrev() {
     clearTimeout(tpT); tpT = setTimeout(async () => {
@@ -3749,7 +3805,7 @@ const Render = (() => {
     const title = { kind, color: tcolNow(), tiers: [1, 2, 3].map(i => $("tier" + i).hidden ? "" : $("tier" + i).value.trim()) };
     await Title.load(); if (my !== rebuildT) return;
     const [srcW, srcH] = mont ? mtSize() : [video.videoWidth, video.videoHeight];
-    S.P = { video, keep, zoom, groups, words: out, broll: ghep ? [] : brollOut(M), mont, srcW, srcH, mode, look, title, ratio: viewRatio(), M, groupAt, bg: bgNow(), style, hookText };
+    S.P = { video, keep, zoom, groups, words: out, broll: ghep ? [] : brollOut(M), mont, srcW, srcH, mode, look, title, ratio: viewRatio(), M, groupAt, bg: bgNow(), style, hookText, logo: logoImg };
     S.audioOut = audioOut; brHint();
     // thông tin
     const nCut = keep.length - 1;
