@@ -397,6 +397,25 @@ footer .logo .lg{width:30px;height:30px}
 .gl{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:12px}.gl li{display:flex;gap:12px;align-items:flex-start;color:var(--on-dark-mute)}.gl b{color:var(--on-dark)}.gl .i{color:var(--gold);margin-top:3px}
 @media (max-width:980px){.shots{grid-template-columns:1fr 1fr}}
 @media (max-width:640px){.sbar{left:6px;right:6px;bottom:6px;padding:3px}.sbar button{height:30px;min-width:30px;font-size:12px;padding:0 6px}.sbar .ss{padding:0 9px}.sbar .ss span{display:none}.samples.two{grid-template-columns:1fr 1fr;gap:12px}.samples.two .sample{max-width:none}.samples.two .sample h3{font-size:15px}.samples.two .sample p{font-size:13px}.sample .frame{padding:5px;border-radius:18px}.sample video{border-radius:14px}.shots{gap:12px}.shots figure{padding:8px 8px 12px}.shots b{font-size:15px}.shots span{font-size:13px}}
+.two-k{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.two-k a{display:block;text-decoration:none;color:inherit;background:rgba(255,255,255,.08);border:1px solid var(--line-dark);border-radius:16px;padding:14px 16px}
+.two-k a:hover{background:rgba(255,255,255,.13)}
+.two-k b{display:flex;align-items:center;gap:8px;color:var(--on-dark);font-size:17px}.two-k b .i{color:var(--gold);width:20px;height:20px}
+.two-k span{display:block;margin-top:6px;font-size:14px;line-height:1.5;color:var(--on-dark-mute)}
+.stats2{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px;border-top:1px solid var(--line-dark);padding-top:20px}
+.stats2 div{padding:0 4px}
+.stats2 b{display:block;font-family:var(--sans);font-size:28px;font-weight:800;color:var(--gold);line-height:1.1}
+.stats2 span{display:block;font-size:13px;line-height:1.4;color:var(--on-dark-mute);margin-top:4px}
+.samples.three{display:grid;grid-template-columns:repeat(3,minmax(0,300px));justify-content:center;gap:32px}
+.more-cta{text-align:center;margin-top:36px}.more-cta p{font-size:18px;margin:0 0 16px}
+.shotone{margin:0 auto;max-width:340px}.shotone img{width:100%;border-radius:22px;border:1px solid var(--line-dark);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}.shotone figcaption{margin-top:12px;text-align:center;font-size:14px;color:var(--on-dark-mute)}
+input.vol{-webkit-appearance:none;appearance:none;width:64px;height:4px;border-radius:9px;background:rgba(255,255,255,.35);outline:none;flex:none;margin:0 4px}
+input.vol::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;border:0}
+input.vol::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:#fff;border:0}
+.vbar{width:360px}
+.novol input.vol{display:none}
+@media (max-width:640px){.two-k{grid-template-columns:1fr}.stats2{grid-template-columns:1fr 1fr;gap:16px 10px}.stats2 div:last-child{grid-column:1/-1}.stats2 b{font-size:24px}
+.samples.three{grid-template-columns:1fr 1fr;gap:12px}.samples.three .sample:last-child{grid-column:1/-1;max-width:60%;margin:0 auto}.samples.three .sample h3{font-size:15px}.samples.three .sample p{font-size:13px}input.vol{width:44px;margin:0 2px}}
 </style>
 </head>
 <body>
@@ -414,18 +433,23 @@ footer .logo .lg{width:30px;height:30px}
   <div class="wrap">
     <div>
       <p class="kicker">Edit video tự quay · Ghép video, hình ảnh</p>
-      <h1>Quay thô vào,<br>ra <em>video đăng ngay.</em></h1>
-      <p class="lead">Chọn video bạn tự quay, bấm một nút: máy tự cắt khoảng lặng, cắt ậm ờ, gắn phụ đề tiếng Việt khớp giọng, chèn B-roll, logo và nhạc nền. Không ngồi quay? Chọn các đoạn video ngắn và hình ảnh có sẵn, máy ghép thành một video có nhạc. Làm ngay trên điện thoại.</p>
+      <h1>Đưa video thô vào,<br>ra <em>video đăng ngay.</em></h1>
+      <p class="lead">Bấm một nút, máy tự edit thành video hoàn chỉnh có phụ đề, nhạc, logo. Làm ngay trên điện thoại, không cần biết dựng.</p>
+      <div class="two-k">
+        <a href="#truoc-sau"><b><svg class="i" aria-hidden="true"><use href="#i-mic"/></svg>Video tự quay nói</b><span>Tự cắt khoảng lặng, cắt ậm ờ, gắn phụ đề tiếng Việt khớp giọng.</span></a>
+        <a href="#ghep"><b><svg class="i" aria-hidden="true"><use href="#i-clap"/></svg>Ghép hình, video ngắn</b><span>Không cần ngồi quay. Chọn hình, clip có sẵn, máy ghép thành video có nhạc, chữ, lồng tiếng.</span></a>
+      </div>
       <div class="cta">
-        <a class="btn btn-gold" href="#dang-ky">Nhận link dùng thử 24 giờ <span class="arr">→</span></a>
-        <a class="link" href="#ghep">Xem video ghép mẫu</a>
+        <a class="btn btn-gold" href="#dang-ky">Đăng ký dùng thử miễn phí <span class="arr">→</span></a>
+        <a class="link" href="#truoc-sau">Xem video mẫu trước, sau</a>
       </div>
       <p class="by"><img src="wao-academy.jpg" alt="" width="34" height="34">Một sản phẩm của <b>WAO ACADEMY</b></p>
-      <div class="stats">
-        <div><b>12</b><span>đoạn video, hình mỗi video ghép</span></div>
-        <div><b>4</b><span>phong cách phụ đề</span></div>
-        <div><b>3</b><span>khung dọc, ngang, cả hai</span></div>
-        <div><b>0</b><span>cần mạng sau lần đầu</span></div>
+      <div class="stats2">
+        <div><b>1 phút</b><span>có ngay 1 video hoàn thiện</span></div>
+        <div><b>0</b><span>cần mạng vẫn dùng được, không cần app hay công cụ của ai</span></div>
+        <div><b>3</b><span>phong cách mặc định, bấm là ra</span></div>
+        <div><b>2</b><span>dạng video: tự quay, ghép hình và video</span></div>
+        <div><b>100+</b><span>mẫu tùy chỉnh theo ý</span></div>
       </div>
     </div>
     <div class="stage" aria-label="Video hướng dẫn">
@@ -434,8 +458,8 @@ footer .logo .lg{width:30px;height:30px}
       <div class="ph c"><video id="heroV" src="video/huong_dan.mp4" poster="video/huong_dan.jpg" autoplay muted playsinline preload="metadata"></video>
         <button class="vbig" id="vReplay" type="button" hidden><svg class="i" aria-hidden="true"><use href="#i-replay"/></svg>Xem lại</button>
         </div>
-      <div class="vbar"><button type="button" id="vPlay" aria-label="Tạm dừng"><svg class="i" aria-hidden="true"><use href="#i-pause"/></svg></button><span class="vprog"><b id="vProg"></b></span><button type="button" id="vSound" class="snd"><svg class="i" aria-hidden="true"><use href="#i-vol"/></svg><span>Bật tiếng</span></button><button type="button" id="vAgain" aria-label="Xem lại từ đầu"><svg class="i" aria-hidden="true"><use href="#i-replay"/></svg></button></div>
-      <p class="cap">Video hướng dẫn, làm bằng chính Xưởng Edit</p>
+      <div class="vbar"><button type="button" id="vPlay" aria-label="Tạm dừng"><svg class="i" aria-hidden="true"><use href="#i-pause"/></svg></button><span class="vprog"><b id="vProg"></b></span><button type="button" id="vSound" class="snd"><svg class="i" aria-hidden="true"><use href="#i-vol"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"><button type="button" id="vAgain" aria-label="Xem lại từ đầu"><svg class="i" aria-hidden="true"><use href="#i-replay"/></svg></button></div>
+      <p class="cap">Video hướng dẫn, làm bằng chính Xưởng Edit</p><p class="cap ios-vol" hidden>Chỉnh to nhỏ bằng nút âm lượng bên hông điện thoại</p>
     </div>
   </div>
 </section>
@@ -461,9 +485,9 @@ footer .logo .lg{width:30px;height:30px}
     </div>
     <div class="feat rv">
       <div><span class="n">i.</span><div><h3>Tự cắt khoảng lặng, cắt ậm ờ</h3><p>Máy nghe giọng tiếng Việt, cắt chỗ im lặng và tiếng ờ, à, ừm. Video gọn, nhịp nhanh.</p></div></div>
-      <div><span class="n">ii.</span><div><h3>Phụ đề khớp giọng</h3><p>Phụ đề tiếng Việt chạy theo từng chữ. Sửa chữ sai thì video giữ nguyên, xóa câu nào là cắt luôn đoạn đó.</p></div></div>
-      <div><span class="n">iii.</span><div><h3>B-roll, logo, nhạc nền</h3><p>Máy gợi ý chỗ chèn hình, video minh họa. Logo của bạn nằm nhỏ góc trên bên phải mọi video.</p></div></div>
-      <div><span class="n">iv.</span><div><h3>Riêng tư, không cần mạng</h3><p>Mọi thứ chạy ngay trên máy bạn. Tải bộ nghe một lần, sau đó tắt mạng vẫn edit được.</p></div></div>
+      <div><span class="n">ii.</span><div><h3>Phụ đề khớp giọng</h3><p>Phụ đề tiếng Việt chạy theo từng chữ, khớp giọng, khớp nhịp nói. Sửa chữ sai thì video giữ nguyên.</p></div></div>
+      <div><span class="n">iii.</span><div><h3>B-roll, logo, nhạc nền</h3><p>Máy gợi ý chỗ chèn hình, video minh họa. Logo đặt vị trí tinh tế. Nhạc nền không dính bản quyền, bật kiếm tiền được.</p></div></div>
+      <div><span class="n">iv.</span><div><h3>Riêng tư, không cần mạng</h3><p>Mọi thứ chạy ngay trên máy bạn, không chạy trên máy chủ, không thất thoát dữ liệu. Không cần mạng internet vẫn dùng được.</p></div></div>
     </div>
   </div>
 </section>
@@ -475,9 +499,9 @@ footer .logo .lg{width:30px;height:30px}
       <h2>Ba bước, <em>một tách cà phê.</em></h2>
     </div>
     <div class="steps rv">
-      <div><div class="big">01</div><h3>Chọn video tự quay</h3><p>Lấy video quay nói chuyện trong máy. Hoặc chọn tới 12 hình, video để ghép thành một video.</p></div>
-      <div><div class="big">02</div><h3>Chọn phong cách</h3><p>Mặc định, Giật tít hay Chữa lành. Muốn kỹ thì chọn Tự chỉnh để tự chọn nhạc, chữ, màu.</p></div>
-      <div><div class="big">03</div><h3>Bấm làm, xem rồi xuất</h3><p>Máy tự nghe, cắt lặng, cắt ậm ờ, làm phụ đề theo phong cách đã chọn. Xem nhanh rồi xuất dọc, ngang hoặc cả hai.</p></div>
+      <div><div class="big">01</div><h3>Chọn dạng video muốn edit</h3><p>Video tự quay nói, hoặc ghép hình và video ngắn.</p></div>
+      <div><div class="big">02</div><h3>Đưa video, hình ảnh vào</h3><p>Chọn video quay sẵn, hoặc chọn tới 12 hình, video trong máy. Chọn phong cách có sẵn hoặc Tự chỉnh.</p></div>
+      <div><div class="big">03</div><h3>Bấm Edit tự động, xem rồi xuất</h3><p>Máy tự làm hết. Xem nhanh, ổn thì xuất dọc, ngang hoặc cả hai, đăng ngay.</p></div>
     </div>
   </div>
 </section>
@@ -486,14 +510,17 @@ footer .logo .lg{width:30px;height:30px}
   <div class="wrap">
     <div class="head-row rv">
       <div><p class="kicker">03 · Trước và sau</p><h2>Cùng một video, <em>khác hẳn.</em></h2></div>
-      <p class="muted">Bên trái là video quay thô trên điện thoại. Bên phải là bản Xưởng Edit làm sau một lần bấm, phong cách Giật tít, không chỉnh thêm. Bấm Bật tiếng để nghe.</p>
+      <p class="muted">Video quay thô trên điện thoại và bản Xưởng Edit làm sau một lần bấm, phong cách Chữa lành, không chỉnh thêm. Bên cạnh là video ghép từ hình và đoạn video ngắn. Bấm Bật tiếng để nghe.</p>
     </div>
-    <div class="samples two">
-      <figure class="sample rv"><div class="frame"><video src="video/mau_truoc.mp4" poster="video/mau_truoc.jpg" muted loop playsinline preload="metadata" aria-label="Video quay thô"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button></div></div>
+    <div class="samples three">
+      <figure class="sample rv"><div class="frame"><video src="video/mau_truoc.mp4" poster="video/mau_truoc.jpg" muted loop playsinline preload="metadata" aria-label="Video quay thô"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"></div></div>
         <figcaption><div class="meta"><h3>Video quay thô</h3><span class="no">Trước</span></div><p>21 giây, còn khoảng lặng, không phụ đề</p></figcaption></figure>
-      <figure class="sample rv"><div class="frame"><video src="video/mau_sau.mp4" poster="video/mau_sau.jpg" muted loop playsinline preload="metadata" aria-label="Video sau khi edit"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button></div></div>
-        <figcaption><div class="meta"><h3>Sau Xưởng Edit</h3><span class="no">Sau</span></div><p>18 giây, cắt gọn, phụ đề giật tít, tiêu đề, logo</p><p class="voice"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>Máy làm trong vài phút</p></figcaption></figure>
+      <figure class="sample rv"><div class="frame"><video src="video/mau_sau.mp4" poster="video/mau_sau.jpg" muted loop playsinline preload="metadata" aria-label="Video sau khi edit"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"></div></div>
+        <figcaption><div class="meta"><h3>Sau Xưởng Edit</h3><span class="no">Sau</span></div><p>Cắt gọn, phụ đề Chữa lành, tiêu đề, nhạc piano, logo</p><p class="voice"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>Máy làm trong vài phút</p></figcaption></figure>
+      <figure class="sample rv"><div class="frame"><video src="video/mau_ghep.mp4" poster="video/mau_ghep.jpg" muted loop playsinline preload="metadata" aria-label="Video ghép mẫu"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"></div></div>
+        <figcaption><div class="meta"><h3>Ghép hình, video</h3><span class="no">Ghép</span></div><p>5 ảnh sản phẩm và 1 đoạn quay ngắn, nhạc nền Vui tươi</p></figcaption></figure>
     </div>
+    <div class="more-cta rv"><p>Đăng ký dùng thử miễn phí Xưởng Edit để khám phá thêm <b>hàng trăm mẫu edit</b> từ Xưởng Edit.</p><a class="btn btn-gold" href="#dang-ky">Đăng ký dùng thử miễn phí <span class="arr">→</span></a></div>
   </div>
 </section>
 
@@ -506,13 +533,12 @@ footer .logo .lg{width:30px;height:30px}
       <ul class="gl">
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Tới 12 cảnh</b> mỗi video, trộn hình và video</span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Mỗi đoạn video tới 40 giây</b>, video ra tới 5 phút</span></li>
-        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Nhạc nền có sẵn</b>, hoặc lồng giọng bằng file ghi âm</span></li>
+        <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Nhạc nền có sẵn</b>, lồng tiếng bằng thu giọng hoặc file ghi âm</span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Chữ trên từng cảnh</b>, logo góc phải</span></li>
       </ul>
       <p class="muted" style="margin-top:20px">Video hướng dẫn ở đầu trang cũng làm bằng cách ghép này, từ 12 tấm ảnh.</p>
     </div>
-    <div class="rv"><figure class="sample one"><div class="frame"><video src="video/mau_ghep.mp4" poster="video/mau_ghep.jpg" muted loop playsinline preload="metadata" aria-label="Video ghép mẫu"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button></div></div>
-      <figcaption><div class="meta"><h3>Video ghép mẫu</h3><span class="no">Ghép</span></div><p>5 ảnh sản phẩm và 1 đoạn quay ngắn, nhạc nền Vui tươi, 18 giây</p></figcaption></figure></div>
+    <div class="rv"><figure class="shotone"><img src="anh/ghep_chon.jpg" alt="Màn hình chọn hình, video để ghép"><figcaption>Chọn hình, video, đổi thứ tự, số giây, gõ chữ cho từng cảnh</figcaption></figure></div>
   </div>
 </section>
 
@@ -1102,6 +1128,12 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyhE2sdFp8QTc8IzH6T4S
     v.addEventListener('ended', () => { br.hidden = false; ui(); });
     v.addEventListener('timeupdate', () => { pr.style.width = (v.duration ? v.currentTime / v.duration * 100 : 0) + '%'; });
     ['play','pause','volumechange'].forEach(e => v.addEventListener(e, ui)); ui(); }
+  // Thanh âm lượng. iPhone, iPad không cho trang chỉnh âm lượng (chỉ nút bên hông máy) nên ẩn thanh và ghi chú
+  { const t = document.createElement('video'); let ok = true; try { t.volume = 0.5; ok = Math.abs(t.volume - 0.5) < 0.01; } catch (e) { ok = false; }
+    if (!ok) { document.body.classList.add('novol'); document.querySelectorAll('.ios-vol').forEach(e => { e.hidden = false; }); }
+    document.querySelectorAll('input.vol').forEach(r => { const bar = r.closest('.sbar,.vbar'), v = bar.classList.contains('vbar') ? $('heroV') : bar.parentNode.querySelector('video');
+      r.addEventListener('input', () => { v.volume = +r.value; if (v.muted && +r.value > 0) { const b = bar.querySelector('.ss,.snd'); if (b) b.click(); } });
+      const sync = () => { r.value = v.muted ? 0 : v.volume; }; v.addEventListener('volumechange', sync); sync(); }); }
 
   // nút dùng thử chọn "Dùng thử trước", nút gói nào chọn đúng gói đó
   document.querySelectorAll('a[href="#dang-ky"]').forEach(a => a.addEventListener('click', () => { $('goi').value = a.dataset.goi || 'Dùng thử trước'; }));
