@@ -416,6 +416,29 @@ input.vol::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:
 .novol input.vol{display:none}
 @media (max-width:640px){.two-k{grid-template-columns:1fr}.stats2{grid-template-columns:1fr 1fr;gap:16px 10px}.stats2 div:last-child{grid-column:1/-1}.stats2 b{font-size:24px}
 .samples.three{grid-template-columns:1fr 1fr;gap:12px}.samples.three .sample:last-child{grid-column:1/-1;max-width:60%;margin:0 auto}.samples.three .sample h3{font-size:15px}.samples.three .sample p{font-size:13px}input.vol{width:44px;margin:0 2px}}
+.stats3{display:grid;grid-template-columns:1fr 1fr;gap:16px 26px;margin-top:24px;border-top:1px solid var(--line-dark);padding-top:22px}
+.stats3>div{display:grid;grid-template-columns:76px 1fr;gap:12px;align-items:center}.stats3 b.sm{font-size:34px}
+.stats3 b{font-family:var(--sans);font-size:46px;font-weight:800;line-height:1;color:var(--gold);min-width:1.1em;text-align:center}
+.stats3 p{margin:0;line-height:1.35}.stats3 strong{display:block;color:var(--on-dark);font-size:15.5px}.stats3 span{display:block;color:var(--on-dark-mute);font-size:13px;margin-top:3px}
+.stats3>div:last-child{grid-column:1/-1}
+.cmp{max-width:520px;margin:0 auto}
+.cmp-stage{position:relative;aspect-ratio:1/1.12}
+.cmp-b{position:absolute;left:0;top:9%;width:43%;z-index:1;filter:grayscale(.85) brightness(.92)}
+.cmp-a{position:absolute;right:0;top:0;width:63%;z-index:2}
+.cmp-b video,.cmp-a video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:16px;background:#000;box-shadow:0 24px 50px -24px rgba(22,50,79,.55)}
+.cmp-a video{border:3px solid #fff}
+.cmp-tag{position:absolute;top:8px;left:8px;z-index:3;background:rgba(0,0,0,.72);color:#fff;font:700 10px var(--sans);letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border-radius:6px}
+.cmp-tag.on{background:#A50064}
+.cmp-a .sbar{left:8px;right:8px;bottom:8px}
+.cmp-cap{text-align:center;margin-top:18px;min-height:76px}
+.cmp-cap i{display:block;font-family:var(--serif);font-style:italic;font-size:17px;color:var(--muted)}
+.cmp-cap b{display:inline-block;font-family:var(--sans);font-weight:900;font-size:clamp(26px,4vw,34px);letter-spacing:.01em;color:var(--ink);margin-top:4px;padding-bottom:6px;border-bottom:3px solid var(--gold)}
+.dark .cmp-cap i{color:var(--on-dark-mute)}.dark .cmp-cap b{color:var(--on-dark)}
+.cmp-cap.go i,.cmp-cap.go b{animation:capin .45s ease both}@keyframes capin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.shots{align-items:start}.shots img{aspect-ratio:auto!important;height:auto;object-fit:contain!important;border:0!important;border-radius:14px}
+.cskh-num{white-space:nowrap;font-size:clamp(28px,7.6vw,46px)!important}
+.pay h3{font-size:22px;margin:0}.pay{align-items:center}
+@media (max-width:640px){.stats3{grid-template-columns:1fr;gap:14px}.stats3>div{grid-template-columns:64px 1fr}.stats3 b{font-size:38px}.stats3 b.sm{font-size:28px}.cmp-cap{min-height:70px}}
 </style>
 </head>
 <body>
@@ -444,12 +467,12 @@ input.vol::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:
         <a class="link" href="#truoc-sau">Xem video mẫu trước, sau</a>
       </div>
       <p class="by"><img src="wao-academy.jpg" alt="" width="34" height="34">Một sản phẩm của <b>WAO ACADEMY</b></p>
-      <div class="stats2">
-        <div><b>1 phút</b><span>có ngay 1 video hoàn thiện</span></div>
-        <div><b>0</b><span>cần mạng vẫn dùng được, không cần app hay công cụ của ai</span></div>
-        <div><b>3</b><span>phong cách mặc định, bấm là ra</span></div>
-        <div><b>2</b><span>dạng video: tự quay, ghép hình và video</span></div>
-        <div><b>100+</b><span>mẫu tùy chỉnh theo ý</span></div>
+      <div class="stats3">
+        <div><b>0</b><p><strong>Không cần mạng vẫn dùng được</strong><span>Không cần app hay công cụ của ai, không kén máy.</span></p></div>
+        <div><b>1</b><p><strong>1 phút có ngay video hoàn thiện</strong><span>Xuất theo thời gian thực: video 30 giây xuất trong 30 giây, video 3 phút xuất trong 3 phút.</span></p></div>
+        <div><b>2</b><p><strong>2 dạng video</strong><span>Tự quay nói, hoặc ghép hình và video ngắn.</span></p></div>
+        <div><b>3</b><p><strong>3 phong cách có sẵn</strong><span>Chọn là ra, không cần chỉnh gì thêm.</span></p></div>
+        <div><b class="sm">100+</b><p><strong>Mẫu tùy chỉnh theo ý</strong><span>Màu chữ, phông, kiểu hiện, nhạc, tiêu đề, chân nền.</span></p></div>
       </div>
     </div>
     <div class="stage" aria-label="Video hướng dẫn">
@@ -510,16 +533,9 @@ input.vol::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:
   <div class="wrap">
     <div class="head-row rv">
       <div><p class="kicker">03 · Trước và sau</p><h2>Cùng một video, <em>khác hẳn.</em></h2></div>
-      <p class="muted">Video quay thô trên điện thoại và bản Xưởng Edit làm sau một lần bấm, phong cách Chữa lành, không chỉnh thêm. Bên cạnh là video ghép từ hình và đoạn video ngắn. Bấm Bật tiếng để nghe.</p>
+      <p class="muted">Video nhỏ là bản quay thô trên điện thoại. Video lớn là bản Xưởng Edit làm sau một lần bấm, phong cách Chữa lành, không chỉnh thêm. Hai video chạy cùng lúc, cùng khung hình để bạn thấy rõ khác biệt. Bấm Bật tiếng để nghe.</p>
     </div>
-    <div class="samples three">
-      <figure class="sample rv"><div class="frame"><video src="video/mau_truoc.mp4" poster="video/mau_truoc.jpg" muted loop playsinline preload="metadata" aria-label="Video quay thô"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"></div></div>
-        <figcaption><div class="meta"><h3>Video quay thô</h3><span class="no">Trước</span></div><p>21 giây, còn khoảng lặng, không phụ đề</p></figcaption></figure>
-      <figure class="sample rv"><div class="frame"><video src="video/mau_sau.mp4" poster="video/mau_sau.jpg" muted loop playsinline preload="metadata" aria-label="Video sau khi edit"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"></div></div>
-        <figcaption><div class="meta"><h3>Sau Xưởng Edit</h3><span class="no">Sau</span></div><p>Cắt gọn, phụ đề Chữa lành, tiêu đề, nhạc piano, logo</p><p class="voice"><svg class="i" aria-hidden="true"><use href="#i-clock"/></svg>Máy làm trong vài phút</p></figcaption></figure>
-      <figure class="sample rv"><div class="frame"><video src="video/mau_ghep.mp4" poster="video/mau_ghep.jpg" muted loop playsinline preload="metadata" aria-label="Video ghép mẫu"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"></div></div>
-        <figcaption><div class="meta"><h3>Ghép hình, video</h3><span class="no">Ghép</span></div><p>5 ảnh sản phẩm và 1 đoạn quay ngắn, nhạc nền Vui tươi</p></figcaption></figure>
-    </div>
+<div class="cmp rv" data-caps='[[0, "Trước đây, để edit", "MỘT VIDEO TỰ QUAY"], [6.2, "Ngồi cắt ậm ờ, gõ phụ đề từng câu", "MẤT 2–3 TIẾNG"], [12.3, "Còn bây giờ với Xưởng Edit", "CHỈ 1 NÚT BẤM"]]'><div class="cmp-stage"><div class="cmp-b"><span class="cmp-tag">Trước</span><video src="video/ss_truoc.mp4" poster="video/ss_truoc.jpg" muted loop playsinline preload="metadata" aria-label="Video trước"></video></div><div class="cmp-a"><span class="cmp-tag on">Sau · Xưởng Edit</span><video src="video/ss_sau.mp4" poster="video/ss_sau.jpg" muted loop playsinline preload="metadata" aria-label="Video sau"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"></div></div></div><div class="cmp-cap" aria-live="off"><i class="c1"></i><b class="c2"></b></div></div>
     <div class="more-cta rv"><p>Đăng ký dùng thử miễn phí Xưởng Edit để khám phá thêm <b>hàng trăm mẫu edit</b> từ Xưởng Edit.</p><a class="btn btn-gold" href="#dang-ky">Đăng ký dùng thử miễn phí <span class="arr">→</span></a></div>
   </div>
 </section>
@@ -536,9 +552,9 @@ input.vol::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Nhạc nền có sẵn</b>, lồng tiếng bằng thu giọng hoặc file ghi âm</span></li>
         <li><svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span><b>Chữ trên từng cảnh</b>, logo góc phải</span></li>
       </ul>
-      <p class="muted" style="margin-top:20px">Video hướng dẫn ở đầu trang cũng làm bằng cách ghép này, từ 12 tấm ảnh.</p>
+      <p class="muted" style="margin-top:20px">Video nhỏ: hình, video rời, cắt thẳng, không nhạc. Video lớn: Xưởng Edit ghép theo phong cách Sôi động, có chuyển cảnh, chữ, tiêu đề, nhạc nền. Video hướng dẫn ở đầu trang cũng làm bằng cách ghép này.</p>
     </div>
-    <div class="rv"><figure class="shotone"><img src="anh/ghep_chon.jpg" alt="Màn hình chọn hình, video để ghép"><figcaption>Chọn hình, video, đổi thứ tự, số giây, gõ chữ cho từng cảnh</figcaption></figure></div>
+    <div class="cmp rv" data-caps='[[0, "Trước đây, ghép hình và video", "KÉO, CẮT TỪNG ĐOẠN"], [5, "Chỉnh hiệu ứng, chèn nhạc, gõ chữ", "MẤT CẢ BUỔI"], [10, "Còn bây giờ: chọn hàng loạt, bấm làm", "RA VIDEO HOÀN CHỈNH"]]'><div class="cmp-stage"><div class="cmp-b"><span class="cmp-tag">Trước</span><video src="video/gh_truoc.mp4" poster="video/gh_truoc.jpg" muted loop playsinline preload="metadata" aria-label="Video trước"></video></div><div class="cmp-a"><span class="cmp-tag on">Sau · Sôi động</span><video src="video/gh_sau.mp4" poster="video/gh_sau.jpg" muted loop playsinline preload="metadata" aria-label="Video sau"></video><div class="sbar"><button type="button" class="sp" aria-label="Phát"><svg class="i" aria-hidden="true"><use href="#i-play"/></svg></button><span class="vprog"><b></b></span><button type="button" class="ss"><svg class="i" aria-hidden="true"><use href="#i-volx"/></svg><span>Bật tiếng</span></button><input type="range" class="vol" min="0" max="1" step="0.05" value="1" aria-label="Âm lượng"></div></div></div><div class="cmp-cap" aria-live="off"><i class="c1"></i><b class="c2"></b></div></div>
   </div>
 </section>
 
@@ -549,10 +565,10 @@ input.vol::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:
       <p class="muted">Muốn nhanh thì chọn phong cách có sẵn. Muốn kỹ thì vào Tự chỉnh, mọi lựa chọn đều có xem trước ngay bên cạnh.</p>
     </div>
     <div class="shots rv">
-      <figure><img src="anh/07_kieu_chu.jpg" alt="Chọn kiểu chữ phụ đề"><figcaption><b>Phụ đề theo ý bạn</b><span>Màu chữ, kiểu chữ, cỡ, kiểu hiện, vị trí.</span></figcaption></figure>
-      <figure><img src="anh/08_broll.jpg" alt="Chèn B-roll"><figcaption><b>Chèn B-roll</b><span>Máy gợi ý chỗ chèn, bạn chọn thẻ chữ, hình hoặc video.</span></figcaption></figure>
-      <figure><img src="anh/09_logo_tieu_de.jpg" alt="Thêm logo"><figcaption><b>Logo góc phải</b><span>Chọn một lần, máy nhớ cho mọi video.</span></figcaption></figure>
-      <figure><img src="anh/14_ghep.jpg" alt="Ghép hình và video"><figcaption><b>Ghép hình và video</b><span>Tới 12 cảnh, thêm nhạc nền, lồng giọng.</span></figcaption></figure>
+      <figure><img src="anh/f_kieu_hien.jpg" alt="Chọn kiểu chữ phụ đề"><figcaption><b>Phụ đề theo ý bạn</b><span>Màu chữ, kiểu chữ, cỡ, kiểu hiện, vị trí.</span></figcaption></figure>
+      <figure><img src="anh/f_broll.jpg" alt="Chèn B-roll"><figcaption><b>Chèn B-roll</b><span>Máy gợi ý chỗ chèn, bạn chọn thẻ chữ, hình hoặc video.</span></figcaption></figure>
+      <figure><img src="anh/f_logo.jpg" alt="Thêm logo"><figcaption><b>Logo góc phải</b><span>Chọn một lần, máy nhớ cho mọi video.</span></figcaption></figure>
+      <figure><img src="anh/f_ghep.jpg" alt="Ghép hình và video"><figcaption><b>Ghép hình và video</b><span>Tới 12 cảnh, thêm nhạc nền, lồng giọng.</span></figcaption></figure>
     </div>
     <div class="ideas rv">
       <span>Review sản phẩm</span><span>Livestream cắt clip</span><span>Chia sẻ kiến thức</span><span>Vlog đời thường</span><span>Tư vấn khách hàng</span><span>Giới thiệu shop</span><span>Dạy học online</span><span>Kể chuyện thương hiệu</span>
@@ -601,7 +617,7 @@ input.vol::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:
     </div>
     <div class="pay rv" id="thanh-toan">
       <div class="shield"><svg class="i" aria-hidden="true"><use href="#i-shield"/></svg></div>
-      <div><h3>Thanh toán an toàn qua MoMo</h3><p>Bấm <b>Đăng ký gói này</b>, điền thông tin, bấm Gửi là hiện mã QR (hoặc bấm <b>Mua gói</b> trong app): quét mã QR có sẵn số tiền và lời nhắn, hoặc chuyển tay vào MoMo <b>0938 333 310</b>, tên <b>NGUYỄN NGỌC DIỄM</b>. Chỉ nhận đúng tài khoản này, không ai thu hộ. Chuyển xong, mình đối soát theo lời nhắn và gửi mã qua Zalo. Còn phân vân thì gọi Heartline 0938 333 310 trước khi chuyển.</p></div>
+      <div><h3>Thanh toán an toàn qua MoMo</h3></div>
       <div class="acts"><a class="btn btn-line btn-sm" href="https://zalo.me/0938333310" target="_blank" rel="noopener">Hỏi qua Zalo</a><a class="btn btn-line btn-sm" href="https://www.facebook.com/profile.php?id=61585588883230" target="_blank" rel="noopener">Fanpage</a></div>
     </div>
     <p class="trial-bar">Chưa chắc? <a href="#dang-ky">Dùng thử miễn phí 24 giờ</a>, không cần trả trước.</p>
@@ -820,7 +836,7 @@ const LOCK = (() => {
   const CONTACT = "Diễm Nguyễn (Zalo 0938 333 310)";   // ghi trên màn hình khóa: liên hệ ai để nhận mã
   const KEY = "95e3845e10c23e066e35309c7d91b45350666606fc5b8f03";
   const B32 = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";   // không có I L O U cho khỏi nhầm
-  const mem = {}, st = { get(k) { try { const v = localStorage.getItem(k); if (v != null) return v; } catch (e) { } return k in mem ? mem[k] : null; }, set(k, v) { mem[k] = String(v); try { localStorage.setItem(k, v); } catch (e) { } } };
+  const st = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) { } } };
 
   const enc = bytes => { let bits = 0, v = 0, s = ""; for (const b of bytes) { v = (v << 8) | b; bits += 8; while (bits >= 5) { s += B32[(v >>> (bits - 5)) & 31]; bits -= 5; } } if (bits) s += B32[(v << (5 - bits)) & 31]; return s; };
   const dec = s => { const out = []; let bits = 0, v = 0; for (const c of s) { const i = B32.indexOf(c); if (i < 0) return null; v = (v << 5) | i; bits += 5; if (bits >= 8) { out.push((v >>> (bits - 8)) & 255); bits -= 8; } } return out; };
@@ -882,19 +898,6 @@ const LOCK = (() => {
     return (cur = { ok: false, expired: !!(fromLink || st.get("xe_ma")) });
   }
 
-  // mã không đúng: đoán lý do thường gặp để báo khách dễ hiểu
-  async function sigOther(msg) { const k = await crypto.subtle.importKey("raw", new TextEncoder().encode(KEY), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]); return new Uint8Array(await crypto.subtle.sign("HMAC", k, new TextEncoder().encode(msg))).slice(0, 6); }
-  async function whyWrong(dev, v) {
-    const c = norm(v);
-    if (c === norm(dev)) return "Đây là mã máy của bạn. Gửi mã máy này cho Diễm để nhận mã kích hoạt, rồi nhập mã kích hoạt vào ô này.";
-    if (c.length < 15) return "Mã còn thiếu chữ. Mã kích hoạt có 15 ký tự (dạng XXXX-XXXX-XXXX-XXX). Chép nguyên mã Diễm gửi rồi dán vào.";
-    const b = dec(c);
-    if (b && b.length >= 9) {
-      const hour = (b[0] << 16) | (b[1] << 8) | b[2];
-      for (const d of [dev, "", TRIAL_DEV]) { const t = await sigOther("" + norm(d) + ":h" + hour); if (t.every((x, i) => x === b[3 + i])) return "Mã này là của Xưởng video, không dùng cho app này. Mở Xưởng video rồi nhập mã vào đó."; }
-    }
-    return "Mã không đúng với máy này (mã máy " + dev + "). Kiểm tra lại từng chữ. Nếu bạn lấy mã máy ở trình duyệt khác, hoặc trước khi thêm vào màn hình chính, thì mã máy đã khác: gửi lại mã máy đang hiện ở trên để nhận mã mới.";
-  }
   // khoa = true: không đóng được (chưa có mã / hết hạn); false: tự mở ra để nhập mã khác
   function overlay(dev, khoa, expired) {
     const el = document.createElement("div");
@@ -905,34 +908,19 @@ const LOCK = (() => {
       <p>${khoa ? (expired ? "Mã hoặc link dùng thử của bạn đã hết hạn. " : "") + "Để dùng, gửi" : "Gửi"} <b>mã máy</b> dưới đây cho ${CONTACT} để nhận mã kích hoạt.</p>
       <p class="khoa-may">Mã máy: <b id="khoaMay">${dev}</b> <button type="button" id="khoaCopy">Sao chép</button></p>
       <p class="khoa-lh"><button type="button" id="khoaMua">Mua gói (MoMo)</button><a href="https://zalo.me/0938333310" target="_blank" rel="noopener">Nhắn Zalo</a><a href="https://www.facebook.com/profile.php?id=61585588883230" target="_blank" rel="noopener">Fanpage</a></p>
-      <form id="khoaForm" novalidate><input id="khoaMa" placeholder="Nhập mã kích hoạt" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go">
-      <button type="submit" id="khoaMo">Kích hoạt</button></form>
-      <p id="khoaLoi" class="khoa-loi" role="alert" aria-live="polite"></p></div>`;
+      <input id="khoaMa" placeholder="Nhập mã kích hoạt" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      <button type="button" id="khoaMo">Kích hoạt</button>
+      <p id="khoaLoi" class="khoa-loi"></p></div>`;
     document.body.appendChild(el);
     if (!khoa) el.querySelector("#khoaDong").onclick = () => el.remove();
     el.querySelector("#khoaMua").onclick = buy;
     el.querySelector("#khoaCopy").onclick = () => { try { navigator.clipboard.writeText(dev); el.querySelector("#khoaCopy").textContent = "Đã chép"; } catch (e) { } };
-    const inp = el.querySelector("#khoaMa"), btn = el.querySelector("#khoaMo"), err = el.querySelector("#khoaLoi");
-    const say = (t, ok) => { err.textContent = t; err.style.color = ok ? "#2F8F5B" : ""; try { err.scrollIntoView({ block: "nearest" }); } catch (x) { } };
-    // điện thoại: bàn phím hiện lên thì kéo nút Kích hoạt lên cho thấy
-    inp.addEventListener("focus", () => setTimeout(() => { try { btn.scrollIntoView({ block: "nearest" }); } catch (x) { } }, 350));
-    el.querySelector("#khoaForm").addEventListener("submit", async e => {
-      e.preventDefault();
-      if (btn.disabled) return;
-      const v = inp.value;
-      if (!norm(v)) { say("Bạn chưa nhập mã kích hoạt."); return; }
-      inp.blur(); btn.disabled = true; btn.textContent = "Đang kiểm tra...";
-      try {
-        const h = await check(dev, v);
-        if (h == null) { say(await whyWrong(dev, v)); return; }
-        if (h !== FOREVER && Date.now() >= hourEnd(h)) { say("Mã này đã hết hạn (" + untilText(h) + "). Nhắn Diễm để nhận mã mới."); return; }
-        st.set("xe_ma", norm(v));
-        say("Kích hoạt xong. Dùng được " + untilText(h) + ".", true); btn.textContent = "Đã kích hoạt";
-        setTimeout(() => { el.remove(); if (window.__khoaReload) location.reload(); else guard(); }, 900);
-        return;
-      } catch (x) { say("Trình duyệt này chưa kiểm tra được mã. Mở link bằng Chrome hoặc Safari (không mở trong Zalo, Facebook), rồi nhập lại."); }
-      finally { if (btn.textContent !== "Đã kích hoạt") { btn.disabled = false; btn.textContent = "Kích hoạt"; } }
-    });
+    el.querySelector("#khoaMo").onclick = async () => {
+      const v = el.querySelector("#khoaMa").value, h = await check(dev, v), err = el.querySelector("#khoaLoi");
+      if (h == null) { err.textContent = "Mã kích hoạt không đúng. Kiểm tra lại từng chữ."; return; }
+      if (h !== FOREVER && Date.now() >= hourEnd(h)) { err.textContent = "Mã này đã hết hạn (" + untilText(h) + ")."; return; }
+      st.set("xe_ma", norm(v)); el.remove(); guard();
+    };
   }
   // ---------------------------------------------------------------- mua gói: MoMo, lời nhắn tự điền mã máy + gói
   const PAY = { momo: "0938 333 310", name: "NGUYỄN NGỌC DIỄM", plans: [["1THANG", "1 tháng", 149000, "1T", 199000], ["1NAM", "1 năm", 690000, "1N", 990000], ["VINHVIEN", "Vĩnh viễn", 1290000, "VV", 1890000]] };
@@ -1051,12 +1039,12 @@ const LOCK = (() => {
   }
 
   const css = document.createElement("style");
-  css.textContent = `#khoa{position:fixed;inset:0;z-index:9999;background:rgba(14,30,24,.92);display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-  .khoa-hop{margin:auto;background:var(--panel,#fff);color:var(--ink,#16324F);border-radius:20px;padding:22px;max-width:420px;width:100%;font-family:var(--body,sans-serif)}
+  css.textContent = `#khoa{position:fixed;inset:0;z-index:9999;background:rgba(14,30,24,.92);display:flex;align-items:center;justify-content:center;padding:16px}
+  .khoa-hop{background:var(--panel,#fff);color:var(--ink,#16324F);border-radius:20px;padding:22px;max-width:420px;width:100%;font-family:var(--body,sans-serif)}
   .khoa-hop h2{margin:0 0 8px}.khoa-hop p{line-height:1.5}.khoa-may b{font-size:20px;letter-spacing:1px}
   .khoa-hop input{width:100%;box-sizing:border-box;font-size:18px;padding:12px;border-radius:12px;border:2px solid var(--line,#ddd);background:var(--field,#fff);color:inherit;text-transform:uppercase;margin:8px 0}
   .khoa-hop button{font:inherit;font-weight:800;border:0;border-radius:12px;padding:10px 14px;background:var(--flame,#E8471B);color:#fff;cursor:pointer}
-  #khoaCopy{padding:6px 10px;font-size:14px;margin-left:6px}#khoaMo{width:100%;padding:14px}#khoaMo:disabled{opacity:.7}#khoaForm{margin:0}
+  #khoaCopy{padding:6px 10px;font-size:14px;margin-left:6px}#khoaMo{width:100%;padding:14px}
   .khoa-lh{display:flex;gap:8px;flex-wrap:wrap}.khoa-lh a{flex:1;text-align:center;font-weight:800;text-decoration:none;padding:10px;border-radius:12px;border:2px solid var(--flame,#E8471B);color:var(--flame,#E8471B)}
   .khoa-loi{color:var(--flame,#E8471B);font-weight:700;min-height:1.2em}
   .khoa-ban{margin:8px 0 0;font-size:13px;color:var(--muted,#6A6B8F);text-align:center}
@@ -1130,7 +1118,7 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyhE2sdFp8QTc8IzH6T4S
     const ui = v => { const f = v.parentNode, sp = f.querySelector('.sp'), ss = f.querySelector('.ss');
       sp.innerHTML = ico(v.paused ? 'play' : 'pause'); sp.setAttribute('aria-label', v.paused ? 'Phát' : 'Tạm dừng');
       ss.innerHTML = ico(v.muted ? 'volx' : 'vol') + '<span>' + (v.muted ? 'Bật tiếng' : 'Tắt tiếng') + '</span>'; ss.classList.toggle('on', !v.muted); };
-    const quiet = me => { all.forEach(o => { if (o !== me && !o.muted) { o.muted = true; ui(o); } }); if (me && !hero.paused && !hero.muted) hero.muted = true; };
+    const quiet = me => { document.querySelectorAll('video').forEach(o => { if (o !== me && !o.muted) { o.muted = true; if (all.includes(o)) ui(o); } }); };
     all.forEach(v => { const f = v.parentNode, pr = f.querySelector('.vprog b');
       f.querySelector('.sp').onclick = () => { if (v.paused) { v.dataset.tay = ''; v.play().catch(() => { }); } else { v.dataset.tay = '1'; v.pause(); } };
       f.querySelector('.ss').onclick = () => { v.muted = !v.muted; if (!v.muted) { quiet(v); if (v.currentTime > 0.5) v.currentTime = 0; } v.dataset.tay = ''; v.play().catch(() => { }); ui(v); };
@@ -1156,6 +1144,24 @@ const SHEET_URL = 'https://script.google.com/macros/s/AKfycbyhE2sdFp8QTc8IzH6T4S
     v.addEventListener('ended', () => { br.hidden = false; ui(); });
     v.addEventListener('timeupdate', () => { pr.style.width = (v.duration ? v.currentTime / v.duration * 100 : 0) + '%'; });
     ['play','pause','volumechange'].forEach(e => v.addEventListener(e, ui)); ui(); }
+  // So sánh trước / sau: video nhỏ (trước) chạy khớp từng khung với video lớn (sau), chữ bên dưới đổi theo đoạn
+  document.querySelectorAll('.cmp').forEach(c => {
+    const a = c.querySelector('.cmp-a video'), b = c.querySelector('.cmp-b video'), caps = JSON.parse(c.dataset.caps), cap = c.querySelector('.cmp-cap'), c1 = cap.querySelector('.c1'), c2 = cap.querySelector('.c2');
+    const sp = c.querySelector('.sp'), ss = c.querySelector('.ss'), pr = c.querySelector('.vprog b'); let ci = -1;
+    const ico = n => '<svg class="i" aria-hidden="true"><use href="#i-' + n + '"/></svg>';
+    const ui = () => { sp.innerHTML = ico(a.paused ? 'play' : 'pause'); sp.setAttribute('aria-label', a.paused ? 'Phát' : 'Tạm dừng'); ss.innerHTML = ico(a.muted ? 'volx' : 'vol') + '<span>' + (a.muted ? 'Bật tiếng' : 'Tắt tiếng') + '</span>'; ss.classList.toggle('on', !a.muted); };
+    const capAt = t => { let i = 0; caps.forEach((x, k) => { if (t >= x[0]) i = k; }); if (i !== ci) { ci = i; c1.textContent = caps[i][1]; c2.textContent = caps[i][2]; cap.classList.remove('go'); void cap.offsetWidth; cap.classList.add('go'); } };
+    const sync = () => { if (Math.abs(b.currentTime - a.currentTime) > 0.12) b.currentTime = a.currentTime; };
+    a.addEventListener('play', () => { sync(); b.play().catch(() => { }); ui(); });
+    a.addEventListener('pause', () => { b.pause(); ui(); });
+    a.addEventListener('seeked', sync); a.addEventListener('volumechange', ui);
+    a.addEventListener('timeupdate', () => { capAt(a.currentTime); if (!a.paused) sync(); pr.style.width = (a.duration ? a.currentTime / a.duration * 100 : 0) + '%'; });
+    sp.addEventListener('click', () => { if (a.paused) { a.dataset.tay = ''; a.play().catch(() => { }); } else { a.dataset.tay = '1'; a.pause(); } });
+    ss.addEventListener('click', () => { a.muted = !a.muted; if (!a.muted) { document.querySelectorAll('video').forEach(o => { if (o !== a && !o.muted) o.muted = true; }); a.currentTime = 0; } a.dataset.tay = ''; a.play().catch(() => { }); });
+    [a, b].forEach(v => v.addEventListener('click', () => sp.click()));
+    capAt(0); ui();
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { if (!a.dataset.tay) a.play().catch(() => { }); } else if (!a.paused) a.pause(); }), { threshold: .4 }).observe(a);
+  });
   // Thanh âm lượng. iPhone, iPad không cho trang chỉnh âm lượng (chỉ nút bên hông máy) nên ẩn thanh và ghi chú
   { const t = document.createElement('video'); let ok = true; try { t.volume = 0.5; ok = Math.abs(t.volume - 0.5) < 0.01; } catch (e) { ok = false; }
     if (!ok) { document.body.classList.add('novol'); document.querySelectorAll('.ios-vol').forEach(e => { e.hidden = false; }); }

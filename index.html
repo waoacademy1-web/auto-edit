@@ -118,9 +118,20 @@ body:has(#result:not([hidden])) #nextSteps{display:none}
 .sdemo{display:grid;justify-items:center;gap:4px;margin:10px 0 4px}
 .sdemo video{width:min(52vw,220px);aspect-ratio:9/16;border-radius:14px;background:#000;box-shadow:0 4px 14px #0003}
 body.kieu .tuchinh{display:none!important}
+/* Ghép + phong cách làm sẵn: chỉ hiện chọn nhạc nền (bước Nhạc nền), không hiện cả bộ Tự chỉnh */
+body.ghep.kieu #tuBox{display:block!important}
+body.ghep.kieu #tuBox .tuhead,body.ghep.kieu #tuBox .tunav,body.ghep.kieu #tuBox .tustep:not([data-name="Nhạc nền"]){display:none!important}
+body.ghep.kieu #tuBox .tustep[data-name="Nhạc nền"]{display:block!important}
+body.ghep.kieu #musicRow{display:flex!important}body.ghep.kieu #musicPick{display:block!important}
+/* Ghép: chỗ sửa chính tả phụ đề chỉ hiện khi có giọng lồng tiếng và bật hiện phụ đề */
+body:not(.hasvoice) .vsub{display:none!important}body.ghep:not(.hasvoice) #stat{display:none!important}
+body.ghep:not(.hasvoice) #linesBox,body.ghep.nosub #linesBox,body.ghep:not(.hasvoice) .subw,body.ghep.nosub .subw{display:none!important}
 .pv-gt{background:linear-gradient(160deg,#ff6b4a,#7a1020)}.pv-gt::after{background:linear-gradient(#0000,#c8141ee0)}
 .pv-nl{background:linear-gradient(160deg,#4a8bff,#1a1f60)}
-.pv-cl{background:linear-gradient(160deg,#e8b98a,#6b4024)}.pv-cl::after{background:linear-gradient(#0000,#3c1e0ad9)}
+.pv-cl{background:linear-gradient(160deg,#e8b98a,#6b4024)}
+.pv-sd{background:linear-gradient(160deg,#ffb020,#d01860)}.pv-sd::after{background:linear-gradient(#0000,#8a0030e0)}
+.pv-vt{background:linear-gradient(160deg,#7fe0c8,#3f8cff)}.pv-vt span{font-family:"Baloo 2",var(--display)}
+body.ghep .pre:not(.g):not(.pre-tu){display:none}body:not(.ghep) .pre.g{display:none}.pv-cl::after{background:linear-gradient(#0000,#3c1e0ad9)}
 .pv-vl{background:linear-gradient(160deg,#b8c4a0,#4a5a48)}
 .pv span.soft{font:italic 700 14px "Playfair Display",Georgia,serif;-webkit-text-stroke:0;text-shadow:0 1px 6px #000}
 .pv span.vl{font-weight:700;font-size:11px;-webkit-text-stroke:1.5px #000}.pv span.vl i{color:#FFE7A8}
@@ -252,7 +263,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <img class="logo-mark" src="icon.png" alt="" aria-hidden="true">
-    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 3.3</span></div>
+    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 3.4</span></div>
     <p class="byw"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABIAEgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7LooooAKiurmC2VDPKsYdwi57knA/WsDxRqV1cGXRdCkge/2/vwxIMcbAjcCCMEHBPOcHIycA8vrEmgiZW1NrjW79Qnm7ZmS33qB0HTGQTgDGWNc+IxVHDR5qsrI2oYariJctON2ekPcQJt3TRjdnblhzgZP6A09GV1DowZWGQQcgivAfGWq+OLi6jj8MQ+FItJiiCizv4bgys3IbM0bg4IPcGqegfEi807U9N0TxFZyeCLh5PJtrg3ButKuWbAIEvBjfAG1ZVxkcHk5xw+ZYXEvlpzTfbZ/ibV8vxNBXqQsj6LorF8O69a6iXs33299Axjkt5nUycd+OD9Rx6cVtV3HGFFFFABSMMqRkjIxwaWqes6ppui6bNqer39rYWUC7pbi5lEcaD3Y8CgDhvFK2vh+3Ok6aWNxdZku7hjmR1JJCk/iemP1rk6z/AB38QvDUl1ba5a3V1qVnq03k6cbGzlne4KoSdqKu4jCMc47ZrldQ8aaJ4gs5NF0XxOuha3KyeSL+3e3lGHUsAkoXcSoK8Z61+fZnHEYvEyqNPlTsnZ2STt/w59xlzoYbDxgmuZq7V1d3O6qpq+nWOr6ZcaZqdrFd2dwhSWGQZVgf89e1cp438WaXo2u6e3/CRw+ZaSSJc6La4mu713QCJFjB3AgkNzgY6mrs/jvQvt7abpkepa7qKf6200eye8kiPo5jBVT9WFcFPCV5csqcW2+yZ3zxNFcynJJLvY6X9nO7ntfE2q+C9YvZ59Q0O2R9PuXIL3unSHEfmHGWeJlMee4217rXyr4B8Y6dN+0n4eE0N7oV0un32mX1vqsQtpQxWGaJME4JOQQM55r6qr9FwNSpUw8XVVpdfkfBY2FOFeSpu8egUUUV1nKYPj/xZpHgnwrd+Italdba3AVI4xuknkY4SKNf4nY4AH9K8Dl03V/HOqx+J/iKqTSI3madoW7daaavbcvSWbH3nbgHhcAVu/FW5fxH8dbfR7kltO8K6bFfRwn7r3lyzqshHfZHGQPQuTWL4t8MT+JtQtoL/VZ4tAjjJuLC3Jja7kzwJJAc+WB/CMZPU4r5XO8ykqn1aMuVdX19EfS5Pl6dP6xKPM+i/U5T4i+LfDUPjLwlDH4os7aWyvLlrh7ZjM9qGtJUUssYZhlmC9O9b3gPxl8JLux1HTPHmoae2m3YRI7XUtPnMIYDBk8ySMBD0Gcjpniug07TNB8N6aRYWWnaTZwrljHGkSKPUnj8zXE+O/iJ4Qv/AA7eabpfirRri6lwm3+1/sg25G7bMFYA4/OuPLsx9ny06VNyS63799LfidWPy9VHKdSok30t2/E3rH4VeD774m2PhzRvGN7deF9U0uTVUt7bZLJJDHIkRgF+D5nkkuPk5OARuArt/H/xQ8E/BW/0fwLo/hhTPcwedDZWUkFrFGm7YCWkZQXYg4HJOCTXlf7G+mvaePbC8ZZUjv8AQtUvIEkk3kRm/hjU7gArZ8sncoAbOe9b3xs8D+LbP4u6h47On61q+hXUdqpGjrFM0MUK/NFPbOpaRS25g6EkbunFfWz/AHVJypR17HzMLVKqjUlp3PK/EVzp3iH4/XGqeN/Dd1o+l6vczlYtZiVY+bWCKMeYCU37omxhsjivafBfjLVfhhqNrpPiPUbjVfA91IsFtqFy5efSHY4RJXPLwE4Ac8pwCSOai07UPDnjPQZTbvaatp02Y54pE3AHujowyrD0IBFYWgeGb3Sb2/8AC08Z1PwZeWjG3W5k3vaEna1scnLRkHKn+HBHpXyUc5qxre0l7rW8Xs9enZ/15H08sppypci1T2l1Xr3X9eZ9UAggEEEHkEUV5X+zNq97ceC7/wAMancyXN34W1GTS1nkOXltwqvAzHufLdVP+7RX2kJqcVKOzPkZwcJOL3RS+MXgvxKnjKDx94O0+PVp3shYatpZmWKS4iRi8csTN8u9SzjaxAIPXIrk7b/hZmrv9m0b4Y39hKeDc65eQ28EfuRGzu/0UfjXt/jPVfDvhzSzrfiKWO2tBNDA8752o0kixqWPZdzDJPAHJqDRNW8K6x4VTxRYyxtpLwyTidsqPLQsGbB7Daea4MTlWFxNT2tSN36nbh8zxOHp+zpy0PJNT/Z51XxFDZX/AIn+IM8+rW9wJxBHp0cmmRjBGwW0mQ+CQd7knjoK6J9C+LHhi2VYE8IePNNiAzZSaeul3W0do2UtCT7FVHvXaeA9c8J+N/DkHiDw8/2ixmd41Lo0bhkJDAq2CDx+WDVfwD4n8H+OLe8n8PiaVLOVY5fOgkiJ3LuVlDYyrDkEV3U6UKUeWCsjjqVJ1Jc03dnkX/C1dHT42rrY0LW49Sj8Nf2Qnh02uNQN4bkSCIR5xs2Lu80Hy8fxdq72HSfjJ4pH2vVfFGneBLV+Y9O0q0S9ulHpJPMCm72RMe5p1p47+Fl/a33imxhW9nsL1dFaaCweS6eR3ASKPA3srMQRjg9a3H8WeCY/GyeDJJSmtvYfbxbtE4xHgnBPQPgE7euBmrIPPdT+Ad7ZT6j4q8O+NdSufGl1MJpbvUlQW96qoF8iaKJVUKdvDgblJzz0rmm8Ta9Zyf2bqvw78Xxa4vy/Y7XT2uIpW9Y7hf3ZT/aJGO4r0uL4q/DaTwmPEyPe/YTfRWABspVlM0sYkjAQjOGRlYHpgitSTx14Ci+IUfw/e5dfEUmNtoYJOQYTNndjbjYp79eK87GZXh8Y1KotV1R34TMq+FTjB6dmVfgJ4R1jw1oGqal4kjig1vX9QbULu2ifetquxUjh3DhiqIMkcZJxxRW18PPFPhPxhb3F/wCF5WnjtXWKVzGybXZFfb83cBhkdQeDzRXfCChFRjsjinJzk5S3ZueIdE0nxDpMuk65p9vqFhKytJbzoGRirBlyD6MAfwrOg8E+E4LO2s4NBsore2sJdOhiRMKltLjzIgP7rbRn6UUVRIuleCvCmlLZLpug2VmthcyXdqsKbRFM6FHdQOMlSR+NTeE/CfhzwpDdReHdHtdNS7l86dYVxvfGMn6DgDoO1FFAGanw28CR6RdaRF4W06Kxu5IpZ4Y49oeSP7j5HO5ex61f/wCEO8L/ANvpr/8AYdmdVSMRLeFMyhBGY9u7rjYSMe9FFAGbF8MfAMXh7/hH4vC9hHpn2pbz7OoYDzlXar5znIUADngDFa58L+HjrS60dJtTqKzLOLnb84kWIwhs+ojJX6GiigC1o2kaZo0E8GlWMFnHcXEl1KsS7Q8sjbnc+5JyaKKKAP/Z" alt="Logo WAO Academy" width="22" height="22">Sản phẩm thuộc <b>WAO ACADEMY</b></p>
   </header>
 
@@ -289,10 +300,11 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <label><input type="radio" name="mlen" value="300"><span>Tối đa 5 phút<small>chậm hơn, ~170 MB</small></span></label>
     </div></div>
     <label class="switch"><input type="checkbox" id="optSceneAudio"><span>Giữ tiếng gốc của video cảnh<small>Cho kiểu ASMR: lọc bớt ồn đều (quạt, máy lạnh, xì), làm rõ tiếng. Tiếng xe, người nói xung quanh thì không lọc được.</small></span></label>
-    <span class="lbl">Giọng nói (không bắt buộc)</span>
+    <span class="lbl">Thêm âm thanh: lồng tiếng (không bắt buộc)</span>
     <div class="row"><button type="button" id="recBtn" hidden>🎙 Thu giọng</button>
       <label class="pickimg"><i class="ic ic-mic" aria-hidden="true"></i>Tải file ghi âm / video có giọng<input type="file" id="vFile" accept="audio/*,video/*,.m4a,.mp3,.wav,.aac"></label>
       <button type="button" id="vDel" hidden>Bỏ giọng</button></div>
+    <label class="switch vsub"><input type="checkbox" id="optSubsG" checked><span>Hiện phụ đề theo giọng<small>Bật thì bước 4 có chỗ sửa chính tả phụ đề. Tắt thì video chỉ có giọng, không có chữ chạy.</small></span></label>
     <p class="note" id="vInfo">Có giọng: máy làm giọng trong, rõ, tự ra phụ đề và tự chia cảnh theo câu nói (dài tối đa theo độ dài đã chọn). Không có giọng: video chạy theo nhạc, gõ chữ cho từng cảnh ở trên.</p>
   </section>
 
@@ -303,13 +315,16 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       <label class="pre"><input type="radio" name="preset" value="co_ban" checked><div class="pvi pv"><span>Phụ đề <i>rõ</i></span></div><b>Mặc định</b><small>Phụ đề rõ, tiêu đề 3 tầng, không nhạc</small></label>
       <label class="pre"><input type="radio" name="preset" value="giat_tit"><div class="pvi pv pv-gt"><em>TÍT TO</em><span>chữ <i>nảy</i></span></div><b>Giật tít năng lượng</b><small>Tít to 3 giây đầu, chữ nảy, nhạc sôi</small></label>
       <label class="pre"><input type="radio" name="preset" value="chua_lanh"><div class="pvi pv pv-cl"><span class="soft">nhẹ nhàng</span></div><b>Chữa lành</b><small>Chữ mềm, màu ấm, nhạc piano êm</small></label>
+      <label class="pre g"><input type="radio" name="preset" value="soi_dong"><div class="pvi pv pv-sd"><span>SÔI <i>ĐỘNG</i></span></div><b>Sôi động</b><small>Cảnh nhanh, chuyển cảnh mạnh, nhạc sôi</small></label>
+      <label class="pre g"><input type="radio" name="preset" value="nhe_nhang"><div class="pvi pv pv-cl"><span class="soft">nhẹ nhàng</span></div><b>Nhẹ nhàng</b><small>Cảnh chậm, mờ dần, màu ấm, nhạc êm</small></label>
+      <label class="pre g"><input type="radio" name="preset" value="vui_tuoi"><div class="pvi pv pv-vt"><span>vui <i>tươi</i></span></div><b>Vui tươi</b><small>Cảnh trượt vào, chữ tròn, nhạc vui</small></label>
       <label class="pre pre-tu"><input type="radio" name="preset" value="tu_chinh"><div class="pvi pvt">＋</div><b>Tự chỉnh</b><small>Tự chọn nhạc, chữ, màu, tiêu đề</small></label>
     </div>
     <p class="note" id="styleHint">Chọn xong bấm nút bên dưới, video ra luôn theo phong cách này. Chọn Tự chỉnh thì làm xong sẽ hiện thêm nhạc, chữ, màu, tiêu đề để chỉnh theo ý.</p>
   </section>
 
   <button class="big" id="go" disabled><i class="ic ic-cut" aria-hidden="true"></i>Edit tự động</button>
-  <div id="nextSteps" class="nxt"><span>Làm xong sẽ hiện tiếp:</span><b><i>3</i>Xem thử</b><b><i>4</i>Sửa tiêu đề, phụ đề</b><b><i>5</i>Xuất video</b></div>
+  <div id="nextSteps" class="nxt"><span>Làm xong sẽ hiện tiếp:</span><b><i>3</i>Xem thử</b><b><i>4</i>Sửa tiêu đề<span class="subw">, phụ đề</span></b><b><i>5</i>Xuất video</b></div>
   <p class="note" id="firstNote">Lần đầu máy tải bộ nghe tiếng Việt khoảng <b id="mbNeed">290</b> MB (nên dùng Wi-Fi). Các lần sau không tải lại, tắt mạng vẫn dùng được.</p>
 
   <section id="status" hidden aria-live="polite">
@@ -492,7 +507,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
       </div>
       <div class="row tunav"><button type="button" id="tuBack">‹ Lại</button><button type="button" id="tuNext">Tiếp ›</button></div>
     </div>
-    <div class="step"><b>4</b>Sửa tiêu đề, phụ đề</div>
+    <div class="step"><b>4</b>Sửa tiêu đề<span class="subw">, phụ đề</span></div>
     <div class="ctl" id="logoRow"><span class="lbl">Logo <small>(không bắt buộc) nhỏ ở góc trên bên phải, suốt video</small></span>
       <div class="row logorow"><canvas id="logoThumb" width="96" height="56" hidden aria-label="Logo đang dùng"></canvas><label class="pickimg"><i class="ic ic-img" aria-hidden="true"></i>Chọn logo trong máy<input type="file" id="logoFile" accept="image/*"></label><button type="button" id="logoClear" hidden>Bỏ logo</button></div>
       <p class="note" id="logoName">Chưa có logo</p>
@@ -546,7 +561,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
     </div>
     <div id="hookRow" class="bgrow" hidden><span class="lbl">Tít 3 giây đầu</span>
       <input type="text" id="hookText" maxlength="60" placeholder="Để trống thì máy lấy câu nói đầu tiên"></div>
-    <details open>
+    <details open id="linesBox">
       <summary>Phụ đề từng dòng: sửa chữ sai, ✕ cắt bỏ câu, ✓ xong thì gọn lại</summary>
       <p class="note quoteHint">Kiểu Hiện cả cụm: chạm vào chữ bên dưới mỗi dòng để tô màu hoặc bỏ tô.</p>
       <div id="linesSum" class="row lsum" hidden><span id="linesSumText"></span><button type="button" id="linesDone">✓ Xong hết</button><button type="button" id="linesAll">Xem tất cả</button></div>
@@ -613,7 +628,7 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
     reg.update().catch(() => {});
     // có bản mới: vừa mở app thì tự tải lại luôn; đang làm dở thì chỉ báo, chạm mới tải lại (khỏi mất việc)
     if (hadSW) navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (Date.now() - t0 < 20000) { if (document.getElementById("khoa")) window.__khoaReload = true; else location.reload(); return; }   // đang nhập mã kích hoạt: chờ kích hoạt xong mới tải lại
+      if (Date.now() - t0 < 20000) { location.reload(); return; }
       const b = document.createElement("button"); b.textContent = "✨ Có bản mới, chạm để cập nhật";
       b.style.cssText = "position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:98;padding:12px 18px;border-radius:999px;border:0;background:#2F8F5B;color:#fff;font:700 15px system-ui,sans-serif;box-shadow:0 4px 14px #0005";
       b.onclick = () => location.reload(); document.body.append(b);
@@ -621,7 +636,6 @@ if ("serviceWorker" in navigator && location.protocol !== "file:") {
     if (!self.crossOriginIsolated && navigator.serviceWorker.controller == null) {
       navigator.serviceWorker.addEventListener("controllerchange", () => {
         try { if (sessionStorage.getItem("ae_reload")) return; sessionStorage.setItem("ae_reload", "1"); } catch (e) { }
-        if (document.getElementById("khoa")) { window.__khoaReload = true; return; }   // khách đang nhập mã: không tải lại giữa chừng (mất chữ đang gõ)
         location.reload();
       });
     }
@@ -2180,6 +2194,10 @@ const Style = (() => {
     chua_lanh:  { name: "Chữa lành", title: { kind: "viet_tay", color: "vang" }, track: "4B", look: { size: "vua", color: "trang_vang", font: "playfair", anim: "mo_truot", unit: "dong" }, bg: "nau", cutZoom: false, pulse: false, kb: 0, grade: "warm", music: "em", sfx: null, hook: false, fade: true },
     vlog:       { name: "Vlog bình yên", look: { size: "nho", color: "trang_vang", font: "quicksand", anim: "karaoke", unit: "dong" }, bg: "den", cutZoom: false, pulse: false, kb: 0, grade: "film", music: "vua", sfx: null, hook: false, fade: true },
     co_ban:     { name: "Mặc định", title: { kind: "ba_tang", color: "vang" }, track: null, look: { size: "lon", color: "trang_vang", font: "be_vietnam", anim: "nay", unit: "cum" }, bg: "den", cutZoom: true, pulse: false, kb: 0, grade: null, music: null, sfx: null, hook: false, fade: false },
+    // phong cách cho dạng Ghép hình và video. mt: img = số giây mỗi hình, xf = giây chuyển cảnh, tr = kiểu chuyển, kb = độ zoom chậm của hình
+    soi_dong:   { name: "Sôi động", ghep: true, title: { kind: "ba_tang", color: "do" }, track: "6B", look: { size: "lon", color: "trang_vang", font: "be_vietnam", anim: "hop", unit: "cum" }, bg: "den", cutZoom: false, pulse: false, kb: 0, grade: "pop", music: null, sfx: null, hook: false, fade: false, mt: { img: 2, xf: 0.25, tr: "punch", kb: 0.14 } },
+    nhe_nhang:  { name: "Nhẹ nhàng", ghep: true, title: { kind: "viet_tay", color: "vang" }, track: "2B", look: { size: "vua", color: "trang_vang", font: "playfair", anim: "mo_truot", unit: "dong" }, bg: "nau", cutZoom: false, pulse: false, kb: 0, grade: "warm", music: null, sfx: null, hook: false, fade: true, mt: { img: 3.5, xf: 0.9, tr: "fade", kb: 0.05 } },
+    vui_tuoi:   { name: "Vui tươi", ghep: true, title: { kind: "ba_tang", color: "vang" }, track: "1A", look: { size: "lon", color: "trang_vang", font: "baloo", anim: "nay", unit: "cum" }, bg: "den", cutZoom: false, pulse: false, kb: 0, grade: "pop", music: null, sfx: null, hook: false, fade: false, mt: { img: 2.5, xf: 0.45, tr: "slide", kb: 0.08 } },
     tu_chinh:   { name: "Tự chỉnh", custom: true, look: { size: "lon", color: "trang_vang", font: "be_vietnam", anim: "nay", unit: "cum" }, bg: "den", cutZoom: true, pulse: false, kb: 0, grade: null, music: null, sfx: null, hook: false, fade: false },
   };
 
@@ -2431,10 +2449,12 @@ const Render = (() => {
       else while (el.currentTime < want - 0.02 && !el.paused && !el.ended) await rvfc(el);
     }
   }
-  async function scene(ctx, W, H, c, i, t, exact) {
-    const u = Math.max(0, t - c.s);
+  const MT0 = { xf: XF, tr: "fade", kb: 0.06 };
+  const mtOf = P => (P && P.style && P.style.mt) || MT0;
+  async function scene(ctx, W, H, c, i, t, exact, P) {
+    const u = Math.max(0, t - c.s), m = mtOf(P), kb = m.kb;
     if (c.type === "anh" && c.bmp) {   // zoom rất chậm, cảnh chẵn phóng vào, cảnh lẻ lùi ra (không giật)
-      const f = Math.min(1, u / (c.d + XF)); cover(ctx, W, H, c.bmp, c.bmp.width, c.bmp.height, i % 2 ? 1.06 - 0.06 * f : 1 + 0.06 * f);
+      const f = Math.min(1, u / (c.d + m.xf)); cover(ctx, W, H, c.bmp, c.bmp.width, c.bmp.height, i % 2 ? 1 + kb - kb * f : 1 + kb * f);
     } else if (c.el) {
       const want = Math.min(c.from + u, (c.len || 1e9) - 0.05);   // video ngắn hơn cảnh: đứng ở khung cuối
       if (exact === "xuat" && "requestVideoFrameCallback" in c.el) await follow(c.el, want);
@@ -2445,8 +2465,18 @@ const Render = (() => {
   async function drawMont(ctx, W, H, P, t, exact) {
     const L = P.mont; ctx.fillStyle = "#000"; ctx.fillRect(0, 0, W, H); if (!L.length) return;
     let i = L.length - 1; while (i > 0 && t < L[i].s) i--;
-    if (i > 0 && t - L[i].s < XF) { await scene(ctx, W, H, L[i - 1], i - 1, t, exact); ctx.save(); ctx.globalAlpha = (t - L[i].s) / XF; await scene(ctx, W, H, L[i], i, t, exact); ctx.restore(); }
-    else await scene(ctx, W, H, L[i], i, t, exact);
+    const m = mtOf(P), xf = m.xf;
+    if (i > 0 && t - L[i].s < xf) {
+      const p = (t - L[i].s) / xf, e = 1 - Math.pow(1 - p, 3);
+      if (m.tr === "slide") {   // cảnh mới trượt từ phải vào, cảnh cũ lùi sang trái
+        ctx.save(); ctx.translate(-W * 0.3 * e, 0); await scene(ctx, W, H, L[i - 1], i - 1, t, exact, P); ctx.restore();
+        ctx.save(); ctx.translate(W * (1 - e), 0); await scene(ctx, W, H, L[i], i, t, exact, P); ctx.restore();
+      } else if (m.tr === "punch") {   // cảnh mới phóng to rồi thu về, chớp sáng nhẹ
+        const z = 1.18 - 0.18 * e; ctx.save(); ctx.translate(W / 2, H / 2); ctx.scale(z, z); ctx.translate(-W / 2, -H / 2); await scene(ctx, W, H, L[i], i, t, exact, P); ctx.restore();
+        ctx.fillStyle = `rgba(255,255,255,${0.55 * (1 - p)})`; ctx.fillRect(0, 0, W, H);
+      } else { await scene(ctx, W, H, L[i - 1], i - 1, t, exact, P); ctx.save(); ctx.globalAlpha = p; await scene(ctx, W, H, L[i], i, t, exact, P); ctx.restore(); }
+    }
+    else await scene(ctx, W, H, L[i], i, t, exact, P);
   }
 
   // vẽ 1 khung ra: hình gốc hoặc B-roll (mờ vào / mờ ra 0,15 s), rồi chữ
@@ -2494,7 +2524,7 @@ const Render = (() => {
     const buf = { b: null };
     function draw(t, exact) {
       // B-roll video: cho chạy theo khi đang phát, dừng khi ra khỏi đoạn
-      for (const b of [...(P.broll || []), ...(P.mont || [])]) if (b.el) { const inB = playing && t >= b.s && t < b.s + b.d + (P.mont ? XF : 0) && b.from + t - b.s < (b.len || 1e9); if (inB && b.el.paused) b.el.play().catch(() => {}); else if (!inB && !b.el.paused) b.el.pause(); }
+      for (const b of [...(P.broll || []), ...(P.mont || [])]) if (b.el) { const inB = playing && t >= b.s && t < b.s + b.d + (P.mont ? mtOf(P).xf : 0) && b.from + t - b.s < (b.len || 1e9); if (inB && b.el.paused) b.el.play().catch(() => {}); else if (!inB && !b.el.paused) b.el.pause(); }
       return paint(ctx, W, H, P, Math.max(0, seg), t, exact);
     }
     function loop() {
@@ -2705,7 +2735,7 @@ const Render = (() => {
       for (const c of P.mont) if (c.el) { c.el.muted = true; c.el.pause(); }
       for (; k < nOut && !err; k++) {
         const t = k / fps; await paint(ctx, W, H, P, 0, t, "xuat");
-        for (const c of P.mont) if (c.el && !c.el.paused && (t < c.s - 0.5 || t > c.s + c.d + XF)) c.el.pause();
+        for (const c of P.mont) if (c.el && !c.el.paused && (t < c.s - 0.5 || t > c.s + c.d + mtOf(P).xf)) c.el.pause();
         const vf = new VideoFrame(cv, { timestamp: Math.round(t * 1e6), duration: Math.round(1e6 / fps) });
         venc.encode(vf, { keyFrame: k % (fps * 2) === 0 }); vf.close();
         if (venc.encodeQueueSize > 8) await new Promise(r => setTimeout(r, 5));
@@ -2783,7 +2813,7 @@ const LOCK = (() => {
   const CONTACT = "Diễm Nguyễn (Zalo 0938 333 310)";   // ghi trên màn hình khóa: liên hệ ai để nhận mã
   const KEY = "95e3845e10c23e066e35309c7d91b45350666606fc5b8f03";
   const B32 = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";   // không có I L O U cho khỏi nhầm
-  const mem = {}, st = { get(k) { try { const v = localStorage.getItem(k); if (v != null) return v; } catch (e) { } return k in mem ? mem[k] : null; }, set(k, v) { mem[k] = String(v); try { localStorage.setItem(k, v); } catch (e) { } } };
+  const st = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) { } } };
 
   const enc = bytes => { let bits = 0, v = 0, s = ""; for (const b of bytes) { v = (v << 8) | b; bits += 8; while (bits >= 5) { s += B32[(v >>> (bits - 5)) & 31]; bits -= 5; } } if (bits) s += B32[(v << (5 - bits)) & 31]; return s; };
   const dec = s => { const out = []; let bits = 0, v = 0; for (const c of s) { const i = B32.indexOf(c); if (i < 0) return null; v = (v << 5) | i; bits += 5; if (bits >= 8) { out.push((v >>> (bits - 8)) & 255); bits -= 8; } } return out; };
@@ -2845,19 +2875,6 @@ const LOCK = (() => {
     return (cur = { ok: false, expired: !!(fromLink || st.get("xe_ma")) });
   }
 
-  // mã không đúng: đoán lý do thường gặp để báo khách dễ hiểu
-  async function sigOther(msg) { const k = await crypto.subtle.importKey("raw", new TextEncoder().encode(KEY), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]); return new Uint8Array(await crypto.subtle.sign("HMAC", k, new TextEncoder().encode(msg))).slice(0, 6); }
-  async function whyWrong(dev, v) {
-    const c = norm(v);
-    if (c === norm(dev)) return "Đây là mã máy của bạn. Gửi mã máy này cho Diễm để nhận mã kích hoạt, rồi nhập mã kích hoạt vào ô này.";
-    if (c.length < 15) return "Mã còn thiếu chữ. Mã kích hoạt có 15 ký tự (dạng XXXX-XXXX-XXXX-XXX). Chép nguyên mã Diễm gửi rồi dán vào.";
-    const b = dec(c);
-    if (b && b.length >= 9) {
-      const hour = (b[0] << 16) | (b[1] << 8) | b[2];
-      for (const d of [dev, "", TRIAL_DEV]) { const t = await sigOther("" + norm(d) + ":h" + hour); if (t.every((x, i) => x === b[3 + i])) return "Mã này là của Xưởng video, không dùng cho app này. Mở Xưởng video rồi nhập mã vào đó."; }
-    }
-    return "Mã không đúng với máy này (mã máy " + dev + "). Kiểm tra lại từng chữ. Nếu bạn lấy mã máy ở trình duyệt khác, hoặc trước khi thêm vào màn hình chính, thì mã máy đã khác: gửi lại mã máy đang hiện ở trên để nhận mã mới.";
-  }
   // khoa = true: không đóng được (chưa có mã / hết hạn); false: tự mở ra để nhập mã khác
   function overlay(dev, khoa, expired) {
     const el = document.createElement("div");
@@ -2868,34 +2885,19 @@ const LOCK = (() => {
       <p>${khoa ? (expired ? "Mã hoặc link dùng thử của bạn đã hết hạn. " : "") + "Để dùng, gửi" : "Gửi"} <b>mã máy</b> dưới đây cho ${CONTACT} để nhận mã kích hoạt.</p>
       <p class="khoa-may">Mã máy: <b id="khoaMay">${dev}</b> <button type="button" id="khoaCopy">Sao chép</button></p>
       <p class="khoa-lh"><button type="button" id="khoaMua">Mua gói (MoMo)</button><a href="https://zalo.me/0938333310" target="_blank" rel="noopener">Nhắn Zalo</a><a href="https://www.facebook.com/profile.php?id=61585588883230" target="_blank" rel="noopener">Fanpage</a></p>
-      <form id="khoaForm" novalidate><input id="khoaMa" placeholder="Nhập mã kích hoạt" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" enterkeyhint="go">
-      <button type="submit" id="khoaMo">Kích hoạt</button></form>
-      <p id="khoaLoi" class="khoa-loi" role="alert" aria-live="polite"></p></div>`;
+      <input id="khoaMa" placeholder="Nhập mã kích hoạt" autocomplete="off" autocapitalize="characters" spellcheck="false">
+      <button type="button" id="khoaMo">Kích hoạt</button>
+      <p id="khoaLoi" class="khoa-loi"></p></div>`;
     document.body.appendChild(el);
     if (!khoa) el.querySelector("#khoaDong").onclick = () => el.remove();
     el.querySelector("#khoaMua").onclick = buy;
     el.querySelector("#khoaCopy").onclick = () => { try { navigator.clipboard.writeText(dev); el.querySelector("#khoaCopy").textContent = "Đã chép"; } catch (e) { } };
-    const inp = el.querySelector("#khoaMa"), btn = el.querySelector("#khoaMo"), err = el.querySelector("#khoaLoi");
-    const say = (t, ok) => { err.textContent = t; err.style.color = ok ? "#2F8F5B" : ""; try { err.scrollIntoView({ block: "nearest" }); } catch (x) { } };
-    // điện thoại: bàn phím hiện lên thì kéo nút Kích hoạt lên cho thấy
-    inp.addEventListener("focus", () => setTimeout(() => { try { btn.scrollIntoView({ block: "nearest" }); } catch (x) { } }, 350));
-    el.querySelector("#khoaForm").addEventListener("submit", async e => {
-      e.preventDefault();
-      if (btn.disabled) return;
-      const v = inp.value;
-      if (!norm(v)) { say("Bạn chưa nhập mã kích hoạt."); return; }
-      inp.blur(); btn.disabled = true; btn.textContent = "Đang kiểm tra...";
-      try {
-        const h = await check(dev, v);
-        if (h == null) { say(await whyWrong(dev, v)); return; }
-        if (h !== FOREVER && Date.now() >= hourEnd(h)) { say("Mã này đã hết hạn (" + untilText(h) + "). Nhắn Diễm để nhận mã mới."); return; }
-        st.set("xe_ma", norm(v));
-        say("Kích hoạt xong. Dùng được " + untilText(h) + ".", true); btn.textContent = "Đã kích hoạt";
-        setTimeout(() => { el.remove(); if (window.__khoaReload) location.reload(); else guard(); }, 900);
-        return;
-      } catch (x) { say("Trình duyệt này chưa kiểm tra được mã. Mở link bằng Chrome hoặc Safari (không mở trong Zalo, Facebook), rồi nhập lại."); }
-      finally { if (btn.textContent !== "Đã kích hoạt") { btn.disabled = false; btn.textContent = "Kích hoạt"; } }
-    });
+    el.querySelector("#khoaMo").onclick = async () => {
+      const v = el.querySelector("#khoaMa").value, h = await check(dev, v), err = el.querySelector("#khoaLoi");
+      if (h == null) { err.textContent = "Mã kích hoạt không đúng. Kiểm tra lại từng chữ."; return; }
+      if (h !== FOREVER && Date.now() >= hourEnd(h)) { err.textContent = "Mã này đã hết hạn (" + untilText(h) + ")."; return; }
+      st.set("xe_ma", norm(v)); el.remove(); guard();
+    };
   }
   // ---------------------------------------------------------------- mua gói: MoMo, lời nhắn tự điền mã máy + gói
   const PAY = { momo: "0938 333 310", name: "NGUYỄN NGỌC DIỄM", plans: [["1THANG", "1 tháng", 149000, "1T", 199000], ["1NAM", "1 năm", 690000, "1N", 990000], ["VINHVIEN", "Vĩnh viễn", 1290000, "VV", 1890000]] };
@@ -3014,12 +3016,12 @@ const LOCK = (() => {
   }
 
   const css = document.createElement("style");
-  css.textContent = `#khoa{position:fixed;inset:0;z-index:9999;background:rgba(14,30,24,.92);display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-  .khoa-hop{margin:auto;background:var(--panel,#fff);color:var(--ink,#16324F);border-radius:20px;padding:22px;max-width:420px;width:100%;font-family:var(--body,sans-serif)}
+  css.textContent = `#khoa{position:fixed;inset:0;z-index:9999;background:rgba(14,30,24,.92);display:flex;align-items:center;justify-content:center;padding:16px}
+  .khoa-hop{background:var(--panel,#fff);color:var(--ink,#16324F);border-radius:20px;padding:22px;max-width:420px;width:100%;font-family:var(--body,sans-serif)}
   .khoa-hop h2{margin:0 0 8px}.khoa-hop p{line-height:1.5}.khoa-may b{font-size:20px;letter-spacing:1px}
   .khoa-hop input{width:100%;box-sizing:border-box;font-size:18px;padding:12px;border-radius:12px;border:2px solid var(--line,#ddd);background:var(--field,#fff);color:inherit;text-transform:uppercase;margin:8px 0}
   .khoa-hop button{font:inherit;font-weight:800;border:0;border-radius:12px;padding:10px 14px;background:var(--flame,#E8471B);color:#fff;cursor:pointer}
-  #khoaCopy{padding:6px 10px;font-size:14px;margin-left:6px}#khoaMo{width:100%;padding:14px}#khoaMo:disabled{opacity:.7}#khoaForm{margin:0}
+  #khoaCopy{padding:6px 10px;font-size:14px;margin-left:6px}#khoaMo{width:100%;padding:14px}
   .khoa-lh{display:flex;gap:8px;flex-wrap:wrap}.khoa-lh a{flex:1;text-align:center;font-weight:800;text-decoration:none;padding:10px;border-radius:12px;border:2px solid var(--flame,#E8471B);color:var(--flame,#E8471B)}
   .khoa-loi{color:var(--flame,#E8471B);font-weight:700;min-height:1.2em}
   .khoa-ban{margin:8px 0 0;font-size:13px;color:var(--muted,#6A6B8F);text-align:center}
@@ -3379,7 +3381,7 @@ const LOCK = (() => {
   // Tự chỉnh: hiện từng phần một (nhạc, giọng, chữ phụ đề, từ điển, B-roll), bấm Tiếp để qua phần sau
   let tuI = 0;
   // video không có giọng (ghép hình chỉ có nhạc): bỏ qua phần Giọng nói
-  const tuSteps = () => [...document.querySelectorAll("#tuBox .tustep")].filter(d => { const skip = !!(S && S.noVoice) && d.dataset.name === "Giọng nói"; if (skip) d.hidden = true; return !skip; });
+  const tuSteps = () => [...document.querySelectorAll("#tuBox .tustep")].filter(d => { const nm = d.dataset.name, skip = (!!(S && S.noVoice) && (nm === "Giọng nói" || nm.startsWith("Từ điển"))) || (modeNow() === "ghep" && nm.startsWith("B-roll")); if (skip) d.hidden = true; return !skip; });
   // phần Chữ phụ đề chia thành từng mục nhỏ: màu chữ, rồi lần lượt cỡ chữ, phông, kiểu hiện, chia phụ đề, vị trí
   let tuJ = 0, tuWiz = false;
   const subStep = () => $("subPick").closest(".tustep");
@@ -3428,7 +3430,7 @@ const LOCK = (() => {
       if (p.time >= 16) { clearInterval(sampleIv); p.stop(); setPlay(false); $("styleNote").textContent = `Xong 16 giây thử phong cách ${name}. Ưng thì sửa tiêu đề, phụ đề ở bước 4 rồi xuất. Bấm Xem để xem tiếp.`; }
     }, 200);
   }
-  { const pv = store.get("ae_preset", null); if (pv && Style.PRESETS[pv] && ["co_ban", "giat_tit", "chua_lanh", "tu_chinh"].includes(pv)) setRadio("preset", pv); }
+  { const pv = store.get(store.get("ae_mode", null) === "ghep" ? "ae_preset_g" : "ae_preset", null); if (pv && Style.PRESETS[pv] && ["co_ban", "giat_tit", "chua_lanh", "soi_dong", "nhe_nhang", "vui_tuoi", "tu_chinh"].includes(pv)) setRadio("preset", pv); }
   setTimeout(() => { applyPreset(true); titlePrev(); }, 0);   // mỗi lần mở: áp phong cách đang chọn (Tự chỉnh thì giữ lựa chọn tay); chờ danh sách nhạc dựng xong
   $("hookRow").hidden = !Style.PRESETS[presetNow()].hook;
   // tên phong cách đang chọn hiện ở bước Xem thử; nút Đổi phong cách cuộn lên bước 2
@@ -3436,8 +3438,12 @@ const LOCK = (() => {
   styleName();
   $("styleChange").addEventListener("click", () => $("styleCard").scrollIntoView({ behavior: "smooth", block: "start" }));
   document.querySelectorAll('input[name="preset"]').forEach(r => r.addEventListener("change", styleName));
-  document.querySelectorAll('input[name="preset"]').forEach(r => r.addEventListener("change", async () => { store.set("ae_preset", presetNow()); store.set("ae_bg_hand", ""); applyPreset(); titlePrev(); if (S) { await rebuild(); playSample(); } }));   // đổi phong cách: lớp phủ chân nền theo phong cách mới
+  document.querySelectorAll('input[name="preset"]').forEach(r => r.addEventListener("change", async () => { store.set(modeNow() === "ghep" ? "ae_preset_g" : "ae_preset", presetNow()); store.set("ae_bg_hand", ""); applyPreset(); titlePrev(); if (modeNow() === "ghep") { fitScenes(); drawScenes(); } if (S) { await rebuild(); playSample(); } }));   // đổi phong cách: lớp phủ chân nền theo phong cách mới
   { const v = store.get("ae_optMusic", null); if (v != null) $("optMusic").checked = v === "1"; }
+  // Hiện phụ đề: 1 công tắc ở bước Tự chỉnh, 1 công tắc ngay chỗ lồng tiếng (dạng Ghép), luôn khớp nhau
+  { const a = $("optSubs"), b = $("optSubsG"), sync = src => { (src === a ? b : a).checked = src.checked; document.body.classList.toggle("nosub", !src.checked); };
+    b.checked = a.checked; document.body.classList.toggle("nosub", !a.checked);
+    a.addEventListener("change", () => sync(a)); b.addEventListener("change", () => { sync(b); a.dispatchEvent(new Event("change")); }); }
   $("optMusic").addEventListener("change", () => { store.set("ae_optMusic", $("optMusic").checked ? "1" : "0"); if (S) rebuild(); });
   $("hookText").addEventListener("change", () => { if (S) rebuild(); });
   // tiêu đề suốt video (3 tầng ở chân)
@@ -3841,7 +3847,7 @@ const LOCK = (() => {
   // mỗi video cảnh lấy tối đa 40 giây; hình mặc định 3 / 5 / 6 giây. Tổng quá độ dài đã chọn thì máy tự rút ngắn đều các video (cảnh tự chỉnh giây thì giữ).
   const MAX_SC = 12, MAX_VID = 40, DUR_OPTS = [2, 3, 4, 5, 6, 8, 10, 12, 15, 20, 25, 30, 35, 40];
   { let v = store.get("ae_mlen", null); if (v === "120") v = "180"; if (v) setRadio("mlen", v); }
-  const maxT = () => +(radio("mlen") || 60), maxVid = () => MAX_VID, imgDur = () => ({ 60: 3, 180: 5, 300: 6 })[maxT()] || 3;
+  const maxT = () => +(radio("mlen") || 60), maxVid = () => MAX_VID, imgDur = () => { const m = modeNow() === "ghep" && (Style.PRESETS[presetNow()] || {}).mt; return m ? m.img : ({ 60: 3, 180: 5, 300: 6 })[maxT()] || 3; };
   // giờ mặc định từng cảnh: video lấy hết (tối đa 40 s), quá độ dài đã chọn thì rút đều các video chưa chỉnh tay
   function fitScenes() {
     const auto = c => !c.manual;
@@ -3861,6 +3867,9 @@ const LOCK = (() => {
   function modeUI() {
     const g = modeNow() === "ghep";
     document.body.classList.toggle("ghep", g); $("step1noi").hidden = g; $("step1ghep").hidden = !g;
+    // mỗi dạng có bộ phong cách riêng (Tự chỉnh dùng chung): đổi dạng thì chọn lại phong cách hợp dạng đó
+    const okP = v => !!Style.PRESETS[v] && (v === "tu_chinh" || !!Style.PRESETS[v].ghep === g);
+    if (!okP(presetNow())) { const want = store.get(g ? "ae_preset_g" : "ae_preset", null); setRadio("preset", okP(want) ? want : g ? "soi_dong" : "co_ban"); applyPreset(); styleName(); titlePrev(); }
     updateGo();
   }
   { const v = store.get("ae_mode", null); if (v) setRadio("mode", v); }
