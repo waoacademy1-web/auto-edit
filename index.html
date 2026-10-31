@@ -247,7 +247,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
 <div class="wrap">
   <header>
     <img class="logo-mark" src="icon.png" alt="" aria-hidden="true">
-    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 3.0</span></div>
+    <div><h1>Xưởng Edit</h1><p>Cắt khoảng lặng, cắt ậm ờ, gắn phụ đề, làm giọng. Chạy ngay trên điện thoại, không cần máy tính.</p><span class="ver">Phiên bản 3.1</span></div>
   </header>
 
   <section class="card">
@@ -572,7 +572,7 @@ details summary{cursor:pointer;font:700 14px var(--display);color:var(--muted)}
         <li>Bấm Xuất video rồi Lưu video vào máy (iPhone chọn “Lưu video”).</li>
         <li>Thêm vào màn hình chính để mở như app: Safari bấm Chia sẻ → Thêm vào MH chính; Chrome bấm ⋮ → Thêm vào màn hình chính.</li>
       </ol>
-      <p class="note">Mọi thứ chạy trong máy, video không gửi đi đâu. iPhone cần iOS 26 trở lên để xuất video có tiếng.</p>
+      <p class="note">Mọi thứ chạy trong máy, video không gửi đi đâu. iPhone cần iOS 16.4 trở lên (iPhone 8 trở về sau), dùng Safari. Máy đời cũ xuất chậm hơn một chút.</p>
       <div class="row"><button id="prefetch">Tải sẵn bộ nghe (dùng Wi-Fi)</button><span class="note" id="cacheInfo"></span></div>
       <p class="note" id="devInfo"></p>
     </details>
@@ -2531,7 +2531,99 @@ const Render = (() => {
     }
     return null;
   }
-  function canExport() { return typeof VideoEncoder !== "undefined" && typeof VideoFrame !== "undefined"; }
+  function canExport() { return typeof VideoEncoder !== "undefined" && typeof VideoFrame !== "undefined" && (typeof AudioEncoder !== "undefined" || canRecord()); }
+
+  // ---- Ghi tiếng cho máy chưa có AudioEncoder (iPhone iOS 16.4 tới 18): phát tiếng vào MediaRecorder theo thời gian thật, chạy song song lúc vẽ hình ----
+  const REC_MIME = ["audio/mp4;codecs=mp4a.40.2", "audio/mp4"];
+  const recMime = () => window.MediaRecorder && REC_MIME.find(m => MediaRecorder.isTypeSupported(m));
+  function canRecord() { return typeof window !== "undefined" && !!recMime() && !!(window.AudioContext || window.webkitAudioContext); }
+  let recAC = null;
+  // gọi ngay lúc bấm Xuất (iPhone chỉ cho mở tiếng khi đang bấm)
+  function unlockAudio() {
+    if (typeof AudioEncoder !== "undefined" || !canRecord()) return;
+    try { if (!recAC) recAC = new (window.AudioContext || window.webkitAudioContext)({ sampleRate: 48000 }); recAC.resume(); } catch (e) { }
+  }
+  async function recordAudio(pcm, sr) {
+    unlockAudio();
+    for (let i = 0; i < 40 && recAC.state !== "running"; i++) { try { await recAC.resume(); } catch (e) { } await new Promise(r => setTimeout(r, 50)); }
+    if (recAC.state !== "running") throw new Error("Máy chưa cho ghi tiếng. Bấm Xuất video lần nữa.");
+    const buf = recAC.createBuffer(1, pcm.length, sr); buf.getChannelData(0).set(pcm);
+    const src = recAC.createBufferSource(), dst = recAC.createMediaStreamDestination(); src.buffer = buf; src.connect(dst);
+    const rec = new MediaRecorder(dst.stream, { mimeType: recMime(), audioBitsPerSecond: 128000 }), parts = [];
+    const blob = await new Promise((res, rej) => {
+      rec.ondataavailable = e => { if (e.data && e.data.size) parts.push(e.data); };
+      rec.onerror = e => rej(e.error || new Error("Ghi tiếng lỗi"));
+      rec.onstop = () => res(new Blob(parts, { type: "audio/mp4" }));
+      rec.onstart = () => src.start();
+      src.onended = () => setTimeout(() => rec.state !== "inactive" && rec.stop(), 300);
+      rec.start(1000);
+    });
+    src.disconnect();
+    const a = mp4Audio(new Uint8Array(await blob.arrayBuffer()));
+    const end = pcm.length / sr * 1e6; a.samples = a.samples.filter(x => x.ts < end);   // bỏ phần lặng thừa ở cuối
+    if (!a.samples.length) throw new Error("Ghi tiếng không được (file rỗng).");
+    return a;
+  }
+  // đọc file mp4 (thường hoặc chia mảnh) lấy từng khung tiếng AAC/Opus đã nén + cấu hình
+  function mp4Audio(u) {
+    const dv = new DataView(u.buffer, u.byteOffset, u.byteLength), str = o => String.fromCharCode(u[o], u[o + 1], u[o + 2], u[o + 3]);
+    const kids = (a, b) => { const out = []; for (let o = a; o + 8 <= b;) { let sz = dv.getUint32(o), h = 8; if (sz === 1) { sz = Number(dv.getBigUint64(o + 8)); h = 16; } else if (sz === 0) sz = b - o; if (sz < 8) break; out.push({ t: str(o + 4), o, d: o + h, e: o + sz }); o += sz; } return out; };
+    const find = (bx, path) => { let cur = [bx]; for (const p of path) { const n = []; for (const c of cur) n.push(...kids(c.d, c.e).filter(k => k.t === p)); cur = n; } return cur; };
+    const top = kids(0, u.length), root = { d: 0, e: u.length };
+    const moov = top.find(b => b.t === "moov"); if (!moov) throw new Error("Tiếng ghi ra không đọc được (thiếu moov).");
+    const trak = find(moov, ["trak"]).find(t => find(t, ["mdia", "hdlr"]).some(h => str(h.d + 8) === "soun")) || find(moov, ["trak"])[0];
+    const tid = dv.getUint32(find(trak, ["tkhd"])[0].d + (u[find(trak, ["tkhd"])[0].d] === 1 ? 20 : 12));
+    const mdhd = find(trak, ["mdia", "mdhd"])[0], scale = dv.getUint32(mdhd.d + (u[mdhd.d] === 1 ? 20 : 12));
+    const stbl = find(trak, ["mdia", "minf", "stbl"])[0], stsd = find(stbl, ["stsd"])[0];
+    const ent = kids(stsd.d + 8, stsd.e)[0];   // mp4a / Opus
+    const ch = dv.getUint16(ent.d + 16), sr = dv.getUint32(ent.d + 24) >>> 16;
+    const sub = kids(ent.d + 28, ent.e);
+    let codec, desc = null;
+    if (ent.t === "mp4a") {
+      codec = "aac"; const es = sub.find(b => b.t === "esds"); if (!es) throw new Error("Thiếu cấu hình AAC.");
+      // tìm thẻ DecoderSpecificInfo (0x05) trong esds
+      let o = es.d + 4; const len = () => { let n = 0, b; do { b = u[o++]; n = (n << 7) | (b & 127); } while (b & 128); return n; };
+      while (o < es.e) { const tag = u[o++], n = len(); if (tag === 3) { o += 3; continue; } if (tag === 4) { o += 13; continue; } if (tag === 5) { desc = u.slice(o, o + n); break; } o += n; }
+    } else if (ent.t === "Opus") codec = "opus";
+    else throw new Error("Máy ghi tiếng dạng " + ent.t + ", chưa hỗ trợ.");
+    const samples = [];
+    // dạng thường: bảng mẫu trong stbl
+    const stsz = find(stbl, ["stsz"])[0];
+    if (stsz && dv.getUint32(stsz.d + 8)) {
+      const n = dv.getUint32(stsz.d + 8), fix = dv.getUint32(stsz.d + 4), size = i => fix || dv.getUint32(stsz.d + 12 + i * 4);
+      const co = find(stbl, ["stco"])[0], c64 = find(stbl, ["co64"])[0], nc = dv.getUint32((co || c64).d + 4);
+      const off = i => co ? dv.getUint32(co.d + 8 + i * 4) : Number(dv.getBigUint64(c64.d + 8 + i * 8));
+      const sc = find(stbl, ["stsc"])[0], ns = dv.getUint32(sc.d + 4), scE = j => [dv.getUint32(sc.d + 8 + j * 12), dv.getUint32(sc.d + 12 + j * 12)];
+      const st = find(stbl, ["stts"])[0], nt = dv.getUint32(st.d + 4), durs = [];
+      for (let j = 0; j < nt; j++) { const c = dv.getUint32(st.d + 8 + j * 8), d = dv.getUint32(st.d + 12 + j * 8); for (let q = 0; q < c; q++) durs.push(d); }
+      let i = 0, t = 0;
+      for (let c = 0; c < nc && i < n; c++) {
+        let per = 0; for (let j = 0; j < ns; j++) if (scE(j)[0] <= c + 1) per = scE(j)[1];
+        let o = off(c);
+        for (let q = 0; q < per && i < n; q++, i++) { const z = size(i), d = durs[i] || durs[durs.length - 1] || 1024; samples.push({ data: u.slice(o, o + z), ts: t / scale * 1e6, dur: d / scale * 1e6 }); o += z; t += d; }
+      }
+    }
+    // dạng chia mảnh: moof + mdat
+    const trex = find(moov, ["mvex", "trex"]).find(b => dv.getUint32(b.d + 4) === tid);
+    const dDur = trex ? dv.getUint32(trex.d + 12) : 0, dSize = trex ? dv.getUint32(trex.d + 16) : 0;
+    let t = 0;
+    for (const mf of top.filter(b => b.t === "moof")) for (const tf of find(mf, ["traf"])) {
+      const hd = find(tf, ["tfhd"])[0], fl = dv.getUint32(hd.d) & 0xffffff; if (dv.getUint32(hd.d + 4) !== tid) continue;
+      let p = hd.d + 8, base = mf.o, sDur = dDur, sSize = dSize;
+      if (fl & 1) { base = Number(dv.getBigUint64(p)); p += 8; } if (fl & 2) p += 4; if (fl & 8) { sDur = dv.getUint32(p); p += 4; } if (fl & 16) { sSize = dv.getUint32(p); p += 4; }
+      const dt = find(tf, ["tfdt"])[0]; if (dt) t = u[dt.d] === 1 ? Number(dv.getBigUint64(dt.d + 4)) : dv.getUint32(dt.d + 4);
+      for (const tr of find(tf, ["trun"])) {
+        const f2 = dv.getUint32(tr.d) & 0xffffff, n = dv.getUint32(tr.d + 4); let q = tr.d + 8, o = base;
+        if (f2 & 1) { o = base + dv.getInt32(q); q += 4; } if (f2 & 4) q += 4;
+        for (let i = 0; i < n; i++) {
+          let d = sDur, z = sSize; if (f2 & 0x100) { d = dv.getUint32(q); q += 4; } if (f2 & 0x200) { z = dv.getUint32(q); q += 4; } if (f2 & 0x400) q += 4; if (f2 & 0x800) q += 4;
+          samples.push({ data: u.slice(o, o + z), ts: t / scale * 1e6, dur: d / scale * 1e6 }); o += z; t += d;
+        }
+        base = o;
+      }
+    }
+    return { codec, sr, ch, desc, samples };
+  }
 
   // trả về Blob mp4
   async function exportMp4(P, audioOut, sr, opts, onProg) {
@@ -2540,23 +2632,26 @@ const Render = (() => {
     const vc = await pickVideoCfg(W, H, fps, P.M.total);
     if (!vc) throw new Error("Máy không xuất được video H.264 (WebCodecs).");
     const ac = await pickAudioCfg(sr);
-    if (!ac) throw new Error("Máy chưa hỗ trợ ghi tiếng (AudioEncoder). iPhone cần iOS 26 trở lên.");
+    // máy chưa có AudioEncoder (iPhone dưới iOS 26): ghi tiếng bằng MediaRecorder, song song lúc vẽ hình; hình giữ lại, ghép khi có tiếng
+    if (!ac && !canRecord()) throw new Error("Máy chưa hỗ trợ ghi tiếng (AudioEncoder). Cập nhật iOS hoặc dùng Chrome.");
+    let recErr = null; const recP = ac ? null : recordAudio(audioOut, sr).catch(e => { recErr = e; });
     const target = new Mp4Muxer.ArrayBufferTarget();
-    const mux = new Mp4Muxer.Muxer({ target, fastStart: "in-memory", firstTimestampBehavior: "offset",
-      video: { codec: "avc", width: W, height: H, frameRate: fps }, audio: { codec: ac.mux, sampleRate: sr, numberOfChannels: 1 } });
-    let err = null;
-    const venc = new VideoEncoder({ output: (ch, meta) => mux.addVideoChunk(ch, meta), error: e => { err = e; } });
+    const mkMux = a => new Mp4Muxer.Muxer({ target, fastStart: "in-memory", firstTimestampBehavior: "offset",
+      video: { codec: "avc", width: W, height: H, frameRate: fps }, audio: a });
+    let mux = ac ? mkMux({ codec: ac.mux, sampleRate: sr, numberOfChannels: 1 }) : null;
+    let err = null; const vq = [];
+    const venc = new VideoEncoder({ output: (ch, meta) => mux ? mux.addVideoChunk(ch, meta) : vq.push([ch, meta]), error: e => { err = e; } });
     venc.configure(vc);
     // Safari có lúc không kèm cấu hình AAC -> file không có tiếng: tự điền (AAC-LC, 48 kHz, 1 kênh)
-    const aenc = new AudioEncoder({ output: (ch, meta) => {
+    const aenc = ac && new AudioEncoder({ output: (ch, meta) => {
       if (ac.mux === "aac" && meta && (!meta.decoderConfig || !meta.decoderConfig.description))
         meta = { ...meta, decoderConfig: { ...(meta.decoderConfig || {}), codec: "mp4a.40.2", sampleRate: sr, numberOfChannels: 1, description: new Uint8Array([0x11, 0x88]) } };
       mux.addAudioChunk(ch, meta);
     }, error: e => { err = e; } });
-    aenc.configure(ac.c);
+    if (aenc) aenc.configure(ac.c);
     // tiếng: mã hóa hết trước (nhanh)
     const CH = 4800;
-    for (let i = 0; i < audioOut.length; i += CH) {
+    for (let i = 0; aenc && i < audioOut.length; i += CH) {
       const n = Math.min(CH, audioOut.length - i);
       const ad = new AudioData({ format: "f32-planar", sampleRate: sr, numberOfFrames: n, numberOfChannels: 1, timestamp: Math.round(i / sr * 1e6), data: audioOut.slice(i, i + n) });
       aenc.encode(ad); ad.close();
@@ -2634,14 +2729,22 @@ const Render = (() => {
       }
     }
     if (err) throw err;
-    await venc.flush(); await aenc.flush();
+    await venc.flush(); if (aenc) await aenc.flush();
     if (err) throw err;
+    if (!ac) {
+      if (onProg) onProg(1);
+      const r = await recP; if (recErr) throw recErr;
+      mux = mkMux({ codec: r.codec, sampleRate: r.sr, numberOfChannels: r.ch });
+      for (const [c, m] of vq) mux.addVideoChunk(c, m);
+      const dc = { codec: r.codec === "aac" ? "mp4a.40.2" : "opus", sampleRate: r.sr, numberOfChannels: r.ch }; if (r.desc) dc.description = r.desc;
+      r.samples.forEach((x, i) => mux.addAudioChunkRaw(x.data, "key", Math.round(x.ts), Math.round(x.dur), i ? undefined : { decoderConfig: dc }));
+    }
     mux.finalize();
-    venc.close(); aenc.close();
+    venc.close(); if (aenc) aenc.close();
     return new Blob([target.buffer], { type: "video/mp4" });
   }
 
-  return { joinAudio, zooms, outSize, preview, exportMp4, canExport, brAt };
+  return { joinAudio, zooms, outSize, preview, exportMp4, canExport, brAt, unlockAudio, mp4Audio };
 })();
 
 </script>
@@ -4136,7 +4239,8 @@ const LOCK = (() => {
     if (prev) { prev.stop(); setPlay(false); }
     const trial = typeof LOCK !== "undefined" && LOCK.isTrial();   // bản dùng thử: tối đa 10 video, có chữ nhỏ ở góc
     if (trial && LOCK.trialLeft() <= 0) { status("Bản dùng thử đã làm đủ " + LOCK.TRIAL_MAX + " video. Mua gói để làm tiếp, video không còn chữ dùng thử ở góc.", null, "", true); LOCK.buy(); return; }
-    if (!Render.canExport()) { status("Trình duyệt này chưa xuất được video. iPhone: cập nhật iOS 26 trở lên và dùng Safari. Android: dùng Chrome.", null, "", true); return; }
+    if (!Render.canExport()) { status("Trình duyệt này chưa xuất được video. iPhone: cập nhật iOS 16.4 trở lên và dùng Safari. Android: dùng Chrome.", null, "", true); return; }
+    Render.unlockAudio();   // iPhone đời cũ: mở tiếng ngay lúc bấm để ghi tiếng được
     $("exp").disabled = true; $("doneBox").hidden = true; $("outVid").removeAttribute("src");
     $("expSlot").append($("status")); $("expArea").hidden = true;
     const t0 = Date.now();
